@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Heading } from "@ui/Heading.tsx";
+import { Text } from "@ui/Text.tsx";
+import { Button } from "@ui/Button.tsx";
+import { Badge } from "@ui/Badge.tsx";
+
+const allBlogPosts = await getCollection('blog');
+---
+
+<BaseLayout>
+	<main class="max-w-4xl mx-auto">
+		<Heading className="text-9xl">All my posts</Heading>
+		<ul class="flex flex-col gap-y-4">
+			{allBlogPosts.map(post => (
+				<li>
+					<a href={`/posts/${post.slug}`} aria-label="article" data-astro-prefetch>
+						<Heading level={2}>{post.data.title}</Heading>
+						<Text>{post.data.description}</Text>
+						{post.data.tags.map(tag => (
+							<Badge color="orange">{tag}</Badge>
+						))}
+					</a>
+				</li>
+			))}
+		</ul>
+	</main>
+</BaseLayout>

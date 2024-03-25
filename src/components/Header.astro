@@ -1,0 +1,18 @@
+---
+import github from "@assets/github.svg?raw";
+import { TextLink } from "@ui/Text";
+---
+
+<header class="sticky top-0 z-50 w-full p-2 backdrop-blur flex-none transition-colors duration-500 border-b border-white/[0.2] supports-backdrop-blur:bg-white/60">
+  <nav class="flex justify-between items-center max-w-7xl mx-auto">
+    <TextLink href="/" newTab={false} className="text-3xl no-underline">Léo Mercier</TextLink>
+    <div class="flex gap-x-3 md:gap-x-8">
+      <TextLink href="https://leomercier.dev" className="no-underline">About</TextLink>
+      <TextLink href="/" newTab={false} className="no-underline">Blog</TextLink>
+      <hr class="border border-white/[0.2] h-auto" />
+      <TextLink href="https://github.com/Sawangg" className="no-underline" aria-label="github" data-astro-prefetch>
+        <Fragment set:html={github} />
+      </TextLink>
+    </div>
+  </nav>
+</header>

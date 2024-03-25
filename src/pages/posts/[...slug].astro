@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import avatar from "@assets/avatar.png";
+import { MDul, MDli } from "@components/MDList.tsx";
+import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MDHeading.tsx";
+import { MDhr } from "@components/MDhr.tsx";
+import { MDpre } from "@components/MDpre.tsx";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Avatar } from "@ui/Avatar.tsx";
+import { Button } from "@ui/Button.tsx";
+import { Text, TextLink, Strong } from "@ui/Text.tsx";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map(post => ({
+    params: { slug: post.slug }, props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title}>
+  <main class="px-4 sm:px-6 md:px-8">
+    <article class="max-w-5xl mx-auto">
+      <section class="flex flex-col gap-y-3 pt-16 pb-12">
+        <time class="text-md leading-6 text-zinc-400" datetime={post.data.publishedAt.toISOString()}>
+          {post.data.publishedAt.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
+        </time>
+        <h1 class="text-3xl font-extrabold mb-2 tracking-tight">{post.data.title}</h1>
+        <div class="flex justify-between items-center">
+          <ul class="flex gap-x-3 items-center">
+            <li>
+              <Avatar className="w-10">
+                <Image src={avatar} class="rounded-full" alt="" loading="eager" />
+              </Avatar>
+            <li>
+            <li class="flex flex-col">
+              <Strong>{post.data.author}</Strong>
+              <TextLink href={post.data.authorLink}>{post.data.authorAt}</TextLink>
+            </li>
+          </ul>
+          <Button plain>
+            Share
+          </Button>
+        </div>
+      </section>
+      <Content components={{
+        img: Image,
+        h2: MDHeading2,
+        h3: MDHeading3,
+        h4: MDHeading4,
+        p: Text,
+        a: TextLink,
+        strong: Strong,
+        ul: MDul,
+        li: MDli,
+        hr: MDhr,
+        pre: MDpre }}
+      />
+    </article>
+  </main>
+</BaseLayout>

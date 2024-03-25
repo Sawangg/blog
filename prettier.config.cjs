@@ -1,0 +1,28 @@
+/** @type {import('prettier').Config} */
+module.exports = {
+  arrowParens: "always",
+  bracketSameLine: false,
+  endOfLine: "lf",
+  printWidth: 120,
+  semi: true,
+  singleQuote: false,
+  tabWidth: 2,
+  trailingComma: "all",
+  useTabs: false,
+  importOrder: [
+    "^(astro/(.*)$)|^(astro$)",
+    "^(react/(.*)$)|^(react$)",
+    "<THIRD_PARTY_MODULES>",
+    "^types$",
+    "^@components/(.*)$",
+    "^@layouts/(.*)$",
+    "^@pages/(.*)$",
+    "^@public/(.*)$",
+    "^@src/(.*)$",
+    "^@styles/(.*)$",
+    "^@ui/(.*)$",
+    "^[./]",
+  ],
+  importOrderParserPlugins: ["typescript", "jsx"],
+  plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+};

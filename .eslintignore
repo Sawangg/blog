@@ -1,0 +1,13 @@
+.unlighthouse
+.vscode
+node_modules
+public
+dist
+env
+.eslintignore
+.gitattributes
+.gitignore
+.prettierignore
+LICENSE.md
+pnpm-lock.yaml
+README.md
