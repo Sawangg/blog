@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "@ui/primitives/utils.ts";
 import {
   Button,
   ListBox,
@@ -23,7 +23,7 @@ export const Select: React.FC<SelectProps> = ({ label, className, children, ...p
     {...props}
   >
     <Button
-      className={clsx(
+      className={cn(
         "dark:border-white/10 dark:bg-white/5 dark:text-white dark:*:text-white dark:data-[hovered]:border-white/20 dark:data-[hovered]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[invalid]:dark:border-red-600 data-[invalid]:data-[hovered]:dark:border-red-600 data-[disabled]:dark:bg-white/[2.5%] relative block w-full cursor-pointer appearance-none rounded-lg border border-zinc-950/10 bg-transparent py-[calc(theme(spacing[2.5])-1px)] pl-[calc(theme(spacing[3.5])-1px)] pr-[calc(theme(spacing.10)-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 focus:outline-none data-[disabled]:border-zinc-950/20 data-[hovered]:border-zinc-950/20 data-[invalid]:border-red-500 data-[invalid]:data-[hovered]:border-red-500 data-[disabled]:opacity-100 sm:py-[calc(theme(spacing[1.5])-1px)] sm:pl-[calc(theme(spacing.3)-1px)] sm:pr-[calc(theme(spacing.9)-1px)] sm:text-sm/6 [&_optgroup]:font-semibold",
         className,
       )}

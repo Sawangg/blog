@@ -1,9 +1,14 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { Text, Strong } from "@ui/Text.tsx";
 ---
 
-<BaseLayout title="404">
-	<section class="flex justify-center items-center">
-		<p>404 | Page not found</p>	
-	</section>
+<BaseLayout title="404 - Léo Mercier">
+  <section class="h-screen flex flex-auto items-center justify-center text-center px-4 flex-col sm:flex-row">
+    <div class="flex flex-row gap-x-6 items-center">
+      <Strong className="text-3xl">404</Strong>
+      <hr class="border border-white/[0.2] h-6" />
+      <Text className="text-xl">Page not found</Text>
+    </div>
+  </section>
 </BaseLayout>

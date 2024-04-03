@@ -1,6 +1,6 @@
 "use client";
 
-import clsx from "clsx";
+import { cn } from "@ui/primitives/utils.ts";
 import {
   Radio as RARadio,
   RadioGroup as RARadioGroup,
@@ -31,7 +31,7 @@ export type RadioFieldProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLD
 
 export const RadioField: React.FC<RadioFieldProps> = ({ children, className, ...props }) => (
   <div
-    className={clsx(
+    className={cn(
       "grid grid-cols-[1.125rem_1fr] items-center gap-x-4 gap-y-1 sm:grid-cols-[1rem_1fr] [&>[data-slot=control]]:col-start-1 [&>[data-slot=control]]:row-start-1 [&>[data-slot=control]]:justify-self-center [&>[data-slot=description]]:col-start-2 [&>[data-slot=description]]:row-start-2 [&>[data-slot=label]]:col-start-2 [&>[data-slot=label]]:row-start-1 [&>[data-slot=label]]:justify-self-start [&_[data-slot=label]]:has-[[data-slot=description]]:font-medium",
       className,
     )}

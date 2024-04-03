@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "@ui/primitives/utils.ts";
 import { AspectRatio } from "./primitives/AspectRatio";
 
 export type AvatarProps = Omit<
@@ -10,7 +10,7 @@ export type AvatarProps = Omit<
 
 export const Avatar: React.FC<AvatarProps> = ({ initials, className, children, ...props }) => (
   <span
-    className={clsx(
+    className={cn(
       className,
       "inline-grid rounded-full align-middle *:col-start-1 *:row-start-1 *:rounded-full",
       !props.src && !children && "dark:bg-white dark:text-black bg-zinc-900 text-white",

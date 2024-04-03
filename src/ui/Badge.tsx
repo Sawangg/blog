@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "@ui/primitives/utils.ts";
 
 const colorClasses = {
   red: "bg-red-400/20 text-red-700 group-data-[hovered]:bg-red-400/30 dark:bg-red-400/10 dark:text-red-300 dark:group-data-[hover]:bg-red-400/15",
@@ -30,17 +30,19 @@ const colorClasses = {
   zinc: "bg-zinc-400/20 text-zinc-700 group-data-[hovered]:bg-zinc-400/30 dark:bg-zinc-400/10 dark:text-zinc-300 dark:group-data-[hover]:bg-zinc-400/15",
 };
 
+export type BadgeColor = keyof typeof colorClasses;
+
 export type BadgeProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> & {
-  color?: keyof typeof colorClasses;
+  color?: BadgeColor;
 };
 
 export const Badge: React.FC<BadgeProps> = ({ color = "zinc", className, children, ...props }) => {
   return (
     <span
-      className={clsx(
-        className,
+      className={cn(
         "inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 text-sm/5 font-medium sm:text-xs/5 forced-colors:outline",
         colorClasses[color],
+        className
       )}
       {...props}
     >

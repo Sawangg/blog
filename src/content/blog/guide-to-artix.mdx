@@ -1,13 +1,15 @@
 ---
 title: "Part #1: Running Linux as your daily driver"
-description: "The first part of my guide to run Linux as your daily driver"
+description: "Are you tired of Microsoft? Learn everything to switch to Linux!"
 author: "Léo Mercier"
 authorLink: "https://github.com/Sawangg"
 authorAt: "@Sawangg"
-publishedAt: 2024-01-01
+publishedAt: 2024-02-07
 tags: 
-- "Linux"
-- "OS"
+- title: Linux
+  color: orange
+- title: Guide
+  color: red
 ---
 
 In this guide you’ll see how to setup a full disk encryption with Artix Linux (dinit) on your machine as well as rice the distro to be **secure**, **usefull** and **pretty**. It will contain detailed informations to guide you through the install process and more. For this guilde you will need
@@ -204,13 +206,13 @@ It's time to install all the necessary packages for your brand new os.
 
 First we're going to install the base. I chose dinit but you can use runit openrc or s6 and I also added seatd instead of elogind
 ```sh
-basestrap -i /mnt base base-devel dinit
+basestrap -i /mnt base base-devel dinit seatd seatd-dinit
 ```
 
 Then we're going to chose linux-hardened for more security. We're also using seatd and turnstile instead of elogind. We're going to install turnstile later on.
 (TODO: try booster instead of mkinitcpio)
 ```sh
-basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio seatd seatd-dinit dhcpcd dhcpcd-dinit
+basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit openssh
 ```
 
 And finally we're going to install additional packages

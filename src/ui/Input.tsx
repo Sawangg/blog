@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "@ui/primitives/utils.ts";
 import { Input as RAInput, type InputProps } from "react-aria-components";
 
 export const Input: React.FC<InputProps> = ({ className, ...props }) => {
@@ -8,9 +8,9 @@ export const Input: React.FC<InputProps> = ({ className, ...props }) => {
       data-slot="control"
     >
       <RAInput
-        className={clsx(
-          className,
+        className={cn(
           "dark:border-white/10 dark:bg-white/5 dark:text-white dark:data-[hovered]:border-white/20 dark:data-[hovered]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[invalid]:dark:border-red-500 data-[invalid]:data-[hovered]:dark:border-red-500 data-[disabled]:dark:bg-white/[2.5%] relative block w-full appearance-none rounded-lg border border-zinc-950/10 bg-transparent px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 after:pointer-events-none focus:outline-none data-[disabled]:border-zinc-950/20 data-[hovered]:border-zinc-950/20 data-[invalid]:border-red-500 data-[invalid]:data-[hovered]:border-red-500 sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] sm:text-sm/6",
+          className,
         )}
         {...props}
       />

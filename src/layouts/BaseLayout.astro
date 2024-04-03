@@ -5,12 +5,13 @@ import Footer from "../components/Footer.astro";
 const { title } = Astro.props;
 ---
 
-<html lang="en" direction="ltr" class="[color-scheme:dark] antialiased bg-zinc-900">
+<html lang="en" class="[color-scheme:dark] antialiased bg-zinc-900">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title ?? "Léo Mercier's Blog"}</title>
     <meta name="description" content="A blog created by Leo Mercier on tech subjects."/>
+    <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body class="relative text-white overflow-x-hidden min-h-screen selection:bg-sky-500 dark:selection:text-white">
     <Header />
