@@ -5,14 +5,17 @@ import { Heading } from "@ui/Heading.tsx";
 import { Text } from "@ui/Text.tsx";
 import { Badge, type BadgeColor } from "@ui/Badge.tsx";
 
-const allBlogPosts = await getCollection('blog');
+const allBlogPosts = await getCollection("blog", ({ data }) => {
+  return data.draft !== true;
+});
+
 const sortedPosts = allBlogPosts.slice().sort((a, b) => {
   return new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime();
 });
 ---
 
 <BaseLayout>
-  <main class="max-w-3xl mx-auto mt-4">
+  <main class="max-w-3xl mx-auto mt-4 px-4 lg:px-0">
     <Heading className="text-4xl mb-6">All of my posts</Heading>
     <ul class="space-y-8">
       {sortedPosts.map(post => (
