@@ -12,7 +12,13 @@ tags:
   color: red
 ---
 
-In this guide you’ll see how to setup a full disk encryption with Artix Linux (dinit) on your machine as well as rice the distro to be **secure**, **usefull** and **pretty**. It will contain detailed informations to guide you through the install process and more. For this guilde you will need
+Tired of Microsoft shenanigans and Windows eating all of your RAM? In this guide you’ll see how to setup a full disk encryption with Artix Linux with the init system called dinit on your machine as well as rice the distro to be **secure** and **usefull**. It will contain detailed informations to guide you through the install process and more. The next few articles will continue to help you to install a graphical interface and more!
+
+***
+
+## Material needed
+
+For this guilde you will need the following
 * A USB stick with 1GB in storage
 * The machine you want to install Artix Linux. This wiki was created with a 1TB M2 SSD, AMD CPU and last generation Nvidia GPU in mind but can be used with any machine.
 * An internet connection  
@@ -73,7 +79,7 @@ loadkeys fr
 
 ***
 
-## Wipe your di(c)sk
+## Wipe your disk
 
 This step ensure that you start with a fresh disk. You can use whatever disk manager tool you’re comfortable with. Be careful if you have data on this drive it **will be deleted**! You can list your partitions and disks by running:
 ```sh
@@ -210,7 +216,6 @@ basestrap -i /mnt base base-devel dinit seatd seatd-dinit
 ```
 
 Then we're going to chose linux-hardened for more security. We're also using seatd and turnstile instead of elogind. We're going to install turnstile later on.
-(TODO: try booster instead of mkinitcpio)
 ```sh
 basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit openssh
 ```
