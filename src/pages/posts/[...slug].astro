@@ -42,7 +42,7 @@ const { Content } = await post.render();
               <TextLink href={post.data.authorLink}>{post.data.authorAt}</TextLink>
             </li>
           </ul>
-          <Button plain>
+          <Button plain client:visible>
             Share
           </Button>
         </div>
