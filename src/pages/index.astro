@@ -19,7 +19,7 @@ const sortedPosts = allBlogPosts.slice().sort((a, b) => {
     <Heading className="text-4xl mb-8">All of my posts</Heading>
     <div class="relative sm:pb-8 sm:ml-[calc(2rem+1px)] md:ml-[calc(3.5rem+1px)] lg:ml-[max(calc(14.5rem+1px),calc(100%-48rem))]">
       <hr class="hidden absolute top-3 bottom-0 right-full h-auto mr-7 md:mr-[3.25rem] border border-white/[0.2] sm:block" />
-      <ul class="space-y-16">
+      <ul class="space-y-12 sm:space-y-16">
         {sortedPosts.map(post => (
           <li>
             <article class="relative">

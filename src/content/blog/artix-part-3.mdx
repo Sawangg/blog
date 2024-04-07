@@ -1,0 +1,106 @@
+---
+title: "Part #3: User environment"
+description: "The third post on my Artix Linux guide"
+author: "Léo Mercier"
+authorLink: "https://github.com/Sawangg"
+authorAt: "@Sawangg"
+publishedAt: 2024-02-09
+tags: 
+- title: Linux
+  color: orange
+- title: Guide
+  color: red
+---
+
+We need to configure our user environment to be able to run graphical apps and more. Because we're not using either systemd or logind, it will be harder but if you follow this guide, you'll have all the necessary tools to properly manager your sessions, seats and dbus!
+
+***
+
+## Seat tracker
+
+We previously installed seatd in the introduction, you just need to add your current user to those groups
+```sh
+sudo usermod -aG seat,video,audio,input $(whoami)
+```
+
+_You can check you groups using the `groups` command._
+<br />
+Enable the service as **ROOT** and start it if necessary
+```sh
+sudo dinitctl enable seatd
+```
+
+We now have proper seat support. During your use of the system, you might install elogind as a dependency. You can forcefully remove it by running
+```sh
+sudo pacman -Rdd elogind
+```
+
+***
+
+## Dinit user services
+
+Now that we have a seat tracker, we need a login tracker, that's where. Execute the following commands
+```sh
+sudo pacman -S turnstile turnstile-dinit pambase-turnstile
+```
+
+Make sure you have this line in `/etc/pam.d/system-login` if it wasn't added automatically at the end of the file
+```sh
+session    optional    pam_turnstile.so
+```
+
+Once you're sure that the line was added, open `/etc/turnstile/turnstiled.conf` and change the value of `manage_rundir` from `no` to `yes`
+
+Next enable the service **AS ROOT** and start it if necessary
+```sh
+sudo dinitctl enable turnstiled
+```
+
+Exit your current session and log back in. You can now use `dinitctl list` as a non-root user. If you want to add your user services, place them in `~/.config/dinit.d/` and symlink to `~/.config/dinit.d/boot.d` if you want to start them when you log in.
+
+***
+
+## Dbus as a user
+
+Because we're not using elogind, we don't have proper user dbus support. We're going to create our own user dbus service to be able to start a graphical interface.
+First create a file called `dbus.user` in `~/.config/dinit.d/`. Paste this service
+```
+type = process
+load-options = sub-vars
+logfile = $HOME/.local/share/dinit/dbus.log
+command = /etc/dinit.d/user/scripts/dbus-session --print-address 3
+smooth-recovery = true
+ready-notification = pipefd:3
+```
+
+Since we want it to be started after the user login, we're going to create a symlink like this
+```sh
+ln -s ~/.config/dinit.d/dbus.user ~/.config/dinit.d/boot.d/
+```
+
+Create the log folder
+```sh
+mkdir -p ~/.local/share/dinit
+```
+
+Finally create a script called `dbus-session` located at `/etc/dinit.d/user/scripts/` with this content
+```sh
+#!/bin/sh
+
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/`id -u`/bus"
+dinitctl setenv DBUS_SESSION_BUS_ADDRESS || :
+exec dbus-daemon --session --address="$DBUS_SESSION_BUS_ADDRESS" "$@"
+```
+
+Don't forget to make it executable
+```sh
+chmod +x dbus-session
+```
+
+Finally, enable the service
+```sh
+dinitctl enable dbus.user
+```
+
+You can now exit the session and relogin. If you execute `dinitctl list` you should see your newly created service running.
+

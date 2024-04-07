@@ -12,7 +12,7 @@ tags:
   color: red
 ---
 
-If you followed [the previous post](/posts/guide-to-artix), you should now have a barebone system. It is still better than 90% of computer used today (thanks Microsoft) but we're still vulnerable to all kind of attacks. In this chapter, we're going to increase our security before configuring our user environment in a next post.
+If you followed [the previous post](/posts/artix-part-1), you should now have a barebone system. It is still better than 90% of computer used today (thanks Microsoft) but we're still vulnerable to all kind of attacks. In this chapter, we're going to increase our security before configuring our user environment in a next post.
 
 ***
 
@@ -30,7 +30,7 @@ sudo vim /etc/nftables.conf
 
 And enable the service by running
 ```sh
-dinitctl enable nftables
+sudo dinitctl enable nftables
 ```
 
 You can now see the rules used currently
@@ -98,7 +98,9 @@ You can now test pinging something with ipv6. It should fail!
 ping -6 wiki.archlinux.org
 ```
 
-## MAC address & Host randomization
+***
+
+## MAC address randomization
 
 The MAC address of an interface is a unique identifier that can be used to track us. We're going to randomize it when we boot our system. To achieve that, we can install a GNU package called `macchager`
 ```sh

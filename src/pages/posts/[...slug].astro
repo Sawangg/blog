@@ -6,9 +6,10 @@ import { MDul, MDli } from "@components/MDList.tsx";
 import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MDHeading.tsx";
 import { MDhr } from "@components/MDhr.tsx";
 import { MDpre } from "@components/MDpre.tsx";
+import { Share } from "@components/Share.tsx";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Avatar } from "@ui/Avatar.tsx";
-import { Button } from "@ui/Button.tsx";
+import { Heading } from "@ui/Heading.tsx";
 import { Text, TextLink, Strong } from "@ui/Text.tsx";
 
 export async function getStaticPaths() {
@@ -29,7 +30,7 @@ const { Content } = await post.render();
         <time class="text-md leading-6 text-zinc-400" datetime={post.data.publishedAt.toISOString()}>
           {post.data.publishedAt.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
         </time>
-        <h1 class="text-3xl font-extrabold mb-2 tracking-tight">{post.data.title}</h1>
+        <Heading className="text-3xl font-extrabold mb-2 tracking-tight">{post.data.title}</Heading>
         <div class="flex justify-between items-center">
           <ul class="flex gap-x-3 items-center">
             <li>
@@ -42,23 +43,23 @@ const { Content } = await post.render();
               <TextLink href={post.data.authorLink}>{post.data.authorAt}</TextLink>
             </li>
           </ul>
-          <Button plain client:visible>
-            Share
-          </Button>
+          <Share client:visible />
         </div>
       </section>
-      <Content components={{
-        img: Image,
-        h2: MDHeading2,
-        h3: MDHeading3,
-        h4: MDHeading4,
-        p: Text,
-        a: TextLink,
-        strong: Strong,
-        ul: MDul,
-        li: MDli,
-        hr: MDhr,
-        pre: MDpre }}
+      <Content 
+        components={{
+          img: Image,
+          h2: MDHeading2,
+          h3: MDHeading3,
+          h4: MDHeading4,
+          p: Text,
+          a: TextLink,
+          strong: Strong,
+          ul: MDul,
+          li: MDli,
+          hr: MDhr,
+          pre: MDpre 
+        }}
       />
     </article>
   </main>
