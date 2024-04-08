@@ -1,20 +1,40 @@
 ---
-import Header from "../components/Header.astro";
-//import Footer from "../components/Footer.astro";
+import Header from "@components/Header.astro";
+//import Footer from "@components/Footer.astro";
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <html lang="en" class="[color-scheme:dark] dark antialiased bg-zinc-900">
   <head>
     <meta charset="utf-8" />
+    <meta content="dark light" name="color-scheme" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta 
+      name="description"
+      property="og:description"
+      content={description ?? "A blog created by Leo Mercier on tech subjects."}
+    />
+    <meta name="author" content="Léo Mercier" />
+    <meta name="copyright" content="ISC" />
+
+    <link rel="canonical" href={Astro.url} />
+    <meta content="origin" name="referrer" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+
+    <meta property="og:site_name" content="Léo Mercier's blog" />
+    <meta property="og:title" content={title ?? "Léo Mercier's blog"} />
+    <meta property="og:type" content="website" />
+
+    <link rel="alternate" type="application/rss+xml" title="Léo Mercier's blog" href={`${Astro.site}rss.xml`} />
+
     <title>{title ?? "Léo Mercier's blog"}</title>
-    <meta name="description" content="A blog created by Leo Mercier on tech subjects."/>
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="alternate" type="application/rss+xml" title="Leo Mercier's blog" href={`${Astro.site}rss.xml`} />
   </head>
-  <body class="relative text-white overflow-x-hidden min-h-screen selection:bg-sky-500 dark:selection:text-white pb-4">
+  <body class="text-white overflow-x-hidden min-h-screen selection:bg-sky-500 dark:selection:text-white pb-4">
     <Header />
     <slot />
   </body>
