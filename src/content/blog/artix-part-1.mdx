@@ -356,7 +356,7 @@ chmod 000 /crypto_keyfile.bin
 ```
 
 Add the file to the `FILES` hook of `/etc/mkinitcpio.conf` and register your key.
-```
+```sh
 sed -i "s/FILES=(/FILES=(\/crypto_keyfile.bin/g" /etc/mkinitcpio.conf
 cryptsetup luksAddKey /dev/your-disk-2 /crypto_keyfile.bin
 ```
@@ -404,35 +404,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 Check the output of the command to see if it used our linux-hardened image we created earlier
-
-#### Optional: Set GRUB keyboard layout
-
-If you're using something other than the default US keyboard, you're going have to generate a keymap for GRUB to use.
-
-First, you're going to need to setup the AUR repositories. Check [this page](https://github.com/Sawangg/dotfiles/wiki/Manage-your-packages#aur) of the wiki.
-Next, we're going to add this package
-```sh
-yay -S ckbcomp
-```
-
-We're going to add this line to our default grub
-```sh
-echo "GRUB_TERMINAL_INPUT=at_keyboard" | tee -a /etc/default/grub
-```
-
-Open `/etc/grub.d/40_custom` and paste those lines
-```sh
-insmod keylayouts
-keymap /boot/grub/fr.gkb
-```
-
-Then generate the keymap and update GRUB
-```sh
-grub-kbdcomp -o /boot/grub/fr.gkb fr
-update-grub
-```
-
-Voila, you should have your custom keymap on your next reboot
 
 ***
 
