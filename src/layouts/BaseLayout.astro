@@ -1,6 +1,6 @@
 ---
 import Header from "@components/Header.astro";
-//import Footer from "@components/Footer.astro";
+import Footer from "@components/Footer.astro";
 
 const { title, description } = Astro.props;
 ---
@@ -34,9 +34,10 @@ const { title, description } = Astro.props;
 
     <title>{title ?? "Léo Mercier's blog"}</title>
   </head>
-  <body class="text-white overflow-x-hidden min-h-screen selection:bg-sky-500 dark:selection:text-white pb-4">
+  <body class="text-white overflow-x-hidden min-h-screen selection:bg-sky-500 dark:selection:text-white">
     <Header />
     <slot />
+    <Footer />
   </body>
 </html>
 

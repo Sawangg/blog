@@ -1,7 +1,24 @@
 ---
-import { Text } from "@ui/Text";
+import rss from "@assets/rss.svg?raw";
+import { Button } from "@ui/Button";
+import { Input } from "@ui/Input";
+import { Heading } from "@ui/Heading";
+import { Text, TextLink } from "@ui/Text";
 ---
 
-<footer class="absolute bottom-0 w-full flex items-center justify-center mb-10">
-  <Text>Made with coffee</Text>
+<footer class="mt-16 px-4 pb-28 border-t border-white/[0.2]">
+  <section class="max-w-4xl mx-auto py-12">
+    <Heading className="leading-8 mb-4" >Get all of my posts directly in your inbox!</Heading>
+    <form class="flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:max-w-lg">
+      <Input placeholder="Subscribe by email" />
+      <Button client:visible>Subscribe</Button>
+    </form>
+    <div class="flex gap-x-2 mt-4 items-center justify-center sm:justify-start">
+      <TextLink href="/rss.xml">
+        <Fragment set:html={rss} />
+      </TextLink>
+      <Text className="text-sm">© Léo Mercier — {new Date().toLocaleDateString("en", { year: "numeric" })}</Text>
+    </div>
+  </section>
 </footer>
+
