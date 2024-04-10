@@ -21,12 +21,18 @@ export type DialogProps = RADialogProps & {
 
 export const Dialog: React.FC<DialogProps> = ({ open, onOpenChange, size = "lg", children, className, ...props }) => (
   <ModalOverlay
-    className="dark:bg-zinc-950/50 fixed inset-0 grid w-screen grid-rows-[1fr_auto] justify-items-center overflow-y-auto bg-zinc-950/25 focus:outline-0 sm:grid-rows-[1fr_auto_3fr]"
+    className={({ isEntering, isExiting }) => `dark:bg-zinc-950/50 fixed inset-0 grid w-screen grid-rows-[1fr_auto] justify-items-center overflow-y-auto bg-zinc-950/25 focus:outline-0 sm:grid-rows-[1fr_auto_3fr] 
+      ${isEntering ? 'animate-in fade-in duration-300 ease-out' : ''}
+      ${isExiting ? 'animate-out fade-out duration-200 ease-in' : ''}
+    `}
     isOpen={open}
     onOpenChange={onOpenChange}
     isDismissable
   >
-    <Modal className="row-start-2">
+    <Modal className={({ isEntering, isExiting }) => `row-start-2
+      ${isEntering ? 'animate-in zoom-in-95 ease-out duration-300' : ''}
+      ${isExiting ? 'animate-out zoom-out-95 ease-in duration-200' : ''}
+    `}>
       <RADialog
         className={cn(
           "dark:bg-zinc-900 dark:ring-white/10 w-full min-w-0 rounded-t-3xl bg-white p-[--gutter] shadow-lg outline-none ring-1 ring-zinc-950/10 [--gutter:theme(spacing.8)] sm:mb-auto sm:max-w-lg sm:rounded-2xl",
