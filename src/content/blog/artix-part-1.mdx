@@ -21,7 +21,7 @@ Tired of Microsoft shenanigans and Windows eating all of your RAM? In this guide
 For this guilde you will need the following
 * A USB stick with 1GB in storage
 * The machine you want to install Artix Linux. This wiki was created with a 1TB M2 SSD, AMD CPU and last generation Nvidia GPU in mind but can be used with any machine.
-* An internet connection  
+* An internet connection
 
 This guide was designed so it requires minium effort to follow but you'll still need the basics (such as exiting vim).  
 Additionally, this guide was done using a french layout keyboard (AZERTY), thus you can skip or modify the sections regarding keyboard mapping.
@@ -51,7 +51,7 @@ Locate the ISO you downloaded on your machine and use a tool like dd on Linux or
 
 Here is the command to flash the USB on Linux
 ```sh
-sudo dd bs=4M if=path/to/artixlinux-version-x86_64.iso of=/dev/my-usb conv=fsync oflag=direct status=progress
+dd bs=4M if=path/to/artixlinux-version-x86_64.iso of=/dev/my-usb conv=fsync oflag=direct status=progress
 ```
 
 Once the USB is flashed, plug the USB in your PC when it's shutdown, press the boot menu choice key or change the bootable order in your BIOS and boot onto the USB.
@@ -76,6 +76,19 @@ password: artix
 Change your keyboard mapping if you didn't change the keytable in the GRUB options. Here is an example for the AZERTY layout
 ```sh
 loadkeys fr
+```
+
+### Login to the network
+
+We're going to need an Internet connection to download packages further in this guide. To do that without an Ethernet cable, we're going to use `wpa_supplicant` provided in the live install of Artix. Run all these commands to connect to your WIFI
+```sh
+rfkill unblock wlan
+ip link set wlan0 up
+wpa_cli
+add_network
+set_network 0 ssid "my wifi ssid"
+set_network 0 psk "my password"
+enable_network 0
 ```
 
 ***
@@ -131,7 +144,6 @@ parted -s /dev/your-disk align-check optimal 2
 ## Cryptsetup
 
 Now we're going to encrypt our disk. To get started run the next command to try to force the unlocking of stronger ciphers
-
 ```sh
 cryptsetup benchmark
 ```
@@ -141,13 +153,11 @@ To generate a strong password, you can use this tool:
 https://rumkin.com/tools/password/
 
 Next we're going to encrypt the disk using one of the stronger cipher proposed by the benchmark.
-
 ```sh
 cryptsetup --verbose --type luks1 --cipher serpent-xts-plain64 --key-size 512 --hash sha512 --iter-time 10000 --use-random --verify-passphrase luksFormat /dev/your-disk-2
 ```
 
 Then we mount using the device mapper. A possible reboot here can fix issues mounting the partition.
-
 ```sh
 cryptsetup luksOpen /dev/your-disk-2 alpha
 ```
@@ -157,12 +167,10 @@ cryptsetup luksOpen /dev/your-disk-2 alpha
 ## Logical & Physical volume
 
 Now it's possible to create the physical volume
-
 ```sh
 pvcreate /dev/mapper/alpha
 ```
 And finally the logical volume that we'll call alpha
-
 ```sh
 vgcreate alpha /dev/mapper/alpha
 ```
@@ -172,7 +180,6 @@ vgcreate alpha /dev/mapper/alpha
 ## System partitions
 
 Next we can create the 3 partitions needed: swap user and root
-
 ```sh
 lvcreate --contiguous y --size 16G alpha --name volSwap
 lvcreate --contiguous y --size 400G alpha --name volUser
@@ -182,7 +189,6 @@ lvcreate --contiguous y --extents +100%FREE alpha --name volRoot
 ### Format the partitions
 
 We can format each partition to use the correct file system.
-
 ```sh
 mkfs.fat -n ESP -F 32 /dev/your-disk-1
 mkswap -L SWAP /dev/alpha/volSwap
@@ -192,8 +198,7 @@ mkfs.ext4 -L HOME /dev/alpha/volUser
 
 ### Mount the partitions
 
-We can finally mount our newly created partitions
-
+We can finally mount our newly created partitions. If you get an error about `ext4` being unrecognized, run `modprobe ext4` and check if you get an error. If you do, reboot your system and do the following
 ```sh
 swapon /dev/alpha/volSwap
 mount /dev/alpha/volRoot /mnt
@@ -213,21 +218,22 @@ It's time to install all the necessary packages for your brand new os.
 
 First we're going to install the base. I chose dinit but you can use runit openrc or s6 and I also added seatd instead of elogind
 ```sh
-basestrap -i /mnt base base-devel dinit seatd seatd-dinit
+basestrap -i /mnt base base-devel dinit seatd seatd-dinit dbus-dinit
 ```
 
 Then we're going to chose linux-hardened for more security. We're also using seatd and turnstile instead of elogind. We're going to install turnstile later on.
 ```sh
-basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit openssh
+basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi acpid acpid-dinit openssh
 ```
 
 And finally we're going to install additional packages
 ```sh
-basestrap -i /mnt sudo vim git amd-ucode neofetch
+basestrap -i /mnt doas vim git amd-ucode fastfetch
 ```
 
 Feel free to replace the amd-ucode with the necessary drivers for your CPU (intel-ucode). We're going to install GPU drivers later on.
 
+<br />
 ### Fstab
 
 Generate the fstab
@@ -263,6 +269,13 @@ Set your new root password
 
 ```sh
 passwd
+```
+
+## Doas I do and remove sudo
+
+Since we're using `doas` instead of `sudo` and for whatever reason `sudo` is a dependency of `base-devel`, we will remove it now
+```sh
+pacman -Rdd sudo
 ```
 
 ### Locale, Timezone, Hostname and Hosts
@@ -319,15 +332,21 @@ passwd myuser
 usermod -aG wheel,storage,power myuser
 ```
 
-We need to enable the use of sudo. To do that execute
+We need to enable the use of doas for the wheel group. To do that create `/etc/doas.conf` and add
 ```sh
-EDITOR=vim visudo
-```
-And go to line 108 and uncomment this line
-```
-%wheel ALL=(ALL:ALL) ALL
+permit :wheel
 ```
 
+#### Optional
+
+If you want to persist your password in your terminal after you used it once, you can change the `doas.conf` to this
+```sh
+permit persist :wheel
+```
+
+Keep in mind that this is not as secure as typing your password every time.
+
+<br />
 ### Kernel parameters
 
 ```sh
@@ -427,15 +446,24 @@ reboot
 
 Because we didn't install `networkmanager`, we're going to enable the `dhcpcd` service as root to get an ip adress
 ```sh
-dinitctl enable dhcpcd
+doas dinitctl enable dbus
+doas dinitctl enable dhcpcd
 ```
 
-Once it started, change your dns to whatever you want (don't use Google please). You can prevent the file from being updated if you want your DNS configuration to be persistent.
+### Wifi
+
+If you installed `iwd` in the basestrap, you can connect to the wifi by running
+```sh
+doas dinitctl enable iwd
+iwctl
+station name connect SSID
+```
+
+Once you've got an internet connection, change your dns to whatever you want (don't use Google please). You can prevent the file from being updated if you want your DNS configuration to be persistent.
 ```sh
 vim /etc/resolv.conf
 chattr +i /etc/resolv.conf
 ```
 
 You're DONE !! Congratulation, you're well on your way to have a secure system. See the [next article](https://github.com/Sawangg/dotfiles/wiki/Enhance-security) of this guide to upgrade the security of your newly installed system.
-
 

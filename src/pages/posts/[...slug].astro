@@ -43,7 +43,7 @@ const { Content } = await post.render();
               <TextLink href={post.data.authorLink}>{post.data.authorAt}</TextLink>
             </li>
           </ul>
-          <Share client:only />
+          <Share client:only="react" />
         </div>
       </section>
       <Content 
