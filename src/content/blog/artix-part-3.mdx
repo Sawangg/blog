@@ -1,10 +1,10 @@
 ---
-title: "Part #3: User environment"
-description: "The third post on my Artix Linux guide"
+title: "Part #3: Graphics with Hyprland"
+description: "Enough tty, this is the promised land"
 author: "Léo Mercier"
 authorLink: "https://github.com/Sawangg"
 authorAt: "@Sawangg"
-publishedAt: 2024-02-22
+publishedAt: 2024-05-04
 tags: 
 - title: Linux
   color: orange
@@ -12,62 +12,51 @@ tags:
   color: red
 ---
 
-We need to configure our user environment to be able to run graphical apps and more. Because we're not using either systemd or logind, it will be harder but if you follow this guide, you'll have all the necessary tools to properly manager your sessions, seats and dbus!
-
-***
-
-## Seat tracker
-
-We previously installed seatd in the introduction, you just need to add your current user to those groups
-```sh
-doas usermod -aG seat,video,audio,input $(whoami)
-```
-
-_You can check you groups using the `groups` command._
+Hi there! If you managed to follow this guide up until now, you're one of a kind! For now, you're system is blind and deaf, and at the end of this post, you'll only be deaf because we're tackling having a graphical interface today!
 <br />
-Enable the service as **ROOT** and start it if necessary
-```sh
-doas dinitctl enable seatd
-```
+Wayland is a communication protocol that replaces our old friend Xorg and [Hyprland](https://wiki.hyprland.org/) is an awesome tiling Wayland compositor I've been using for the past 6 months and I've felt in love with it. It's highly customisable and doesn't compromise on its looks. It's still a relatively new project so expect a few bugs here and there but I only have high praise for it. If you've followed my two previous posts, you can go right ahead. If not, I invite you to go back and come here once you're ready.
 
-We now have proper seat support. During your use of the system, you might install elogind as a dependency. You can forcefully remove it by running
+<br />
+## Install Hyprland
+
+Because we've already setup `yay`, you can simply run
 ```sh
+yay -S hyprcursor-git
+yay -S hyprland-nosystemd-git
 doas pacman -Rdd elogind
 ```
 
-***
+If you want to automatically run Hyprland once you're connected, add the `Hyprland` command to your `.bash_profile`.
 
-## Dinit user services
-
-Now that we have a seat tracker, we need a login tracker, that's where. Execute the following commands
-```sh
-doas pacman -S turnstile turnstile-dinit pambase-turnstile
-```
-
-Make sure you have this line in `/etc/pam.d/system-login` if it wasn't added automatically at the end of the file
-```sh
-session    optional    pam_turnstile.so
-```
-
-Once you're sure that the line was added, open `/etc/turnstile/turnstiled.conf` and change the value of `manage_rundir` from `no` to `yes`
-
-Next enable the service **AS ROOT** and start it if necessary
-```sh
-doas dinitctl enable turnstiled
-```
-
-Exit your current session and log back in. You can now use `dinitctl list` as a non-root user. If you want to add your user services, place them in `~/.config/dinit.d/` and symlink to `~/.config/dinit.d/boot.d` if you want to start them when you log in.
-
-***
-
-## Dbus as a user
-
-Because we're not using elogind, we don't have proper user dbus support. We're going to install a package that does that for us
-```sh
-doas pacman -S dbus-dinit-user
-```
-
-This service will now start when another service like `pipewire` requires a dbus session.
 <br />
-You now have correctly setup your user environment like a champ! You're ready for the next step which is a graphical interface in the next article!
+### Terminal emulator
+
+Hyprland is configured with `kitty` as the default terminal emulator. I switched to `alacritty`. Install it by running
+```sh
+yay -S alacritty-git
+```
+You also need to update the Hyprland config located in `~/.config/hypr/hyprland.conf` and replace kitty with alacritty in the terminal configuration.
+
+<br />
+### Clipboard support
+
+To be able to handle copy and paste access for certain applications, we're going to add the package `wl-clipboard`
+```sh
+doas pacman -S wl-clipboard
+```
+
+### Portal support
+
+Portal are kind of magical and handle stuff like screen sharing and more. To install the Hyprland implementation run
+```sh
+doas pacman -S xdg-desktop-portal-hyprland
+```
+
+Exit your current session and login. You should have the Hyprland desktop on your screen. You can then press `WIN+Q` to open up a terminal.
+Run this command to check your hyprland version. Because we installed the git version of the repository, we should be on the latest version.
+```sh
+hyprctl version
+```
+
+Congrats, you now have a good looking Wayland desktop environment, you're in the future! Feel free to go through the Hyprland Wiki and configure it as you please. In the next post and probably the last of this guide, I'll show you how to configure your sound properly in Artix. See you soon!
 

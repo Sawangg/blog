@@ -1,6 +1,6 @@
 ---
 title: "Part #1: Running Linux as your daily driver"
-description: "Are you tired of Microsoft? Learn everything to switch to Linux!"
+description: "Are you tired of Microsoft? Start your Linux 🐧 journey here!"
 author: "Léo Mercier"
 authorLink: "https://github.com/Sawangg"
 authorAt: "@Sawangg"
@@ -20,10 +20,10 @@ Tired of Microsoft shenanigans and Windows eating all of your RAM? In this guide
 
 For this guilde you will need the following
 * A USB stick with 1GB in storage
-* The machine you want to install Artix Linux. This wiki was created with a 1TB M2 SSD, AMD CPU and last generation Nvidia GPU in mind but can be used with any machine.
+* The machine you want to install Artix Linux. This guide was created with a 1TB M2 SSD, AMD CPU and last generation Nvidia GPU in mind but can be used with any machine.
 * An internet connection
 
-This guide was designed so it requires minium effort to follow but you'll still need the basics (such as exiting vim).  
+This post was designed so it requires minium effort to follow but you'll still need the basics (such as exiting vim).  
 Additionally, this guide was done using a french layout keyboard (AZERTY), thus you can skip or modify the sections regarding keyboard mapping.
 
 ***
@@ -56,7 +56,7 @@ dd bs=4M if=path/to/artixlinux-version-x86_64.iso of=/dev/my-usb conv=fsync ofla
 
 Once the USB is flashed, plug the USB in your PC when it's shutdown, press the boot menu choice key or change the bootable order in your BIOS and boot onto the USB.
 
-You might need to edit the GRUB boot options depending on your hardware or else you'll get a black screen once you loaded the live OS. Press e on the Stick/HDD option of the menu and add ‘nomodeset’ at the end of the line that starts with linux. 
+You might need to edit the GRUB boot options depending on your hardware or else you'll get a black screen once you load the live OS. Press e on the Stick/HDD option of the menu and add ‘nomodeset’ at the end of the line that starts with linux. 
 ```
 linux ... nomodeset
 ```
@@ -216,22 +216,22 @@ We did it! We can finally install Artix to our system.
 
 It's time to install all the necessary packages for your brand new os.
 
-First we're going to install the base. I chose dinit but you can use runit openrc or s6 and I also added seatd instead of elogind
+First we're going to install the base. I chose dinit but you can use `runit` `openrc` or `s6` and I also added `seatd` instead of `elogind`
 ```sh
 basestrap -i /mnt base base-devel dinit seatd seatd-dinit dbus-dinit
 ```
 
-Then we're going to chose linux-hardened for more security. We're also using seatd and turnstile instead of elogind. We're going to install turnstile later on.
+Then we're going to chose linux-hardened for more security. We're going to install more packages like `turnstile` to fully replace `elogind` later on.
 ```sh
 basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi acpid acpid-dinit openssh
 ```
 
-And finally we're going to install additional packages
+Finally we're going to install additional packages
 ```sh
 basestrap -i /mnt doas vim git amd-ucode fastfetch
 ```
 
-Feel free to replace the amd-ucode with the necessary drivers for your CPU (intel-ucode). We're going to install GPU drivers later on.
+Feel free to replace the amd-ucode with the necessary drivers for your CPU (intel-ucode). If you are using an Nvidia GPU like I do, I'll post an article on how to handle the pain that Nvidia is on Linux.
 
 <br />
 ### Fstab
@@ -242,7 +242,7 @@ Generate the fstab
 fstabgen -U /mnt >> /mnt/etc/fstab
 ```
 
-Ensure everything is listed correctly
+Ensure everything is listed correctly, you should have 4 entries
 ```sh
 cat /mnt/etc/fstab
 ```
@@ -256,11 +256,12 @@ echo -e "# /dev/mapper/alpha-volUser LABEL=HOME\nUUID=`blkid -s UUID -o value /d
 
 tmpfs is a temporary filesystem that resides in memory or swap partitions. Without systemd, only the /run directory uses tmpfs by default. We can change the size of tmpfs partition using this command
 ```sh
-echo -e "\ntmpfs\t\t\t\t\t\t/tmp\t\ttmpfs\t\trw,nosuid,nodev,relatime,size=8G,mode=1777\t0 0\n" | tee -a /mnt/etc/fstab
+echo -e "\ntmpfs\t\t\t\t\t\t/tmp\t\ttmpfs\t\trw,nosuid,nodev,norelatime,size=8G,mode=1777\t0 0\n" | tee -a /mnt/etc/fstab
 ```
 
 ### Chroot
 
+Now that we installed the base of our system, we can access it using
 ```sh
 artix-chroot /mnt /bin/bash
 ```
@@ -280,7 +281,7 @@ pacman -Rdd sudo
 
 ### Locale, Timezone, Hostname and Hosts
 
-First we need to generate our local. It is recommanded to use en_US
+First we need to generate our local. It is recommanded to use en_US but you can use whatever locale you want.
 
 ```sh
 echo -e "en_US.UTF-8 UTF-8" >> /etc/locale.gen
@@ -422,7 +423,7 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=artix
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-Check the output of the command to see if it used our linux-hardened image we created earlier
+Check the output of the command to see if it used our linux-hardened image we created earlier using `mkinitcpio`.
 
 ***
 
@@ -430,7 +431,7 @@ Check the output of the command to see if it used our linux-hardened image we cr
 
 It seems like we can now boot into our system.
 
-Exit the termnial, unmount the partitions and reboot !
+Exit the termnial, unmount the partitions, shutdown your system, unplug the USB and start it!
 
 ```sh
 exit
@@ -465,5 +466,5 @@ vim /etc/resolv.conf
 chattr +i /etc/resolv.conf
 ```
 
-You're DONE !! Congratulation, you're well on your way to have a secure system. See the [next article](https://github.com/Sawangg/dotfiles/wiki/Enhance-security) of this guide to upgrade the security of your newly installed system.
+You're **DONE**!! Congratulation, you're well on your way to have a wonderful Linux system. See the [next post](https://leomercier.blog/posts/artix-part-2) of this guide to setup your user environment!
 

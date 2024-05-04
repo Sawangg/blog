@@ -1,121 +1,161 @@
 ---
-title: "Part #2: Enhanced security in Artix"
-description: "The second part of my Artix Linux guide"
+title: "Part #2: Setup your Artix user environment"
+description: "One small step for man, one giant leap for privacy"
 author: "Léo Mercier"
 authorLink: "https://github.com/Sawangg"
 authorAt: "@Sawangg"
-publishedAt: 2024-02-08
-tags:
+publishedAt: 2024-02-22
+tags: 
 - title: Linux
   color: orange
 - title: Guide
   color: red
 ---
 
-If you followed [the previous post](/posts/artix-part-1), you should now have a barebone system. It is still better than 90% of computer used today (thanks Microsoft) but we're still vulnerable to all kind of attacks. In this chapter, we're going to increase our security before configuring our user environment in a next post.
+Following up our previous post on installing Artix Linux, we need to configure our user environment to be able to run graphical apps and more. Because we're not using either `systemd` or `elogind`, it will be harder but if you follow this guide, you'll have all the necessary tools to properly manager your sessions, seats and dbus!
 
 ***
 
-## Firewall
+## Seat tracker
 
-Once you're back in your system, login as a user. I assume you know what a firewall is all about so we're going to install one called `nftables`. You could just configure your `iptables` to create the same rules.
+We previously installed seatd, you just need to add your current user to those groups
 ```sh
-sudo pacman -S nftables nftables-dinit
+doas usermod -aG seat,video,audio,input $(whoami)
 ```
 
-Edit and comment the tcp sshd line
+_You can check you groups using the `groups` command._
+<br />
+Enable the service as **ROOT**
 ```sh
-sudo vim /etc/nftables.conf
+doas dinitctl enable seatd
 ```
 
-And enable the service by running
+We now have proper seat support. During your use of the system, you might install `elogind` as a dependency. You can forcefully remove it by running
 ```sh
-sudo dinitctl enable nftables
-```
-
-You can now see the rules used currently
-```sh
-sudo nft list ruleset
+doas pacman -Rdd elogind
 ```
 
 ***
 
-## Kernel parameters
+## Dinit user services
 
-We already installed the hardened version of the Linux kernel so we just have to tweak a few network kernel parameters
+Now that we have a seat tracker, we need a login tracker, that's where `turnstile` comes in clutch. Execute the following commands
 ```sh
-sudo mkdir /etc/sysctl.d/
-sudo vim /etc/sysctl.d/99-network.conf
+doas pacman -S turnstile turnstile-dinit pambase-turnstile
 ```
 
-Add this config
+Make sure you have this line in `/etc/pam.d/system-login` if it wasn't added automatically at the end of the file
 ```sh
-# Do not act as a router
-net.ipv4.ip_forward = 0
-
-# SYN flood protection
-net.ipv4.tcp_syncookies = 1
-
-# Disable ICMP redirect
-net.ipv4.conf.all.accept_redirects = 0
-net.ipv4.conf.default.accept_redirects = 0
-net.ipv4.conf.all.secure_redirects = 0
-net.ipv4.conf.default.secure_redirects = 0
-
-# Don't send ICMP redirects
-net.ipv4.conf.all.send_redirects = 0
-net.ipv4.conf.default.send_redirects = 0
+session    optional    pam_turnstile.so
 ```
 
-Finally apply your changes by running
+Once you're sure that the line was added, open `/etc/turnstile/turnstiled.conf` and change the value of `manage_rundir` from `no` to `yes`
+
+Next enable the service **AS ROOT**
 ```sh
-sysctl --system
+doas dinitctl enable turnstiled
 ```
 
-### Disable ipv6
-
-If you want to disable ipv6 you can do so by creating the file `/etc/sysctl.d/40-ipv6.conf` and add this config
-```sh
-# Disable IPv6
-net.ipv6.conf.all.disable_ipv6 = 1
-```
-
-Don't forget to reload your config
-
-You also need to edit your dhcpcd config located at `/etc/dhcpcd.conf`
-```
-noipv6rs
-noipv6
-```
-
-You can check that you don't have any ipv6 left in your interfaces
-```sh
-ip -c addr
-```
-
-You can now test pinging something with ipv6. It should fail!
-```sh
-ping -6 wiki.archlinux.org
-```
+Exit your current session and log back in. You can now use `dinitctl list` as a non-root user. If you want to add your user services, place them in `~/.config/dinit.d/` and symlink to `~/.config/dinit.d/boot.d` if you want to start them when you log in.
 
 ***
 
-## MAC address randomization
+## Dbus as a user
 
-The MAC address of an interface is a unique identifier that can be used to track us. We're going to randomize it when we boot our system. To achieve that, we can install a GNU package called `macchager`
+Because we're not using elogind, we don't have proper user dbus support. We're going to install a package that does that for us
 ```sh
-yay -S macchanger-git
+doas pacman -S dbus-dinit-user
 ```
 
-Next we're going to create a `udev` rule called `81-mac-spoof.rules` and paste this
+This service will now start when another service like `pipewire` requires a dbus session.
+
+***
+
+## AUR
+Artix is capable of using Arch Linux's AUR. We're going to setup yay to use it. Keep in mind that we're using Artix linux and NOT Arch Linux. It means that some packages that have systemd dependencies will not work on our system.
+
+<br />
+### Doas & Sudo
+
+First, we need to configure `makepkg` to use `doas`. Open `/etc/makepkg.conf`, uncomment and add at the end of the file
 ```sh
-ACTION=="add", SUBSYSTEM=="net", ATTR{address}=="original MAC of interface", RUN+="/usr/bin/macchanger -r interfaceName"
+PACMAN_AUTH=(doas)
 ```
 
-The `original MAC of interface` is the orginal address of your interface and `interfaceName` is the name of the interface. You can find both by running
-```
-ip -c addr
+We also need to create an alias in our `~/.bashrc` to run `doas` instead of `sudo` for `yay`
+```sh
+alias yay='yay --sudo doas --sudoflags -- --save'
 ```
 
-You can add a new line for each interface your PC has but do not change your `lo` MAC adress. Now, each time you reboot you'll get a new MAC address!
+Now we are ready to install `yay`.
+
+<br />
+### Yay it works
+
+Yay is an AUR Helper that will install packages from the Arch AUR. Clone the repository and build it.
+```sh
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ..
+doas rm -r yay
+```
+
+### Add additional repositories
+
+This is an example for adding the universe repository from Artix Linux. Go to `/etc/pacman.conf` and add at the bottom
+```
+[universe]
+Server = https://universe.artixlinux.org/$arch
+```
+
+Run this to update your pacman
+```sh
+doas pacman -Sy
+```
+
+### Arch repositories
+
+Artix Linux supports the use of the Arch Linux repositories.
+```sh
+doas pacman -S artix-archlinux-support
+doas pacman-key --populate archlinux
+```
+
+Append your `/etc/pacman.conf` and add whatever Arch Linux repository you want, for example the `extra` repository. 
+```
+[extra]
+Include = /etc/pacman.d/mirrorlist-arch
+```
+_If you want the community repository, all you have to do is change the extra to community._
+ 
+```sh
+doas pacman -Sy
+```
+
+You can now install packages from the `extra` Arch repository.
+
+***
+
+## Fonts
+
+Fonts are an integral part of your system. They are located in `/usr/share/fonts`. We're going to add a few fonts that we'll be using in our system using `yay` and the extra repository we just installed.
+
+<br />
+### Nerd fonts
+
+Nerd fonts are fonts patched with icons and all kind of crazy. Here is an incomplete [list](https://archlinux.org/groups/x86_64/nerd-fonts/) of fonts we can install. For example `ttf-dejavu-nerd`
+```sh
+doas pacman -S ttf-dejavu-nerd
+```
+
+### Emojis
+
+We also need to add atleast one emoji font on our system. I'm using the AUR package called `openmoji` but you can install any emoji pack you want
+```sh
+yay -S otf-openmoji
+fc-cache
+```
+
+You now have correctly setup your user environment like a champ! You're ready for the next step which is to setup a graphical interface. Stay tuned for the next post of this guide by following me!
 
