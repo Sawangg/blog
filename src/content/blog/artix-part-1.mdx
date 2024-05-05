@@ -223,7 +223,7 @@ basestrap -i /mnt base base-devel dinit seatd seatd-dinit dbus-dinit
 
 Then we're going to chose linux-hardened for more security. We're going to install more packages like `turnstile` to fully replace `elogind` later on.
 ```sh
-basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi acpid acpid-dinit openssh
+basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi acpid acpid-dinit openssh openssh-dinit
 ```
 
 Finally we're going to install additional packages
@@ -443,11 +443,15 @@ reboot
 
 ***
 
-## Connect to the internet
+## First time on the system
+
+Login using your user credentials previously created and enable a few services as **ROOT**
+```sh
+doas dinitctl enable dbus
+```
 
 Because we didn't install `networkmanager`, we're going to enable the `dhcpcd` service as root to get an ip adress
 ```sh
-doas dinitctl enable dbus
 doas dinitctl enable dhcpcd
 ```
 
