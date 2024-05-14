@@ -9,7 +9,11 @@ import robotsTxt from "astro-robots-txt";
 export default defineConfig({
   site: "https://leomercier.blog",
   prefetch: true,
-  integrations: [tailwind({
-    applyBaseStyles: true
-  }), mdx(), react(), sitemap(), robotsTxt()]
+  integrations: [
+    tailwind({ applyBaseStyles: true }),
+    mdx(),
+    react(),
+    sitemap(),
+    robotsTxt(),
+  ],
 });
