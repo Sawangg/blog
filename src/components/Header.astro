@@ -3,14 +3,21 @@ import github from "@assets/github.svg?raw";
 import { TextLink } from "@ui/Text";
 ---
 
-<header class="sticky top-0 z-50 w-full p-2 sm:px-4 backdrop-blur flex-none transition-colors duration-500 border-b border-white/[0.2]">
-  <nav class="flex justify-between items-center max-w-7xl mx-auto">
+<header
+  class="sticky top-0 z-50 w-full flex-none border-b border-white/[0.2] p-2 backdrop-blur transition-colors duration-500 sm:px-4"
+>
+  <nav class="mx-auto flex max-w-7xl items-center justify-between">
     <TextLink href="/" newTab={false} className="text-3xl no-underline">Léo Mercier</TextLink>
     <div class="flex gap-x-3 md:gap-x-8">
       <TextLink href="https://leomercier.dev" className="no-underline">About</TextLink>
       <TextLink href="/" newTab={false} className="no-underline">Blog</TextLink>
-      <hr class="border border-white/[0.2] h-auto" />
-      <TextLink href="https://github.com/Sawangg" className="text-white no-underline" aria-label="github" data-astro-prefetch>
+      <hr class="h-auto border border-white/[0.2]" />
+      <TextLink
+        href="https://github.com/Sawangg"
+        className="text-white no-underline"
+        aria-label="github"
+        data-astro-prefetch
+      >
         <Fragment set:html={github} />
       </TextLink>
     </div>

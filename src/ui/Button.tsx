@@ -51,8 +51,8 @@ export const Button: React.FC<ButtonProps> = ({
         "[&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-0.5 [&>[data-slot=icon]]:size-5 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:text-[--btn-icon] [&>[data-slot=icon]]:sm:my-1 [&>[data-slot=icon]]:sm:size-4",
         // Shadow & Border
         !outline &&
-          !plain &&
-          "dark:before:hidden dark:after:-inset-px dark:after:rounded-lg before:absolute before:inset-0 before:-z-10 before:rounded-[calc(theme(borderRadius.lg)-1px)] before:shadow after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(colors.white/15%)] before:data-[disabled]:shadow-none after:data-[active]:bg-[--btn-hover-overlay] after:data-[hovered]:bg-[--btn-hover-overlay] after:data-[disabled]:shadow-none",
+        !plain &&
+        "dark:before:hidden dark:after:-inset-px dark:after:rounded-lg before:absolute before:inset-0 before:-z-10 before:rounded-[calc(theme(borderRadius.lg)-1px)] before:shadow after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(colors.white/15%)] before:data-[disabled]:shadow-none after:data-[active]:bg-[--btn-hover-overlay] after:data-[hovered]:bg-[--btn-hover-overlay] after:data-[disabled]:shadow-none",
         // Color
         !outline && !plain && "dark:bg-[--btn-bg] bg-[--btn-border] before:bg-[--btn-bg]",
         colorClasses[outline ? "outline" : plain ? "plain" : color],

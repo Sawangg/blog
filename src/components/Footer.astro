@@ -1,19 +1,19 @@
 ---
 import rss from "@assets/rss.svg?raw";
 import { Button } from "@ui/Button";
-import { Input } from "@ui/Input";
 import { Heading } from "@ui/Heading";
+import { Input } from "@ui/Input";
 import { Text, TextLink } from "@ui/Text";
 ---
 
-<footer class="mt-16 px-4 pb-28 border-t border-white/[0.2]">
-  <section class="max-w-4xl mx-auto py-12">
-    <Heading className="leading-8 mb-4" >Get all of my posts directly in your inbox!</Heading>
-    <form class="flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:max-w-lg">
+<footer class="mt-16 border-t border-white/[0.2] px-4 pb-28">
+  <section class="mx-auto max-w-4xl py-12">
+    <Heading className="mb-4 leading-8">Get all of my posts directly in your inbox!</Heading>
+    <form class="flex flex-col gap-y-3 sm:max-w-lg sm:flex-row sm:gap-x-3">
       <Input type="email" placeholder="Subscribe by email" required />
       <Button type="submit" client:visible>Subscribe</Button>
     </form>
-    <div class="flex gap-x-2 mt-4 items-center justify-center sm:justify-start">
+    <div class="mt-4 flex items-center justify-center gap-x-2 sm:justify-start">
       <TextLink href="/rss.xml" className="no-underline" aria-label="rss" data-astro-prefetch>
         <Fragment set:html={rss} />
       </TextLink>
@@ -21,4 +21,3 @@ import { Text, TextLink } from "@ui/Text";
     </div>
   </section>
 </footer>
-
