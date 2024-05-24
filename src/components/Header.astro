@@ -1,6 +1,11 @@
 ---
 import github from "@assets/github.svg?raw";
+import { Image } from 'astro:assets';
 import { TextLink } from "@ui/Text";
+import { Avatar } from "@ui/Avatar";
+
+const { user } = Astro.locals;
+console.log(user);
 ---
 
 <header
@@ -9,13 +14,22 @@ import { TextLink } from "@ui/Text";
   <nav class="mx-auto flex max-w-7xl items-center justify-between">
     <TextLink href="/" newTab={false} className="text-3xl no-underline">Léo Mercier</TextLink>
     <div class="flex gap-x-3 md:gap-x-8">
-      <TextLink href="https://leomercier.dev" className="no-underline">About</TextLink>
-      <TextLink href="/" newTab={false} className="no-underline">Blog</TextLink>
+      {!user ?
+        <TextLink href="/api/login/github" newTab={false} className="no-underline">Login</TextLink>
+        :
+        <Avatar className="w-6">
+          <Image src={user.image} inferSize={true} alt="" class="rounded-full" />
+        </Avatar>
+        <form method="post" action="/api/logout">
+          <button>Sign out</button>
+        </form>
+      }
       <hr class="h-auto border border-white/[0.2]" />
       <TextLink
         href="https://github.com/Sawangg"
         className="text-white no-underline"
         aria-label="github"
+        className="h-fit"
         data-astro-prefetch
       >
         <Fragment set:html={github} />

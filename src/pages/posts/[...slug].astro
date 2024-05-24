@@ -1,5 +1,6 @@
 ---
 import avatar from "@assets/avatar.png";
+import clap from "@assets/clap.svg?raw";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MDHeading.tsx";
@@ -7,7 +8,7 @@ import { MDhr } from "@components/MDhr.tsx";
 import { MDli, MDul } from "@components/MDList.tsx";
 import { MDpre } from "@components/MDpre.tsx";
 import { Share } from "@components/Share.tsx";
-import BaseLayout from "@layouts/BaseLayout.astro";
+import BaseLayout from "@components/BaseLayout.astro";
 import { Avatar } from "@ui/Avatar.tsx";
 import { Heading } from "@ui/Heading.tsx";
 import { Strong, Text, TextLink } from "@ui/Text.tsx";
@@ -40,20 +41,24 @@ const { Content } = await post.render();
         </time>
         <Heading className="mb-2 text-3xl font-extrabold tracking-tight">{post.data.title}</Heading>
         <div class="flex items-center justify-between">
-          <ul class="flex items-center gap-x-3">
+          <ul class="flex items-center gap-x-6">
             <li>
               <Avatar className="w-10">
                 <Image src={avatar} class="rounded-full" alt="" loading="eager" />
               </Avatar>
-              <li>
-                <li class="flex flex-col">
-                  <Strong>{post.data.author}</Strong>
-                  <TextLink href={post.data.authorLink}>{post.data.authorAt}</TextLink>
-                </li>
-              </li>
+            </li>
+            <li class="flex flex-col">
+              <Strong>{post.data.author}</Strong>
+              <TextLink href={post.data.authorLink}>{post.data.authorAt}</TextLink>
             </li>
           </ul>
-          <Share client:only="react" />
+          <div class="flex items-center gap-x-4">
+            <div class="flex items-center gap-x-2">
+              <Text className="dark:text-white">10</Text>
+              <Fragment set:html={clap} />
+            </div>
+            <Share client:only="react" />
+          </div>
         </div>
       </section>
       <Content
