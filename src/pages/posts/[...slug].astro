@@ -10,8 +10,9 @@ import { MDpre } from "@components/MDpre.tsx";
 import { Share } from "@components/Share.tsx";
 import BaseLayout from "@components/BaseLayout.astro";
 import { Avatar } from "@ui/Avatar.tsx";
+import { Button } from "@ui/Button.tsx";
 import { Heading } from "@ui/Heading.tsx";
-import { Strong, Text, TextLink } from "@ui/Text.tsx";
+import { Strong, Text, TextLink, Code } from "@ui/Text.tsx";
 
 const post = await getEntry("blog", Astro.params.slug);
 if (post === undefined) return Astro.redirect("/404");
@@ -46,10 +47,10 @@ const { Content } = await post.render();
             </li>
           </ul>
           <div class="flex items-center gap-x-4">
-            <div class="flex items-center gap-x-2">
-              <Text className="dark:text-white">10</Text>
+            <Button class="flex items-center gap-x-2" client:only="react" outline>
+              10
               <Fragment set:html={clap} />
-            </div>
+            </Button>
             <Share client:only="react" />
           </div>
         </div>
@@ -67,6 +68,7 @@ const { Content } = await post.render();
           li: MDli,
           hr: MDhr,
           pre: MDpre,
+          code: Code,
         }}
       />
     </article>

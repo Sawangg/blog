@@ -12,7 +12,7 @@ export type MDliProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIEleme
 
 export const MDli: React.FC<MDliProps> = ({ children, ...props }) => {
   return (
-    <li className="marker:text-white dark:text-zinc-400 text-base/6 text-zinc-500" {...props}>
+    <li className="marker:text-black dark:marker:text-white dark:text-zinc-400 text-base/6 text-zinc-500" {...props}>
       {children}
     </li>
   );

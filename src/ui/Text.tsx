@@ -58,7 +58,9 @@ export const Code: React.FC<React.DetailedHTMLProps<React.HTMLAttributes<HTMLEle
 }) => (
   <code
     className={cn(
-      "dark:border-white/20 dark:bg-white/5 dark:text-white rounded border border-zinc-950/10 bg-zinc-950/[2.5%] px-0.5 text-sm font-medium text-zinc-950 sm:text-[0.8125rem]",
+      "rounded bg-zinc-950/[2.5%] px-0.5 text-sm font-medium text-zinc-950 sm:text-[0.8125rem]",
+      "dark:bg-white/5 dark:text-white",
+      "border border-zinc-950/10 dark:border-white/20",
       className,
     )}
     {...props}

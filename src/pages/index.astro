@@ -34,7 +34,7 @@ const sortedPosts = allBlogPosts.slice().sort((a, b) => {
       class="relative sm:ml-[calc(2rem+1px)] sm:pb-8 md:ml-[calc(3.5rem+1px)] lg:ml-[max(calc(14.5rem+1px),calc(100%-48rem))]"
     >
       <hr
-        class="absolute bottom-0 right-full top-3 mr-7 hidden h-auto border border-white/[0.2] sm:block md:mr-[3.25rem]"
+        class="absolute bottom-0 right-full top-3 mr-7 hidden h-auto border dark:border-white/[0.2] sm:block md:mr-[3.25rem]"
       />
       <ul class="space-y-12 sm:space-y-16">
         {
@@ -45,7 +45,7 @@ const sortedPosts = allBlogPosts.slice().sort((a, b) => {
                   class="absolute right-full top-2 mr-6 hidden h-[calc(0.5rem+1px)] w-[calc(0.5rem+1px)] overflow-visible text-[#464649] sm:block md:mr-12"
                   viewBox="0 0 9 9"
                 >
-                  <circle class="fill-zinc-900" cx="4.5" cy="4.5" r="4.5" stroke="currentColor" stroke-width="2" />
+                  <circle class="fill-white dark:fill-zinc-900" cx="4.5" cy="4.5" r="4.5" stroke="currentColor" stroke-width="2" />
                 </svg>
                 <a href={`/posts/${post.slug}`} class="relative block h-fit cursor-pointer" data-astro-prefetch>
                   <div class="pt-8 lg:pt-0">
