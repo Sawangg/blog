@@ -1,6 +1,6 @@
 # Leo Mercier's blog
 
-My personal blog built to host my articles
+My personal blog built to host my articles. Edge compatible!
 
 ### Tech stack
 

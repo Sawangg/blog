@@ -2,6 +2,12 @@ import { adapter } from "@db/schema";
 import { GitHub } from "arctic";
 import { Lucia } from "lucia";
 
+type DatabaseUserAttributes = {
+  username: string;
+  image: string;
+  admin: boolean;
+};
+
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
     attributes: {
@@ -9,12 +15,12 @@ export const lucia = new Lucia(adapter, {
     },
   },
   getUserAttributes: (attributes) => {
-      return {
-        username: attributes.username,
-        image: attributes.image,
-        admin: attributes.admin,
-      };
-    },
+    return {
+      username: attributes.username,
+      image: attributes.image,
+      admin: attributes.admin,
+    };
+  },
 });
 
 export const github = new GitHub(import.meta.env.GITHUB_CLIENT_ID, import.meta.env.GITHUB_CLIENT_SECRET);
@@ -25,9 +31,3 @@ declare module "lucia" {
     DatabaseUserAttributes: DatabaseUserAttributes;
   }
 }
-
-type DatabaseUserAttributes = {
-  username: string;
-  image: string;
-  admin: boolean;
-};

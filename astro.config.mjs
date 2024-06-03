@@ -7,7 +7,11 @@ import robotsTxt from "astro-robots-txt";
 
 export default defineConfig({
   output: "server",
+  // adapter: "", // TODO
   site: "https://leomercier.blog",
+  image: {
+    remotePatterns: [{ protocol: "https" }],
+  },
   prefetch: true,
   integrations: [
     tailwind({ applyBaseStyles: true }),
@@ -23,7 +27,4 @@ export default defineConfig({
     sitemap(),
     robotsTxt(),
   ],
-  image: {
-    remotePatterns: [{ protocol: "https" }],
-  },
 });

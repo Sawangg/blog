@@ -3,10 +3,10 @@ import avatar from "@assets/avatar.png";
 import clap from "@assets/clap.svg?raw";
 import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
-import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MDHeading.tsx";
-import { MDhr } from "@components/MDhr.tsx";
-import { MDli, MDul } from "@components/MDList.tsx";
-import { MDpre } from "@components/MDpre.tsx";
+import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MD/MDHeading.tsx";
+import { MDhr } from "@components/MD/MDhr.tsx";
+import { MDli, MDul } from "@components/MD/MDList.tsx";
+import { MDpre } from "@components/MD/MDpre.tsx";
 import { Share } from "@components/Share.tsx";
 import BaseLayout from "@components/BaseLayout.astro";
 import { Avatar } from "@ui/Avatar.tsx";
@@ -14,7 +14,7 @@ import { Button } from "@ui/Button.tsx";
 import { Heading } from "@ui/Heading.tsx";
 import { Strong, Text, TextLink, Code } from "@ui/Text.tsx";
 
-const post = await getEntry("blog", Astro.params.slug);
+const post = await getEntry("blog", Astro.params.slug!);
 if (post === undefined) return Astro.redirect("/404");
 const { Content } = await post.render();
 ---
@@ -47,7 +47,7 @@ const { Content } = await post.render();
             </li>
           </ul>
           <div class="flex items-center gap-x-4">
-            <Button class="flex items-center gap-x-2" client:only="react" outline>
+            <Button outline>
               10
               <Fragment set:html={clap} />
             </Button>
