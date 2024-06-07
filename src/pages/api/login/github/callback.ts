@@ -26,6 +26,7 @@ export async function GET(context: APIContext): Promise<Response> {
     const res = await fetch("https://api.github.com/user", {
       headers: {
         Authorization: `Bearer ${tokens.accessToken}`,
+        "User-Agent": "auth", // Needed for Cloudflare
       },
     });
     const githubUser: GitHubUser = await res.json();

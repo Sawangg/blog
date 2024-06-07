@@ -23,11 +23,13 @@ export const lucia = new Lucia(adapter, {
   },
 });
 
-export const github = new GitHub(import.meta.env.GITHUB_CLIENT_ID, import.meta.env.GITHUB_CLIENT_SECRET);
-
 declare module "lucia" {
   interface Register {
     Lucia: typeof lucia;
     DatabaseUserAttributes: DatabaseUserAttributes;
   }
 }
+
+export const github = new GitHub(import.meta.env.GITHUB_CLIENT_ID, import.meta.env.GITHUB_CLIENT_SECRET, {
+  redirectURI: import.meta.env.GITHUB_REDIRECT_URI,
+});
