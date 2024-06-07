@@ -28,7 +28,7 @@ const sortedPosts = allBlogPosts.slice().sort((a, b) => {
         <Button type="submit" client:visible>Subscribe</Button>
       </form>
     </section>
-    <div
+    <section
       class="relative sm:ml-[calc(2rem+1px)] sm:pb-8 md:ml-[calc(3.5rem+1px)] lg:ml-[max(calc(14.5rem+1px),calc(100%-48rem))]"
     >
       <hr
@@ -51,11 +51,13 @@ const sortedPosts = allBlogPosts.slice().sort((a, b) => {
                       {post.data.title}
                     </Heading>
                     <Text>{post.data.description}</Text>
-                    <div class="mt-3 flex flex-row gap-x-2">
+                    <ul class="mt-3 flex flex-row gap-x-2">
                       {post.data.tags.map((tag) => (
-                        <Badge color={tag.color as BadgeColor}>{tag.title}</Badge>
+                        <li>
+                          <Badge color={tag.color as BadgeColor}>{tag.title}</Badge>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </div>
                   <dl class="absolute left-0 top-0 lg:left-auto lg:right-full lg:mr-[calc(6.5rem+1px)]">
                     <dt class="sr-only">Date</dt>
@@ -75,6 +77,6 @@ const sortedPosts = allBlogPosts.slice().sort((a, b) => {
           ))
         }
       </ul>
-    </div>
+    </section>
   </main>
 </BaseLayout>

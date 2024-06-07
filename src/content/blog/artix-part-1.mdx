@@ -12,18 +12,21 @@ tags:
   color: red
 ---
 
-Tired of Microsoft shenanigans and Windows eating all of your RAM? In this guide you’ll see how to setup a full disk encryption with Artix Linux with the init system called dinit on your machine as well as rice the distro to be **secure** and **usefull**. Because we are using Artix Linux, `systemd` and other common packages found in most Linux distros won't be included. This article will contain detailed informations to guide you through the install process and the next few posts will help you install a graphical interface and more!
+Tired of Microsoft shenanigans and Windows eating all of your RAM? In this multiple articles guide you’ll see how to
+setup a full disk encryption with Artix Linux and the init system called `dinit` on your machine as well as rice the
+distro to be **secure** and **usefull**. Because we are using Artix Linux, `systemd` and other common packages found in
+most Linux distros won't be included, so you have total control of your own computer. This article will contain detailed informations to guide you through the install process and the next few posts will help you install a graphical interface and more!
 
 ***
 
 ## Material needed
 
 For this guilde you will need the following
-* A USB stick with 1GB in storage
-* The machine you want to install Artix Linux. This guide was created with a 1TB M2 SSD, AMD CPU and last generation Nvidia GPU in mind but can be used with any machine.
+* A USB stick with atleast 1GB in storage
+* The machine you want to install Artix Linux. This guide was created with a 1TB M2 SSD, AMD CPU and last generation Nvidia GPU in mind but it can be used with any machine, for example I also installed this on a raspberry pi!
 * An internet connection
 
-This post was designed so it requires minium effort to follow but you'll still need the basics (such as exiting vim).
+This article was designed so it requires minium effort to follow but you'll still need the basics (such as exiting vim).
 Additionally, this guide was done using a french layout keyboard (AZERTY), thus you can skip or modify the sections regarding keyboard mapping.
 
 ***
@@ -47,7 +50,7 @@ During this guide, I will reference the disk as either `/dev/your-disk` or a var
 
 ## Create a bootable USB
 
-Locate the ISO you downloaded on your machine and use a tool like dd on Linux or Rufus on Windows to flash the usb.
+Locate the ISO you downloaded on your machine and use a tool like `dd` on Linux or Rufus on Windows to flash the usb.
 
 Here is the command to flash the USB on Linux
 ```sh
