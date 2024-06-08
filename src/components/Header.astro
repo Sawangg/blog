@@ -3,6 +3,7 @@ import logout from "@assets/logout.svg?raw";
 import { Image } from "astro:assets";
 import { Avatar } from "@ui/Avatar";
 import { Button } from "@ui/Button";
+import { Divider } from "@ui/Divider";
 import { TextLink } from "@ui/Text";
 
 const { user } = Astro.locals;
@@ -14,24 +15,12 @@ const { user } = Astro.locals;
   <nav class="mx-auto flex max-w-7xl items-center justify-between">
     <TextLink href="/" newTab={false} className="text-3xl no-underline">LM</TextLink>
     <div class="flex items-center gap-x-3 md:gap-x-6">
-      {/* <TextLink
-        href="https://github.com/Sawangg"
-        className="text-white no-underline"
-        aria-label="github"
-        className="h-fit"
-        data-astro-prefetch
-      >
-        <Fragment set:html={github} />
-      </TextLink>
-      */}
       <TextLink href="/" newTab={false} className="no-underline">About</TextLink>
-
-      <hr class="h-7 border dark:border-white/[0.2]" />
-
+      <Divider className="h-7" vertical />
       {!user ?
         <TextLink href="/api/login/github" newTab={false} className="no-underline">Sign in</TextLink>
         :
-        <section class="flex items-center gap-x-4">
+        <section class="flex items-center gap-x-2 md:gap-x-4">
           <Avatar className="size-6">
             <Image src={user.image} inferSize={true} alt="" class="rounded-full" />
           </Avatar>

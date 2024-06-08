@@ -3,16 +3,17 @@ import avatar from "@assets/avatar.png";
 import clap from "@assets/clap.svg?raw";
 import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
-import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MD/MDHeading.tsx";
-import { MDhr } from "@components/MD/MDhr.tsx";
-import { MDli, MDul } from "@components/MD/MDList.tsx";
-import { MDpre } from "@components/MD/MDpre.tsx";
-import { Share } from "@components/Share.tsx";
 import BaseLayout from "@components/BaseLayout.astro";
-import { Avatar } from "@ui/Avatar.tsx";
-import { Button } from "@ui/Button.tsx";
-import { Heading } from "@ui/Heading.tsx";
-import { Strong, Text, TextLink, Code } from "@ui/Text.tsx";
+import { MDDivider } from "@components/MD/MDDivider";
+import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MD/MDHeading";
+import { MDhr } from "@components/MD/MDhr";
+import { MDli, MDul } from "@components/MD/MDList";
+import { MDpre } from "@components/MD/MDpre";
+import { Share } from "@components/Share";
+import { Avatar } from "@ui/Avatar";
+import { Button } from "@ui/Button";
+import { Heading } from "@ui/Heading";
+import { Strong, Text, TextLink, Code } from "@ui/Text";
 
 const post = await getEntry("blog", Astro.params.slug!);
 if (post === undefined) return Astro.redirect("/404");
@@ -23,7 +24,7 @@ const { Content } = await post.render();
   <main class="px-4 sm:px-6 md:px-8">
     <article class="mx-auto max-w-5xl">
       <section class="flex flex-col gap-y-3 pb-12 pt-16">
-        <time class="text-md leading-6 text-zinc-400" datetime={post.data.publishedAt.toISOString()}>
+        <time class="text-md leading-6 text-zinc-500" datetime={post.data.publishedAt.toISOString()}>
           {
             post.data.publishedAt.toLocaleDateString("en-US", {
               weekday: "long",
@@ -66,7 +67,7 @@ const { Content } = await post.render();
           strong: Strong,
           ul: MDul,
           li: MDli,
-          hr: MDhr,
+          hr: MDDivider,
           pre: MDpre,
           code: Code,
         }}
