@@ -8,9 +8,7 @@ import robotsTxt from "astro-robots-txt";
 
 export default defineConfig({
   output: "server",
-  adapter: cloudflare({
-    imageService: "passthrough",
-  }),
+  adapter: cloudflare(),
   site: "https://leomercier.blog",
   image: {
     service: passthroughImageService(),
