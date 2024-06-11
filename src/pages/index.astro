@@ -23,7 +23,7 @@ const sortedPosts = allBlogPosts.slice().sort((a, b) => {
         find the latest post here either by joining my <TextLink href="/rss.xml">RSS feed</TextLink> or by subscribing to
         get my latest post directly in your inbox!
       </Text>
-      <form class="flex w-full flex-col gap-y-3 sm:w-auto sm:max-w-lg sm:flex-row sm:gap-x-3">
+      <form method="POST" class="flex w-full flex-col gap-y-3 sm:w-auto sm:max-w-lg sm:flex-row sm:gap-x-3">
         <Input type="email" placeholder="Subscribe by email" required />
         <Button type="submit" client:visible>Subscribe</Button>
       </form>
@@ -45,7 +45,7 @@ const sortedPosts = allBlogPosts.slice().sort((a, b) => {
                 >
                   <circle class="fill-white dark:fill-zinc-900" cx="4.5" cy="4.5" r="4.5" stroke="currentColor" stroke-width="2" />
                 </svg>
-                <a href={`/posts/${post.slug}`} class="relative block h-fit cursor-pointer" data-astro-prefetch>
+                <a href={`/posts/${post.slug}`} class="relative block h-fit cursor-pointer rounded-md outline-none focus:ring-2 focus:ring-sky-500" data-astro-prefetch>
                   <div class="pt-8 lg:pt-0">
                     <Heading level={2} className="text-lg mb-1">
                       {post.data.title}
@@ -61,7 +61,7 @@ const sortedPosts = allBlogPosts.slice().sort((a, b) => {
                   </div>
                   <dl class="absolute left-0 top-0 lg:left-auto lg:right-full lg:mr-[calc(6.5rem+1px)]">
                     <dt class="sr-only">Date</dt>
-                    <dd class="whitespace-nowrap text-sm leading-6 text-zinc-400">
+                    <dd class="whitespace-nowrap text-sm leading-6 text-zinc-500">
                       <time datetime={post.data.publishedAt.toISOString()}>
                         {post.data.publishedAt.toLocaleDateString("en-US", {
                           year: "numeric",

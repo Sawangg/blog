@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "@ui/Button";
 import { Dialog, DialogFooter } from "@ui/Dialog";

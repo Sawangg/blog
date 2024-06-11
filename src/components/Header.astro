@@ -1,10 +1,7 @@
 ---
-import logout from "@assets/logout.svg?raw";
-import { Image } from "astro:assets";
-import { Avatar } from "@ui/Avatar";
-import { Button } from "@ui/Button";
 import { Divider } from "@ui/Divider";
 import { TextLink } from "@ui/Text";
+import { HeaderMenu } from "@components/HeaderMenu";
 
 const { user } = Astro.locals;
 ---
@@ -21,14 +18,12 @@ const { user } = Astro.locals;
         <TextLink href="/api/login/github" newTab={false} className="no-underline">Sign in</TextLink>
         :
         <section class="flex items-center gap-x-2 md:gap-x-4">
-          <Avatar className="size-6">
-            <Image src={user.image} inferSize={true} alt="" class="rounded-full" />
-          </Avatar>
-          <form method="post" action="/api/logout">
+          <HeaderMenu userImage={user.image} client:idle />
+          {/* <form method="post" action="/api/logout">
             <Button type="submit" className="dark:text-red-700 dark:border-none dark:bg-transparent" client:only="react" aria-label="logout" plain>
               <Fragment set:html={logout} />
             </Button>
-          </form>
+          </form> */}
         </section>
       }
     </div>

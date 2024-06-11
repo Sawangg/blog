@@ -9,5 +9,6 @@ export async function POST(context: APIContext): Promise<Response> {
   const sessionCookie = lucia.createBlankSessionCookie();
   context.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 
-  return context.redirect("/");
+  // We send a response instead of a redirect because we use it on the client
+  return new Response(null, { status: 200 });
 }
