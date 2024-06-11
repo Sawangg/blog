@@ -38,7 +38,7 @@ export type TextLinkProps = Omit<
 export const TextLink: React.FC<TextLinkProps> = ({ href, newTab = true, className, children, ...props }) => (
   <a
     className={cn(
-      "dark:text-white dark:decoration-white/50 dark:hover:decoration-white text-zinc-950 underline decoration-zinc-950/50 outline-none hover:decoration-zinc-950 focus:ring-2 focus:ring-blue-500",
+      "dark:text-white dark:decoration-white/50 dark:hover:decoration-white text-zinc-950 underline decoration-zinc-950/50 outline-none hover:decoration-zinc-950 focus:ring-2 focus:ring-sky-500",
       className,
     )}
     href={href}

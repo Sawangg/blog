@@ -19,7 +19,7 @@ export type SelectProps = RASelectProps<object> & {
 
 export const Select: React.FC<SelectProps> = ({ label, className, children, ...props }) => (
   <RASelect
-    className="dark:before:hidden group relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none sm:after:has-[[data-focused]]:ring-2 sm:after:has-[[data-focused]]:ring-blue-500"
+    className="dark:before:hidden group relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none sm:after:has-[[data-focused]]:ring-2 sm:after:has-[[data-focused]]:ring-sky-500"
     aria-label={label}
     data-slot="control"
     {...props}
@@ -52,7 +52,7 @@ export type OptionProps = Omit<
 export const Option: React.FC<OptionProps> = ({ children, value, ...props }) => (
   <ListBoxItem
     id={value}
-    className="dark:text-white cursor-pointer rounded-md pl-1 focus:outline-none data-[hovered]:bg-blue-500 data-[hovered]:text-white"
+    className="dark:text-white cursor-pointer rounded-md pl-1 focus:outline-none data-[hovered]:bg-sky-500 data-[hovered]:text-white"
     {...props}
   >
     {children}
