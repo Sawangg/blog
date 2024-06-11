@@ -1,5 +1,4 @@
 ---
-import avatar from "@assets/avatar.png";
 import clap from "@assets/clap.svg?raw";
 import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
@@ -37,9 +36,7 @@ const { Content } = await post.render();
         <div class="flex items-center justify-between">
           <ul class="flex items-center gap-x-6">
             <li>
-              <Avatar className="w-10">
-                <Image src={avatar} class="rounded-full" alt="" loading="eager" />
-              </Avatar>
+              <Avatar className="w-10" src={post.data.authorAvatar} />
             </li>
             <li class="flex flex-col">
               <Strong>{post.data.author}</Strong>
