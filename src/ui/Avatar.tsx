@@ -1,32 +1,40 @@
-import { cn } from "@ui/primitives/utils.ts";
+import { cn } from "./primitives/utils";
 import { AspectRatio } from "./primitives/AspectRatio";
 
 export type AvatarProps = Omit<
   React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
-    src?: string;
     initials?: string;
+    square?: boolean;
   },
   "width" | "height" | "ref"
 >;
 
-export const Avatar: React.FC<AvatarProps> = ({ initials, className, children, ...props }) => (
+export const Avatar: React.FC<AvatarProps> = ({ initials, square, className, ...props }) => (
   <span
     className={cn(
       className,
-      "inline-grid rounded-full align-middle *:col-start-1 *:row-start-1 *:rounded-full",
-      !props.src && !children && "dark:bg-white dark:text-black bg-zinc-900 text-white",
+      "[--avatar-radius:20%] [--ring-opacity:20%]",
+      "inline-grid shrink-0 align-middle *:col-start-1 *:row-start-1 outline outline-1 -outline-offset-1 outline-black/[--ring-opacity] dark:outline-white/[--ring-opacity]",
+      !square ? "rounded-full *:rounded-full" : "rounded-[--avatar-radius] *:rounded-[--avatar-radius]",
+      !props.src && "bg-zinc-900 text-white dark:bg-white dark:text-black",
     )}
-    data-slot="avatar"
+    data-slot={props.slot ?? "avatar"}
   >
-    {props.src || children ? (
+    {props.src ? (
       <AspectRatio ratio={1 / 1}>
-        <img src={props.src} alt="" className="rounded-full" />
+        {/* You can replace the img tag with your framework's Image implementation */}
+        <img
+          src={props.src}
+          alt={props.alt ?? ""}
+          className={cn("relative size-full -z-10", !square ? "rounded-full *:rounded-full" : "rounded-[--avatar-radius] *:rounded-[--avatar-radius]")}
+          {...props}
+        />
       </AspectRatio>
     ) : (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
-        className="select-none rounded-full fill-current text-[48px] font-medium uppercase"
+        className="select-none fill-current text-[48px] font-medium uppercase"
         aria-hidden
       >
         <text x="50%" y="50%" alignmentBaseline="middle" dominantBaseline="middle" textAnchor="middle" dy=".125em">
@@ -34,6 +42,5 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, className, children, .
         </text>
       </svg>
     )}
-    <span className="dark:ring-white/5 z-50 ring-1 ring-inset ring-black/5 forced-colors:outline" aria-hidden></span>
   </span>
 );
