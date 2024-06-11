@@ -3,6 +3,7 @@ import { AspectRatio } from "./primitives/AspectRatio";
 
 export type AvatarProps = Omit<
   React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
+    src?: string;
     initials?: string;
   },
   "width" | "height" | "ref"
@@ -19,7 +20,7 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, className, children, .
   >
     {props.src || children ? (
       <AspectRatio ratio={1 / 1}>
-        {children}
+        <img src={props.src} alt="" className="rounded-full" />
       </AspectRatio>
     ) : (
       <svg
@@ -29,7 +30,7 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, className, children, .
         aria-hidden
       >
         <text x="50%" y="50%" alignmentBaseline="middle" dominantBaseline="middle" textAnchor="middle" dy=".125em">
-          {initials?.slice(0, 2)}
+          {initials ? initials.slice(0, 2) : "??"}
         </text>
       </svg>
     )}

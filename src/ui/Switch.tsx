@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@ui/primitives/utils.ts";
 import { Switch as RASwitch, type SwitchProps } from "react-aria-components";
 

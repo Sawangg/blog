@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@ui/primitives/utils.ts";
 import { Input as RAInput, type InputProps } from "react-aria-components";
 
