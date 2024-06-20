@@ -1,13 +1,14 @@
 ---
 import BaseLayout from "@components/BaseLayout.astro";
-import { Strong, Text } from "@ui/Text.tsx";
+import { Divider } from "@ui/Divider";
+import { Strong, Text } from "@ui/Text";
 ---
 
 <BaseLayout title="404 - Léo Mercier">
   <section class="flex h-screen flex-auto flex-col items-center justify-center px-4 text-center sm:flex-row">
     <div class="flex flex-row items-center gap-x-6">
       <Strong className="text-3xl">404</Strong>
-      <hr class="h-6 border border-white/[0.2]" />
+      <Divider className="h-6" vertical />
       <Text className="text-xl">Page not found</Text>
     </div>
   </section>

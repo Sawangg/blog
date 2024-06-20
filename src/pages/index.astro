@@ -9,9 +9,8 @@ import { Text, TextLink } from "@ui/Text.tsx";
 
 const allBlogPosts = await getCollection("blog", ({ data }) => data.draft !== true);
 
-const sortedPosts = allBlogPosts.slice().sort((a, b) => {
-  return new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime();
-});
+const sortedPosts = allBlogPosts.slice().sort((a, b) =>
+  new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
 ---
 
 <BaseLayout>
