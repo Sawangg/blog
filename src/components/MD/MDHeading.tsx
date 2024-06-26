@@ -1,12 +1,12 @@
 import clsx from "clsx";
-import { Heading as RAHeading, type HeadingProps } from "react-aria-components";
+import { type HeadingProps, Heading as RAHeading } from "react-aria-components";
 
 export const MDHeading2: React.FC<HeadingProps> = ({ className, children, ...props }) => (
   <RAHeading
     level={2}
     className={clsx(
       className,
-      "dark:text-white mb-2 font-bold text-zinc-900 text-2xl leading-loose whitespace-pre-wrap not-prose",
+      "not-prose mb-2 whitespace-pre-wrap font-bold text-2xl text-zinc-900 leading-loose dark:text-white",
     )}
     data-slot="title"
     {...props}
@@ -18,10 +18,7 @@ export const MDHeading2: React.FC<HeadingProps> = ({ className, children, ...pro
 export const MDHeading3: React.FC<HeadingProps> = ({ className, children, ...props }) => (
   <RAHeading
     level={3}
-    className={clsx(
-      className,
-      "dark:text-white mb-2 font-semibold text-zinc-900 text-xl leading-loose",
-    )}
+    className={clsx(className, "mb-2 font-semibold text-xl text-zinc-900 leading-loose dark:text-white")}
     data-slot="title"
     {...props}
   >
@@ -32,10 +29,7 @@ export const MDHeading3: React.FC<HeadingProps> = ({ className, children, ...pro
 export const MDHeading4: React.FC<HeadingProps> = ({ className, children, ...props }) => (
   <RAHeading
     level={4}
-    className={clsx(
-      className,
-      "dark:text-white mb-2 font-medium text-zinc-900 leading-loose",
-    )}
+    className={clsx(className, "mb-2 font-medium text-zinc-900 leading-loose dark:text-white")}
     data-slot="title"
     {...props}
   >

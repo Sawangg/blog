@@ -1,5 +1,5 @@
-import { cn } from "./primitives/utils";
 import { AspectRatio } from "./primitives/AspectRatio";
+import { cn } from "./primitives/utils";
 
 export type AvatarProps = Omit<
   React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
@@ -14,7 +14,7 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, square, className, ...
     className={cn(
       className,
       "[--avatar-radius:20%] [--ring-opacity:20%]",
-      "inline-grid shrink-0 align-middle *:col-start-1 *:row-start-1 outline outline-1 -outline-offset-1 outline-black/[--ring-opacity] dark:outline-white/[--ring-opacity]",
+      "-outline-offset-1 inline-grid shrink-0 align-middle outline outline-1 outline-black/[--ring-opacity] *:col-start-1 *:row-start-1 dark:outline-white/[--ring-opacity]",
       !square ? "rounded-full *:rounded-full" : "rounded-[--avatar-radius] *:rounded-[--avatar-radius]",
       !props.src && "bg-zinc-900 text-white dark:bg-white dark:text-black",
     )}
@@ -26,7 +26,10 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, square, className, ...
         <img
           src={props.src}
           alt={props.alt ?? ""}
-          className={cn("relative size-full -z-10", !square ? "rounded-full *:rounded-full" : "rounded-[--avatar-radius] *:rounded-[--avatar-radius]")}
+          className={cn(
+            "-z-10 relative size-full",
+            !square ? "rounded-full *:rounded-full" : "rounded-[--avatar-radius] *:rounded-[--avatar-radius]",
+          )}
           {...props}
         />
       </AspectRatio>
@@ -34,7 +37,7 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, square, className, ...
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
-        className="select-none fill-current text-[48px] font-medium uppercase"
+        className="select-none fill-current font-medium text-[48px] uppercase"
         aria-hidden
       >
         <text x="50%" y="50%" alignmentBaseline="middle" dominantBaseline="middle" textAnchor="middle" dy=".125em">

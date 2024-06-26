@@ -1,18 +1,20 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@ui/Button";
 import { Dialog, DialogFooter } from "@ui/Dialog";
 import { Heading } from "@ui/Heading";
-import { Text } from "@ui/Text";
 import { Input } from "@ui/Input";
+import { Text } from "@ui/Text";
+import { useState } from "react";
 
 export const Share: React.FC = () => {
   const [isOpen, setOpen] = useState(false);
 
   return (
     <>
-      <Button onPress={() => setOpen(true)} plain>Share</Button>
+      <Button onPress={() => setOpen(true)} plain>
+        Share
+      </Button>
       <Dialog open={isOpen} onOpenChange={setOpen}>
         <Heading level={2} slot="title">
           Share this post
@@ -33,4 +35,3 @@ export const Share: React.FC = () => {
     </>
   );
 };
-

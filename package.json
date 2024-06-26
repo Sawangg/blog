@@ -7,6 +7,8 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "deploy": "astro check && astro build && wrangler pages deploy",
+    "check": "biome check",
+    "check:fix": "biome check --fix --unsafe",
     "db:push": "drizzle-kit push",
     "db:pull": "drizzle-kit introspect",
     "db:studio": "drizzle-kit studio --host localhost --port 3001"
@@ -37,6 +39,7 @@
     "typescript": "^5.5.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@types/bun": "^1.1.6",
     "@types/eslint": "^8.56.10",

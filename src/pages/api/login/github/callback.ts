@@ -1,9 +1,9 @@
-import type { APIContext } from "astro";
 import { db } from "@db/index";
 import { preparedExistingGithubUser } from "@db/prepared/userGithub";
 import { users } from "@db/schema";
 import { github, lucia } from "@lib/auth";
 import { OAuth2RequestError } from "arctic";
+import type { APIContext } from "astro";
 import { generateIdFromEntropySize } from "lucia";
 
 type GitHubUser = {

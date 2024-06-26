@@ -1,7 +1,7 @@
 ---
-import clap from "@assets/clap.svg?raw";
 import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
+import clap from "@assets/clap.svg?raw";
 import BaseLayout from "@components/BaseLayout.astro";
 import { MDDivider } from "@components/MD/MDDivider";
 import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MD/MDHeading";
@@ -11,7 +11,7 @@ import { Share } from "@components/Share";
 import { Avatar } from "@ui/Avatar";
 import { Button } from "@ui/Button";
 import { Heading } from "@ui/Heading";
-import { Strong, Text, TextLink, Code } from "@ui/Text";
+import { Code, Strong, Text, TextLink } from "@ui/Text";
 
 const post = await getEntry("blog", Astro.params.slug!);
 if (post === undefined) return Astro.redirect("/404");
