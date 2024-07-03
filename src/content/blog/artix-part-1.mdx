@@ -55,7 +55,7 @@ Locate the ISO you downloaded on your machine and use a tool like `dd` on Linux 
 
 Here is the command to flash the USB on Linux
 ```sh
-dd bs=4M if=path/to/artixlinux-version-x86_64.iso of=/dev/my-usb conv=fsync oflag=direct status=progress
+dd bs=4M if=path/to/artixlinux-version-x86_64.iso of=/dev/my-usb oflag=direct status=progress
 ```
 
 Once the USB is flashed, plug the USB in your PC when it's shutdown, press the boot menu choice key or change the bootable order in your BIOS and boot onto the USB.
@@ -232,7 +232,7 @@ basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpi
 
 Finally we're going to install additional packages
 ```sh
-basestrap -i /mnt doas vim git amd-ucode fastfetch
+basestrap -i /mnt doas vim git amd-ucode fastfetch man
 ```
 
 Feel free to replace the amd-ucode with the necessary drivers for your CPU (intel-ucode). If you are using an Nvidia GPU like I do, I'll post an article on how to handle the pain that Nvidia is on Linux.
@@ -339,14 +339,19 @@ usermod -aG wheel,storage,power myuser
 
 We need to enable the use of doas for the wheel group. To do that create `/etc/doas.conf` and add
 ```sh
-permit :wheel
+permit setenv {PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin} :wheel
 ```
+
+Finally, change the permissions of the file to
+```sh
+chown -c root:root /etc/doas.conf
+chmod -c 0400 /etc/doas.conf
 
 #### Optional
 
 If you want to persist your password in your terminal after you used it once, you can change the `doas.conf` to this
 ```sh
-permit persist :wheel
+permit persist setenv {PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin} :wheel
 ```
 
 Keep in mind that this is not as secure as typing your password every time.
