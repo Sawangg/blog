@@ -14,7 +14,7 @@
     "db:studio": "drizzle-kit studio --host localhost --port 3001"
   },
   "dependencies": {
-    "@astrojs/check": "^0.7.0",
+    "@astrojs/check": "^0.8.1",
     "@astrojs/cloudflare": "11.0.1",
     "@astrojs/mdx": "3.1.2",
     "@astrojs/react": "3.6.0",
@@ -26,22 +26,22 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "arctic": "^1.9.1",
-    "astro": "4.11.3",
+    "astro": "^4.11.5",
     "astro-robots-txt": "^1.0.0",
     "clsx": "^2.1.1",
-    "drizzle-orm": "^0.31.2",
+    "drizzle-orm": "^0.32.0",
     "lucia": "^3.2.0",
     "react": "^18.3.1",
     "react-aria-components": "^1.2.1",
     "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.3.0",
+    "tailwind-merge": "^2.4.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.3"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@types/bun": "^1.1.6",
-    "drizzle-kit": "^0.22.8",
-    "wrangler": "^3.63.0"
+    "drizzle-kit": "^0.23.0",
+    "wrangler": "^3.64.0"
   }
 }
