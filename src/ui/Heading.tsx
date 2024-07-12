@@ -1,4 +1,4 @@
-import { cn } from "@ui/primitives/utils.ts";
+import { cn } from "@lib/utils";
 import { type HeadingProps, Heading as RAHeading } from "react-aria-components";
 
 export const Heading: React.FC<HeadingProps> = ({ level = 1, className, children, ...props }) => (

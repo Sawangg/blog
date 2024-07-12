@@ -13,7 +13,8 @@ import { Button } from "@ui/Button";
 import { Heading } from "@ui/Heading";
 import { Code, Strong, Text, TextLink } from "@ui/Text";
 
-const post = await getEntry("blog", Astro.params.slug!);
+if (!Astro.params.slug) throw new Error("No slug found!");
+const post = await getEntry("blog", Astro.params.slug);
 if (post === undefined) return Astro.redirect("/404");
 const { Content } = await post.render();
 ---

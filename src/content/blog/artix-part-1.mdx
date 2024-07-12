@@ -227,12 +227,13 @@ basestrap -i /mnt base base-devel dinit seatd seatd-dinit dbus-dinit
 
 Then we're going to chose linux-hardened for more security. We're going to install more packages like `turnstile` to fully replace `elogind` later on.
 ```sh
-basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi acpid acpid-dinit openssh openssh-dinit
+basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi
+acpid acpid-dinit chrony chrony-dinit openssh man
 ```
 
 Finally we're going to install additional packages
 ```sh
-basestrap -i /mnt doas vim git amd-ucode fastfetch man
+basestrap -i /mnt doas vim git amd-ucode fastfetch
 ```
 
 Feel free to replace the amd-ucode with the necessary drivers for your CPU (intel-ucode). If you are using an Nvidia GPU like I do, I'll post an article on how to handle the pain that Nvidia is on Linux.

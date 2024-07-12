@@ -1,5 +1,5 @@
+import { cn } from "@lib/utils";
 import { AspectRatio } from "./primitives/AspectRatio";
-import { cn } from "./primitives/utils";
 
 export type AvatarProps = Omit<
   React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
@@ -24,13 +24,13 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, square, className, ...
       <AspectRatio ratio={1 / 1}>
         {/* You can replace the img tag with your framework's Image implementation */}
         <img
+          {...props}
           src={props.src}
           alt={props.alt ?? ""}
           className={cn(
             "-z-10 relative size-full",
             !square ? "rounded-full *:rounded-full" : "rounded-[--avatar-radius] *:rounded-[--avatar-radius]",
           )}
-          {...props}
         />
       </AspectRatio>
     ) : (
@@ -40,6 +40,7 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, square, className, ...
         className="select-none fill-current font-medium text-[48px] uppercase"
         aria-hidden
       >
+        <title>{props.alt ?? "avatar"}</title>
         <text x="50%" y="50%" alignmentBaseline="middle" dominantBaseline="middle" textAnchor="middle" dy=".125em">
           {initials ? initials.slice(0, 2) : "??"}
         </text>

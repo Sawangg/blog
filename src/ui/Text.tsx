@@ -1,4 +1,4 @@
-import { cn } from "@ui/primitives/utils.ts";
+import { cn } from "@lib/utils";
 
 export type TextProps = React.DetailedHTMLProps<
   React.ParamHTMLAttributes<HTMLParagraphElement>,
@@ -9,7 +9,7 @@ export type TextProps = React.DetailedHTMLProps<
 
 export const Text: React.FC<TextProps> = ({ as, className, children, ...props }) => (
   <p
-    className={cn("text-base/6 text-zinc-500 dark:text-zinc-400 data-[disabled]:opacity-50", className)}
+    className={cn("text-base/6 text-zinc-500 data-[disabled]:opacity-50 dark:text-zinc-400", className)}
     data-slot={as === "description" ? "description" : "text"}
     {...props}
   >
@@ -38,7 +38,7 @@ export type TextLinkProps = Omit<
 export const TextLink: React.FC<TextLinkProps> = ({ href, newTab = true, className, children, ...props }) => (
   <a
     className={cn(
-      "text-zinc-950 underline decoration-zinc-950/50 outline-none dark:text-white dark:decoration-white/50 dark:hover:decoration-white hover:decoration-zinc-950 focus:ring-2 focus:ring-sky-500",
+      "text-zinc-950 underline decoration-zinc-950/50 outline-none hover:decoration-zinc-950 focus:ring-2 focus:ring-sky-500 dark:text-white dark:decoration-white/50 dark:hover:decoration-white",
       className,
     )}
     href={href}

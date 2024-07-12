@@ -1,4 +1,4 @@
-import { cn } from "@ui/primitives/utils.ts";
+import { cn } from "@lib/utils";
 
 const colorClasses = {
   red: "bg-red-400/20 text-red-700 group-data-[hovered]:bg-red-400/30 dark:bg-red-400/10 dark:text-red-300 dark:group-data-[hovered]:bg-red-400/15",

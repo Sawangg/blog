@@ -2,9 +2,13 @@
 
 import { Avatar } from "@ui/Avatar";
 import { Button } from "@ui/Button";
-import { Dropdown, DropdownDivider, DropdownItem, DropdownMenu } from "@ui/Dropdown";
+import { Dropdown, DropdownDivider, DropdownItem, DropdownMenu, type DropdownProps } from "@ui/Dropdown";
 
-export const HeaderMenu: React.FC<any> = ({ userImage }) => (
+type HeaderMenu = DropdownProps & {
+  userImage: string;
+};
+
+export const HeaderMenu: React.FC<HeaderMenu> = ({ userImage }) => (
   <Dropdown>
     <Button aria-label="menu" plain>
       <Avatar className="size-6" src={userImage} />
@@ -18,6 +22,8 @@ export const HeaderMenu: React.FC<any> = ({ userImage }) => (
           strokeWidth="1.5"
           stroke="currentColor"
           data-slot="icon"
+          role="img"
+          aria-label="gear"
         >
           <path
             strokeLinecap="round"
@@ -42,6 +48,8 @@ export const HeaderMenu: React.FC<any> = ({ userImage }) => (
           strokeWidth="1.5"
           stroke="currentColor"
           data-slot="icon"
+          role="img"
+          aria-label="out"
         >
           <path
             strokeLinecap="round"

@@ -3,6 +3,8 @@ export const MoonIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...props }) 
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
+    role="img"
+    aria-label="moon"
     data-slot="icon"
     aria-hidden
     {...props}

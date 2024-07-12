@@ -1,5 +1,5 @@
+import { cn } from "@lib/utils";
 import { Modal, ModalOverlay, Dialog as RADialog, type DialogProps as RADialogProps } from "react-aria-components";
-import { cn } from "./primitives/utils";
 
 export const sizes = {
   xs: "sm:max-w-xs",
@@ -23,7 +23,7 @@ export const Dialog: React.FC<DialogProps> = ({ open, onOpenChange, size = "lg",
   <ModalOverlay
     className={({ isEntering, isExiting }) =>
       cn(
-        "fixed inset-0 z-50 grid w-screen grid-rows-[1fr_auto] justify-items-center overflow-y-auto bg-zinc-950/20 backdrop-blur-sm transition-colors sm:grid-rows-[1fr_auto_3fr] dark:bg-zinc-950/50 focus:outline-0",
+        "fixed inset-0 z-50 grid w-screen grid-rows-[1fr_auto] justify-items-center overflow-y-auto bg-zinc-950/20 backdrop-blur-sm transition-colors focus:outline-0 sm:grid-rows-[1fr_auto_3fr] dark:bg-zinc-950/50",
         isEntering && "fade-in animate-in duration-300 ease-out",
         isExiting && "fade-out animate-out duration-200 ease-in",
       )
@@ -61,7 +61,7 @@ export const DialogFooter: React.FC<DialogFooterProps> = ({ children, className,
   <div
     className={cn(
       className,
-      "mt-8 flex flex-col-reverse items-center justify-end gap-3 *:w-full sm:*:w-auto sm:flex-row",
+      "mt-8 flex flex-col-reverse items-center justify-end gap-3 *:w-full sm:flex-row sm:*:w-auto",
     )}
     data-slot="control"
     {...props}

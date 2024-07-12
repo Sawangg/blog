@@ -1,4 +1,4 @@
-import { cn } from "@ui/primitives/utils.ts";
+import { cn } from "@lib/utils";
 
 export type DividerProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLHRElement>, HTMLHRElement> & {
   vertical?: boolean;
