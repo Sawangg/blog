@@ -55,7 +55,7 @@ Locate the ISO you downloaded on your machine and use a tool like `dd` on Linux 
 
 Here is the command to flash the USB on Linux
 ```sh
-dd bs=4M if=path/to/artixlinux-version-x86_64.iso of=/dev/my-usb conv=fsync oflag=direct status=progress
+dd bs=4M if=path/to/artixlinux-version-x86_64.iso of=/dev/my-usb oflag=direct status=progress
 ```
 
 Once the USB is flashed, plug the USB in your PC when it's shutdown, press the boot menu choice key or change the bootable order in your BIOS and boot onto the USB.
@@ -227,7 +227,8 @@ basestrap -i /mnt base base-devel dinit seatd seatd-dinit dbus-dinit
 
 Then we're going to chose linux-hardened for more security. We're going to install more packages like `turnstile` to fully replace `elogind` later on.
 ```sh
-basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi acpid acpid-dinit openssh openssh-dinit
+basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi
+acpid acpid-dinit chrony chrony-dinit openssh man
 ```
 
 Finally we're going to install additional packages
@@ -339,14 +340,19 @@ usermod -aG wheel,storage,power myuser
 
 We need to enable the use of doas for the wheel group. To do that create `/etc/doas.conf` and add
 ```sh
-permit :wheel
+permit setenv {PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin} :wheel
 ```
+
+Finally, change the permissions of the file to
+```sh
+chown -c root:root /etc/doas.conf
+chmod -c 0400 /etc/doas.conf
 
 #### Optional
 
 If you want to persist your password in your terminal after you used it once, you can change the `doas.conf` to this
 ```sh
-permit persist :wheel
+permit persist setenv {PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin} :wheel
 ```
 
 Keep in mind that this is not as secure as typing your password every time.

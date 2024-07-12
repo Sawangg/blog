@@ -1,5 +1,5 @@
-import { cn } from "@ui/primitives/utils.ts";
-import { TextField as RATextfield, type TextFieldProps as FieldSetProps } from "react-aria-components";
+import { cn } from "@lib/utils";
+import { type TextFieldProps as FieldSetProps, TextField as RATextfield } from "react-aria-components";
 
 export type LegendProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLLegendElement>, HTMLLegendElement>;
 
@@ -7,7 +7,7 @@ export const Legend: React.FC<LegendProps> = ({ children, className, ...props })
   <legend
     className={cn(
       className,
-      "dark:text-white text-base/6 font-semibold text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6",
+      "font-semibold text-base/6 text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6 dark:text-white",
     )}
     data-slot="legend"
     {...props}

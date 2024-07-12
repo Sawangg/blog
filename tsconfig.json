@@ -14,7 +14,7 @@
       "@db/*": ["src/db/*"],
       "@lib/*": ["src/lib/*"],
       "@pages/*": ["src/pages/*"],
-      "@ui/*": ["src/ui/*"],
+      "@ui/*": ["src/ui/*"]
     },
 
     // JavaScript Support
@@ -25,7 +25,7 @@
     "jsxImportSource": "react",
 
     // Projects
-    "incremental": true,
+    "incremental": true
   },
   "exclude": ["dist", "node_modules"]
 }

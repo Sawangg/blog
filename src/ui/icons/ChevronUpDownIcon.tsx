@@ -4,6 +4,8 @@ export const ChevronUpDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({ ...
     viewBox="0 0 24 24"
     fill="none"
     strokeWidth="1.5"
+    role="img"
+    aria-label="chevron"
     data-slot="icon"
     aria-hidden
     {...props}

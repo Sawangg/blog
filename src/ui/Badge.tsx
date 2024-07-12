@@ -1,4 +1,4 @@
-import { cn } from "@ui/primitives/utils.ts";
+import { cn } from "@lib/utils";
 
 const colorClasses = {
   red: "bg-red-400/20 text-red-700 group-data-[hovered]:bg-red-400/30 dark:bg-red-400/10 dark:text-red-300 dark:group-data-[hovered]:bg-red-400/15",
@@ -40,9 +40,9 @@ export const Badge: React.FC<BadgeProps> = ({ color = "zinc", className, childre
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 text-sm/5 font-medium sm:text-xs/5 forced-colors:outline",
+        "inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 font-medium text-sm/5 sm:text-xs/5 forced-colors:outline",
         colorClasses[color],
-        className
+        className,
       )}
       {...props}
     >

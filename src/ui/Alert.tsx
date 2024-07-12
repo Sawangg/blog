@@ -1,4 +1,4 @@
-import { cn } from "./primitives/utils";
+import { cn } from "@lib/utils";
 import { Modal, ModalOverlay, Dialog as RADialog, type DialogProps as RADialogProps } from "react-aria-components";
 
 export const sizes = {
@@ -21,11 +21,14 @@ export type AlertProps = RADialogProps & {
 
 export const Alert: React.FC<AlertProps> = ({ open, onOpenChange, size = "md", children, className, ...props }) => (
   <ModalOverlay
-    className={({ isEntering, isExiting }) => cn("fixed z-50 inset-0 grid w-screen grid-rows-[1fr_auto] justify-items-center overflow-y-auto bg-zinc-950/20 backdrop-blur-sm transition-colors focus:outline-0 sm:grid-rows-[1fr_auto_3fr] dark:bg-zinc-950/50",
-      "animate-in fade-in duration-300 ease-out",
-      isEntering && "animate-in fade-in duration-300 ease-out",
-      isExiting && "animate-out fade-out duration-200 ease-in",
-    )}
+    className={({ isEntering, isExiting }) =>
+      cn(
+        "fixed inset-0 z-50 grid w-screen grid-rows-[1fr_auto] justify-items-center overflow-y-auto bg-zinc-950/20 backdrop-blur-sm transition-colors focus:outline-0 sm:grid-rows-[1fr_auto_3fr] dark:bg-zinc-950/50",
+        "fade-in animate-in duration-300 ease-out",
+        isEntering && "fade-in animate-in duration-300 ease-out",
+        isExiting && "fade-out animate-out duration-200 ease-in",
+      )
+    }
     isOpen={open}
     onOpenChange={onOpenChange}
     isDismissable
