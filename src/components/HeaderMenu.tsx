@@ -2,9 +2,9 @@
 
 import { Avatar } from "@ui/Avatar";
 import { Button } from "@ui/Button";
-import { Dropdown, DropdownDivider, DropdownItem, DropdownMenu, type DropdownProps } from "@ui/Dropdown";
+import { Dropdown, DropdownDivider, DropdownItem, DropdownMenu } from "@ui/Dropdown";
 
-type HeaderMenu = DropdownProps & {
+type HeaderMenu = {
   userImage: string;
 };
 

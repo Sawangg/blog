@@ -19,11 +19,6 @@ const { user } = Astro.locals;
         :
         <section class="flex items-center gap-x-2 md:gap-x-4">
           <HeaderMenu userImage={user.image} client:idle />
-          {/* <form method="post" action="/api/logout">
-            <Button type="submit" className="dark:text-red-700 dark:border-none dark:bg-transparent" client:only="react" aria-label="logout" plain>
-              <Fragment set:html={logout} />
-            </Button>
-          </form> */}
         </section>
       }
     </div>
