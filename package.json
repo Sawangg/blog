@@ -16,7 +16,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.3",
     "@astrojs/cloudflare": "^11.0.4",
-    "@astrojs/mdx": "^3.1.4",
+    "@astrojs/mdx": "^3.1.5",
     "@astrojs/react": "^3.6.2",
     "@astrojs/rss": "4.0.7",
     "@astrojs/sitemap": "3.1.6",
@@ -26,7 +26,7 @@
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "arctic": "^1.9.2",
-    "astro": "^4.14.5",
+    "astro": "^4.15.1",
     "astro-robots-txt": "^1.0.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.33.0",
@@ -40,8 +40,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
-    "@types/bun": "^1.1.7",
-    "drizzle-kit": "^0.24.1",
-    "wrangler": "^3.72.2"
+    "@types/bun": "^1.1.8",
+    "drizzle-kit": "^0.24.2",
+    "wrangler": "^3.72.3"
   }
 }
