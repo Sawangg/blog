@@ -227,8 +227,7 @@ basestrap -i /mnt base base-devel dinit seatd seatd-dinit dbus-dinit
 
 Then we're going to chose linux-hardened for more security. We're going to install more packages like `turnstile` to fully replace `elogind` later on.
 ```sh
-basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi
-acpid acpid-dinit chrony chrony-dinit openssh man
+basestrap -i /mnt linux-firmware linux-hardened linux-hardened-headers mkinitcpio dhcpcd dhcpcd-dinit iwd iwd-dinit acpi acpid acpid-dinit chrony chrony-dinit openssh man
 ```
 
 Finally we're going to install additional packages
@@ -347,6 +346,7 @@ Finally, change the permissions of the file to
 ```sh
 chown -c root:root /etc/doas.conf
 chmod -c 0400 /etc/doas.conf
+```
 
 #### Optional
 
