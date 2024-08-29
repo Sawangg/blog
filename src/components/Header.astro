@@ -12,7 +12,7 @@ const { user } = Astro.locals;
   <nav class="mx-auto flex max-w-7xl items-center justify-between">
     <TextLink href="/" newTab={false} className="text-3xl no-underline">LM</TextLink>
     <div class="flex items-center gap-x-3 md:gap-x-6">
-      <TextLink href="/" newTab={false} className="no-underline">About</TextLink>
+      <TextLink href="/resume.pdf" className="no-underline">About</TextLink>
       <Divider className="h-7" vertical />
       {!user ?
         <TextLink href="/api/login/github" newTab={false} className="no-underline">Sign in</TextLink>
