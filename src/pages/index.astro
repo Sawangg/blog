@@ -22,7 +22,7 @@ const sortedPosts = allBlogPosts
         This is a blog where I post random articles and guides on things that I find interesting.<br />You can stay updated with my latest posts by joining my <TextLink href="/rss.xml">RSS feed</TextLink> or subscribing to receive them directly in your inbox!
       </Text>
       <form method="POST" class="flex w-full flex-col gap-y-3 sm:w-auto sm:max-w-lg sm:flex-row sm:gap-x-3">
-        <Input name="email" type="email" placeholder="Subscribe by email" required />
+        <Input name="email" type="email" placeholder="Subscribe by email" autoComplete="email" required />
         <Button type="submit" client:visible>Subscribe</Button>
       </form>
     </section>
