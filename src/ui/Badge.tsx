@@ -3,14 +3,14 @@ import { cn } from "@lib/utils";
 const colorClasses = {
   red: "bg-red-400/20 text-red-700 group-data-[hovered]:bg-red-400/30 dark:bg-red-400/10 dark:text-red-300 dark:group-data-[hovered]:bg-red-400/15",
   orange:
-    "bg-orange-400/20 text-orange-700 group-data-[hovered]:bg-orange-400/30 dark:bg-orange-400/10 dark:text-orange-300 dark:group-data-[hovered]:bg-orange-400/15",
+    "bg-orange-400/20 text-orange-800 group-data-[hovered]:bg-orange-400/30 dark:bg-orange-400/10 dark:text-orange-300 dark:group-data-[hovered]:bg-orange-400/15",
   amber:
-    "bg-amber-400/20 text-amber-700 group-data-[hovered]:bg-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300 dark:group-data-[hovered]:bg-amber-400/15",
+    "bg-amber-400/20 text-amber-800 group-data-[hovered]:bg-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300 dark:group-data-[hovered]:bg-amber-400/15",
   yellow:
     "bg-yellow-400/20 text-yellow-700 group-data-[hovered]:bg-yellow-400/30 dark:bg-yellow-400/10 dark:text-yellow-300 dark:group-data-[hovered]:bg-yellow-400/15",
   lime: "bg-lime-400/20 text-lime-700 group-data-[hovered]:bg-lime-400/30 dark:bg-lime-400/10 dark:text-lime-300 dark:group-data-[hovered]:bg-lime-400/15",
   green:
-    "bg-green-400/20 text-green-700 group-data-[hovered]:bg-green-400/30 dark:bg-green-400/10 dark:text-green-300 dark:group-data-[hovered]:bg-green-400/15",
+    "bg-green-400/20 text-green-800 group-data-[hovered]:bg-green-400/30 dark:bg-green-400/10 dark:text-green-300 dark:group-data-[hovered]:bg-green-400/15",
   emerald:
     "bg-emerald-400/20 text-emerald-700 group-data-[hovered]:bg-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-300 dark:group-data-[hovered]:bg-emerald-400/15",
   teal: "bg-teal-400/20 text-teal-700 group-data-[hovered]:bg-teal-400/30 dark:bg-teal-400/10 dark:text-teal-300 dark:group-data-[hovered]:bg-teal-400/15",
