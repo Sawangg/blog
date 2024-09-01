@@ -19,12 +19,10 @@ const sortedPosts = allBlogPosts
     <section class="mb-12 flex flex-col items-center justify-center gap-y-4">
       <Heading className="align-center text-4xl">Welcome traveler</Heading>
       <Text className="text-center">
-        This is a blog where I post random articles and guides on things that I find interesting.<br />
-        You can find the latest post here and by joining my <TextLink href="/rss.xml">RSS feed</TextLink> or by
-        subscribing to get every new post in your inbox!
+        This is a blog where I post random articles and guides on things that I find interesting.<br />You can stay updated with my latest posts by joining my <TextLink href="/rss.xml">RSS feed</TextLink> or subscribing to receive them directly in your inbox!
       </Text>
       <form method="POST" class="flex w-full flex-col gap-y-3 sm:w-auto sm:max-w-lg sm:flex-row sm:gap-x-3">
-        <Input type="email" placeholder="Subscribe by email" required />
+        <Input name="email" type="email" placeholder="Subscribe by email" required />
         <Button type="submit" client:visible>Subscribe</Button>
       </form>
     </section>

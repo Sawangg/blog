@@ -10,7 +10,7 @@ import { Text, TextLink } from "@ui/Text";
   <section class="mx-auto max-w-4xl py-12">
     <Heading className="mb-4 leading-8">Get all of my posts directly in your inbox!</Heading>
     <form class="flex flex-col gap-y-3 sm:max-w-lg sm:flex-row sm:gap-x-3">
-      <Input type="email" placeholder="Subscribe by email" required />
+      <Input name="email" type="email" placeholder="Subscribe by email" required />
       <Button type="submit" client:visible>Subscribe</Button>
     </form>
     <div class="mt-4 flex items-center justify-center gap-x-2 sm:justify-start">
