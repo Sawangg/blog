@@ -6,6 +6,7 @@ import BaseLayout from "@components/BaseLayout.astro";
 import { MDDivider } from "@components/MD/MDDivider";
 import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MD/MDHeading";
 import { MDli, MDul } from "@components/MD/MDList";
+import { MDblockquote } from "@components/MD/MDblockquote";
 import { MDpre } from "@components/MD/MDpre";
 import { Share } from "@components/Share";
 import { Avatar } from "@ui/Avatar";
@@ -46,7 +47,6 @@ const { Content } = await post.render();
           </ul>
           <div class="flex items-center gap-x-4">
             <Button outline>
-              10
               <Fragment set:html={clap} />
             </Button>
             <Share client:only="react" />
@@ -67,6 +67,7 @@ const { Content } = await post.render();
           hr: MDDivider,
           pre: MDpre,
           code: Code,
+          blockquote: MDblockquote,
         }}
       />
     </article>
