@@ -3,7 +3,7 @@ title: "DNS 101: Adblocking & Recursive DNS server in Kubernetes"
 description: "Ads and trackers, you shall not pass!"
 author: "Léo Mercier"
 authorLink: "https://github.com/Sawangg"
-authorAvatar: "https://avatars.githubusercontent.com/u/38500427?v=4"
+authorAvatar: "https://avatars.githubusercontent.com/u/38500427"
 authorAt: "@Sawangg"
 publishedAt: 2024-07-14
 tags:
@@ -23,7 +23,7 @@ be used to monitor your Internet traffic. From Internet companies to your ISP, D
 for advertisers and hackers alike.  
 In today's article, you'll learn how to quickly set up an ad-blocking recursive DNS server at home by combining two
 pieces of software: Pi-hole and Unbound, all within a Kubernetes cluster. If you don't have a Kubernetes cluster running
-yet, follow my previous article [here](https://leomercier.blog/posts/kubernetes-ansible) to get started.
+yet, follow my [previous article](https://leomercier.blog/posts/kubernetes-ansible) to get started.
 
 <br />
 ## PiHole
@@ -44,9 +44,9 @@ as it does not rely on any third-party DNS providers like Google or Cloudflare.
 ## It's deployment time
 Now that you understand what’s going on behind the scenes, let’s deploy the solution! I created an Ansible playbook to
 manage the Kubernetes manifests and deploy everything automatically to your cluster. Convenient, right? You can find the
-playbook and instructions on how to use it in my GitHub repository
-[here](https://github.com/Sawangg/dotfiles-server/tree/master/DNS). Just follow the README.md instructions to set up
-Pi-hole and Unbound in your Kubernetes cluster seamlessly.
+playbook and instructions on how to use it in my [Github
+repository](https://github.com/Sawangg/dotfiles-server/tree/master/DNS). Just follow the README.md instructions to set
+up Pi-hole and Unbound in your Kubernetes cluster seamlessly.
 
 <br />
 ## Update your client/router
