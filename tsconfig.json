@@ -5,7 +5,6 @@
   "compilerOptions": {
     // Type Checking
     "useUnknownInCatchVariables": true,
-
     // Modules
     "baseUrl": ".",
     "paths": {
@@ -16,14 +15,11 @@
       "@pages/*": ["src/pages/*"],
       "@ui/*": ["src/ui/*"]
     },
-
     // JavaScript Support
     "checkJs": true,
-
     // Language and Environment
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-
     // Projects
     "incremental": true
   },

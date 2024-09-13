@@ -1,3 +1,4 @@
+// @ts-check
 import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
