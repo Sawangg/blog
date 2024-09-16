@@ -22,7 +22,7 @@ const { Content } = await post.render();
 
 <BaseLayout title={post.data.title} description={post.data.description}>
   <main class="px-4 sm:px-6 md:px-8">
-    <article class="mx-auto max-w-5xl">
+    <article class="mx-auto max-w-4xl">
       <section class="flex flex-col gap-y-3 pb-12 pt-16">
         <time class="text-md leading-6 text-zinc-500" datetime={post.data.publishedAt.toISOString()}>
           {
