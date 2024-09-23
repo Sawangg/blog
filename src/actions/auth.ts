@@ -9,10 +9,12 @@ export const auth = {
     input: z.object({ provider: z.enum(["github"]) }),
     handler(input, ctx) {
       const state = generateState();
-      let url: URL;
+      let url: URL | null;
 
       if (input.provider === "github") {
         url = github.createAuthorizationURL(state, []);
+      } else {
+        throw new ActionError({ code: "BAD_REQUEST" });
       }
 
       ctx.cookies.set("state", state, {
@@ -23,7 +25,7 @@ export const auth = {
         sameSite: "lax",
       });
 
-      return { url: url.toString() };
+      return { url };
     },
   }),
   logout: defineAction({

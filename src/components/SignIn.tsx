@@ -8,7 +8,7 @@ export const SignIn = () => (
   <Button
     onPress={async () => {
       const { data, error } = await actions.auth.login({ provider: "github" });
-      if (!error) navigate(data.url);
+      if (!error) navigate(data.url.toString());
     }}
     outline
     className="font-normal"
