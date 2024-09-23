@@ -15,7 +15,7 @@ type GitHubUser = {
 export async function GET(context: APIContext): Promise<Response> {
   const code = context.url.searchParams.get("code");
   const state = context.url.searchParams.get("state");
-  const storedState = context.cookies.get("github_oauth_state")?.value ?? null;
+  const storedState = context.cookies.get("state")?.value ?? null;
 
   if (!code || !state || !storedState || state !== storedState) {
     return new Response(null, { status: 400 });
@@ -25,7 +25,7 @@ export async function GET(context: APIContext): Promise<Response> {
     const tokens = await github.validateAuthorizationCode(code);
     const res = await fetch("https://api.github.com/user", {
       headers: {
-        Authorization: `Bearer ${tokens.accessToken}`,
+        Authorization: `Bearer ${tokens.accessToken()}`,
         "User-Agent": "auth", // Needed for Cloudflare
       },
     });

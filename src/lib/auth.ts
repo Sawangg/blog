@@ -1,12 +1,7 @@
 import { adapter } from "@db/schema";
+import type { User } from "@db/schema";
 import { GitHub } from "arctic";
-import { Lucia } from "lucia";
-
-type DatabaseUserAttributes = {
-  username: string;
-  image: string;
-  admin: boolean;
-};
+import { Lucia, TimeSpan } from "lucia";
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
@@ -14,22 +9,19 @@ export const lucia = new Lucia(adapter, {
       secure: import.meta.env.PROD,
     },
   },
-  getUserAttributes: (attributes) => {
-    return {
-      username: attributes.username,
-      image: attributes.image,
-      admin: attributes.admin,
-    };
-  },
+  sessionExpiresIn: new TimeSpan(4, "w"),
+  getUserAttributes: (attributes) => ({ ...attributes }),
 });
 
 declare module "lucia" {
   interface Register {
     Lucia: typeof lucia;
-    DatabaseUserAttributes: DatabaseUserAttributes;
+    DatabaseUserAttributes: Omit<User, "githubId">;
   }
 }
 
-export const github = new GitHub(import.meta.env.GITHUB_CLIENT_ID, import.meta.env.GITHUB_CLIENT_SECRET, {
-  redirectURI: import.meta.env.GITHUB_REDIRECT_URI,
-});
+export const github = new GitHub(
+  import.meta.env.GITHUB_CLIENT_ID,
+  import.meta.env.GITHUB_CLIENT_SECRET,
+  import.meta.env.GITHUB_REDIRECT_URI,
+);

@@ -5,7 +5,7 @@ import Header from "@components/Header.astro";
 const { title, description } = Astro.props;
 ---
 
-<html lang="en" class="bg-zinc-50 font-serif antialiased dark:bg-zinc-900 dark:[color-scheme:dark]">
+<html lang="en" class="bg-zinc-50 dark:bg-zinc-900 dark:[color-scheme:dark]">
   <head>
     <style>
       @font-face {
@@ -71,7 +71,7 @@ const { title, description } = Astro.props;
 
     <title>{title ?? "Léo Mercier's blog"}</title>
   </head>
-  <body class="min-h-screen overflow-x-hidden selection:bg-sky-500 selection:text-white">
+  <body class="antialiased min-h-screen overflow-x-hidden font-serif selection:bg-sky-500 selection:text-white">
     <Header />
     <slot />
     <Footer />

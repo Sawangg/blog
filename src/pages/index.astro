@@ -1,17 +1,21 @@
 ---
+import { actions } from "astro:actions";
 import { getCollection } from "astro:content";
 import BaseLayout from "@components/BaseLayout.astro";
-import { Badge, type BadgeColor } from "@ui/Badge.tsx";
+import { Badge, type BadgeColor } from "@ui/Badge";
 import { Button } from "@ui/Button";
-import { Heading } from "@ui/Heading.tsx";
+import { FieldSet } from "@ui/Fieldset";
+import { Heading } from "@ui/Heading";
 import { Input } from "@ui/Input";
-import { Text, TextLink } from "@ui/Text.tsx";
+import { Text, TextLink } from "@ui/Text";
 
 const allBlogPosts = await getCollection("blog", ({ data }) => data.draft !== true);
 
 const sortedPosts = allBlogPosts
   .slice()
   .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+
+const result = Astro.getActionResult(actions.newsletter.register);
 ---
 
 <BaseLayout>
@@ -21,9 +25,13 @@ const sortedPosts = allBlogPosts
       <Text className="text-center">
         This is a blog where I post random articles and guides on things that I find interesting.<br />You can stay updated with my latest posts by joining my <TextLink href="/rss.xml">RSS feed</TextLink> or subscribing to receive them directly in your inbox!
       </Text>
-      <form method="POST" class="flex w-full flex-col gap-y-3 sm:w-auto sm:max-w-lg sm:flex-row sm:gap-x-3">
-        <Input name="email" type="email" placeholder="Subscribe by email" autoComplete="email" required />
-        <Button type="submit" client:visible>Subscribe</Button>
+      <form method="POST" action={actions.newsletter.register} class="flex w-full flex-col gap-y-3 sm:w-auto sm:max-w-lg sm:flex-row sm:gap-x-3">
+        <FieldSet>
+          <Input name="email" type="email" placeholder="Subscribe by email" autoComplete="email" data-invalid={result?.error && true} aria-invalid={result?.error && true} client:idle required />
+          {result && result.error && <span class="block mt-2 text-base/6 text-red-600 data-[disabled]:opacity-50 sm:text-sm/6 sm:mt-0 dark:text-red-500">{result.error.message}</span>}
+          {result && !result.error && <Text className="text-green-500">Successfully registered!</Text>}
+        </FieldSet>
+        <Button className="h-fit" type="submit" client:visible>Subscribe</Button>
       </form>
     </section>
     <section

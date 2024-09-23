@@ -1,5 +1,7 @@
 "use client";
 
+import { actions } from "astro:actions";
+import { navigate } from "astro:transitions/client";
 import { Avatar } from "@ui/Avatar";
 import { Button } from "@ui/Button";
 import { Dropdown, DropdownDivider, DropdownItem, DropdownMenu } from "@ui/Dropdown";
@@ -37,8 +39,8 @@ export const HeaderMenu: React.FC<HeaderMenu> = ({ userImage }) => (
       <DropdownDivider />
       <DropdownItem
         onAction={async () => {
-          const res = await fetch("/api/logout", { method: "POST" });
-          if (res.status === 200) window.location.reload();
+          const { error } = await actions.auth.logout();
+          if (!error) navigate("/");
         }}
       >
         <svg

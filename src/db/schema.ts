@@ -6,9 +6,12 @@ export const users = pgTable("users", {
   id: text("id").primaryKey(),
   admin: boolean("admin").default(false).notNull(),
   username: text("username").notNull(),
+  email: text("email"),
   image: text("image").notNull(),
   githubId: text("github_id"),
 });
+
+export type User = typeof users.$inferSelect;
 
 export const sessions = pgTable("sessions", {
   id: text("id").primaryKey(),

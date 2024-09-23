@@ -8,6 +8,7 @@
     // Modules
     "baseUrl": ".",
     "paths": {
+      "@actions/*": ["src/actions/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@db/*": ["src/db/*"],
