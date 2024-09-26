@@ -1,3 +1,4 @@
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI } from "astro:env/server";
 import { adapter } from "@db/schema";
 import type { User } from "@db/schema";
 import { GitHub } from "arctic";
@@ -20,8 +21,4 @@ declare module "lucia" {
   }
 }
 
-export const github = new GitHub(
-  import.meta.env.GITHUB_CLIENT_ID,
-  import.meta.env.GITHUB_CLIENT_SECRET,
-  import.meta.env.GITHUB_REDIRECT_URI,
-);
+export const github = new GitHub(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI);

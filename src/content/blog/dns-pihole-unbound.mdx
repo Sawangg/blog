@@ -45,12 +45,15 @@ as it does not rely on any third-party DNS providers like Google or Cloudflare.
 Now that you understand what’s going on behind the scenes, let’s deploy the solution! I created an Ansible playbook to
 manage the Kubernetes manifests and deploy everything automatically to your cluster. Convenient, right? You can find the
 playbook and instructions on how to use it in my [Github
-repository](https://github.com/Sawangg/dotfiles-server/tree/master/DNS). Just follow the README.md instructions to set
+repository](https://github.com/Sawangg/dotfiles-server/tree/master/DNS). Just follow the `README.md` instructions to set
 up Pi-hole and Unbound in your Kubernetes cluster seamlessly.
 
 <br />
 ## Update your client/router
-Now that your ad-blocking DNS server is up and running, you’ll want to use it across all of your devices. To do this, you’ll need to update the DNS entries in your router settings to point to your new server. This will ensure all network devices use your Pi-hole server by default. The instructions for changing DNS settings vary depending on your router model, so a little Googling might be necessary to find the specific steps.  
+Now that your ad-blocking DNS server is up and running, you’ll want to use it across all of your devices. To do this,
+you’ll need to update the DNS entries in your router settings to point to your new server. This will ensure all network
+devices use your Pi-hole server by default. The instructions for changing DNS settings vary depending on your router
+model, so a little Googling might be necessary to find the specific steps.  
 <br/>
 If you can’t modify your DNS entries at the router level, you can update them directly on your machine. For example, on
 a Linux machine, you can edit the `/etc/resolv.conf` file to point to your server’s IP address. To prevent this file
@@ -62,12 +65,13 @@ doas chattr +i /etc/resolv.conf # Use sudo instead of doas if you prefer
 > Note: You can also modify the `dhcpcd` configuration file to automatically give you the custom DNS server
 <br/>
 
-On an IPhone, you can modify it by going into `Settings > Wifi > Tap the "i" icon next to your network > Configure DNS` and then add your
-server's IP here.
+On an IPhone, you can modify it by going into `Settings > Wifi > Tap the "i" icon next to your network > Configure DNS`
+and then add yourserver's IP here.
 
 <br />
 ## Read more
 If you want more in-depth details, feel free to check out the [PiHole
-documentation](https://docs.pi-hole.net/guides/dns/unbound/) for a comprehensive guide on integrating Pi-hole with Unbound.
+documentation](https://docs.pi-hole.net/guides/dns/unbound/) for a comprehensive guide on integrating Pi-hole with 
+Unbound.
 <br />
 Thank you for reading this article, and see you soon!

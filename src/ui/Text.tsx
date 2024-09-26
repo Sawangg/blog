@@ -44,7 +44,6 @@ export const TextLink: React.FC<TextLinkProps> = ({ href, newTab = true, classNa
     href={href}
     target={newTab ? "_blank" : undefined}
     rel={newTab ? "noopener noreferrer" : undefined}
-    data-astro-prefetch
     {...props}
   >
     {children}

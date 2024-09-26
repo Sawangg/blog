@@ -1,6 +1,9 @@
-# Cloudflare config (remove this file if you're not using Cloudflare Workers)
+# Cloudflare config (remove this file if you're not using the Cloudflare adapter)
 name = "blog"
-compatibility_date = "2024-06-05"
+compatibility_date = "2024-09-23"
 pages_build_output_dir = "./dist"
-compatibility_flags = [ "nodejs_compat" ]
+compatibility_flags = ["nodejs_compat"]
 send_metrics = false
+
+[placement]
+mode = "smart"

@@ -6,24 +6,15 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import playformCompress from "@playform/compress";
 import robotsTxt from "astro-robots-txt";
-import { defineConfig, passthroughImageService } from "astro/config";
+import { defineConfig, envField, passthroughImageService } from "astro/config";
 
 export default defineConfig({
+  site: "https://leomercier.blog",
   output: "server",
   adapter: cloudflare(),
-  site: "https://leomercier.blog",
-  image: {
-    service: passthroughImageService(),
-    remotePatterns: [
-      {
-        protocol: "https",
-      },
-    ],
-  },
-  prefetch: true,
   integrations: [
-    tailwind({
-      applyBaseStyles: true,
+    playformCompress({
+      CSS: false,
     }),
     mdx({
       shikiConfig: {
@@ -34,10 +25,38 @@ export default defineConfig({
       },
     }),
     react(),
-    playformCompress({
-      CSS: false,
-    }),
-    sitemap(),
     robotsTxt(),
+    sitemap(),
+    tailwind(),
   ],
+  security: {
+    checkOrigin: true,
+  },
+  image: {
+    service: passthroughImageService(),
+    remotePatterns: [
+      {
+        protocol: "https",
+      },
+    ],
+  },
+  devToolbar: {
+    enabled: false,
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "viewport",
+  },
+  experimental: {
+    clientPrerender: true,
+    env: {
+      schema: {
+        // TODO: Change access to secret for DB_URL and GITHUB_CLIENT_SECRET when getSecret is stable with cloudflar
+        DB_URL: envField.string({ context: "server", access: "public" }),
+        GITHUB_CLIENT_ID: envField.string({ context: "server", access: "public" }),
+        GITHUB_CLIENT_SECRET: envField.string({ context: "server", access: "public" }),
+        GITHUB_REDIRECT_URI: envField.string({ context: "server", access: "public" }),
+      },
+    },
+  },
 });
