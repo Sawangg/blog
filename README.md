@@ -7,8 +7,8 @@ My personal blog built to host my articles.
 - OAuth authentification
 - Edge network compatible
 - Lighthouse 100% on all metrics
+- A+ on security with headers, Strict CSP & security.txt
 - SEO optimization with robots.txt & sitemap
-- Security headers, Strict CSP & security.txt
 
 ### Tech stack
 
@@ -25,7 +25,6 @@ My personal blog built to host my articles.
 - If you're hosting on Cloudflare, you need to disable `Speed Brain`. This features isn't compatible with a strict CSP
 and prefetching is already done inside Astro.
 - CSP nonce is currently generated in the middleware which defeats the purpose of a strong CSP. There is no alternatives currently in Astro.
-- There is no SRI.
 - drizzle-kit studio is not working (cause: astro:env)
-- Some environment variables should have their access restricted to secrets instead of public
+- Some environment variables should have their access restricted to secret instead of public
 
