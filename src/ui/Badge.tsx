@@ -8,7 +8,7 @@ const colorClasses = {
     "bg-amber-400/20 text-amber-800 group-data-[hovered]:bg-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300 dark:group-data-[hovered]:bg-amber-400/15",
   yellow:
     "bg-yellow-400/20 text-yellow-700 group-data-[hovered]:bg-yellow-400/30 dark:bg-yellow-400/10 dark:text-yellow-300 dark:group-data-[hovered]:bg-yellow-400/15",
-  lime: "bg-lime-400/20 text-lime-700 group-data-[hovered]:bg-lime-400/30 dark:bg-lime-400/10 dark:text-lime-300 dark:group-data-[hovered]:bg-lime-400/15",
+  lime: "bg-lime-400/30 text-lime-800 group-data-[hovered]:bg-lime-400/30 dark:bg-lime-400/10 dark:text-lime-300 dark:group-data-[hovered]:bg-lime-400/15",
   green:
     "bg-green-400/20 text-green-800 group-data-[hovered]:bg-green-400/30 dark:bg-green-400/10 dark:text-green-300 dark:group-data-[hovered]:bg-green-400/15",
   emerald:

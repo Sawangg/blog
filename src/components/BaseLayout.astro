@@ -2,7 +2,7 @@
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 
-const { title, description } = Astro.props;
+const { author, description, title } = Astro.props;
 ---
 
 <html lang="en" class="bg-zinc-50 dark:bg-zinc-900 dark:[color-scheme:dark]">
@@ -53,10 +53,11 @@ const { title, description } = Astro.props;
       property="og:description"
       content={description ?? "A blog created by Leo Mercier on tech subjects."}
     />
-    <meta name="author" content="Léo Mercier" />
+    <meta name="author" content={author ?? "Léo Mercier"} />
     <meta name="copyright" content="ISC" />
 
     <link rel="canonical" href={Astro.url} />
+    <link rel="preconnect" href="/" />
     <meta content="origin" name="referrer" />
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />

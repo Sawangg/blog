@@ -20,7 +20,7 @@ if (post === undefined) return Astro.redirect("/404");
 const { Content } = await post.render();
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout author={post.data.author} description={post.data.description} title={post.data.title}>
   <main class="px-4 sm:px-6 md:px-8">
     <article class="mx-auto max-w-4xl">
       <section class="flex flex-col gap-y-3 pb-12 pt-16">
