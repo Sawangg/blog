@@ -7,7 +7,7 @@ My personal blog built to host my articles.
 - OAuth authentification
 - Edge network compatible
 - Lighthouse 100% on all metrics
-- A+ on security with headers, Strict CSP & security.txt
+- A+ on security with headers, strict CSP & security.txt
 - SEO optimization with robots.txt & sitemap
 
 ### Tech stack

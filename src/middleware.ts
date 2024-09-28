@@ -27,7 +27,7 @@ const securityHeadersMiddleware = defineMiddleware(async (_, next) => {
   const response = await next();
   if (response.headers.get("content-type") !== "text/html") return response;
 
-  // NOTE: The nonce should not be create and replace here, it defeats the purpose of the CSP.
+  // NOTE: The nonce should not be created and replaced here, it defeats the purpose of the CSP.
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
     default-src 'none';
