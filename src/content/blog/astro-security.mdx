@@ -21,7 +21,7 @@ article, I'll present you the solutions I found along the way.
 
 <br />
 ## Security Headers
-The first test I wanted to pass was the [mozilla observatory](https://observatory.mozilla.org/). The solution will depend on
+The first test I wanted to pass was the [Mozilla observatory](https://observatory.mozilla.org/). The solution will depend on
 two factors. First, if your site is static or dynamic and second on your hosting. My website is fully dynamic and hosted
 on the edge network of Cloudflare. So, I created a middleware that added all the necessary headers.
 ```ts
@@ -69,7 +69,7 @@ the middleware and simply replace the `script` tags with the `nonce`. This is no
 no better way. An integration called `@kindspells/astro-shield` could work but I haven't tested it myself.
 <br />
 The values of the different headers will depend on what you want to achieve, my middleware is really strict. You can
-find more informations on the [security headers website](https://securityheaders.com/) as well as the [mozilla web security
+find more informations on the [security headers website](https://securityheaders.com/) as well as the [Mozilla web security
 page](https://infosec.mozilla.org/guidelines/web_security).
 <br />
 > If you're on a static website, you could add `<meta>` tags in your `<head>` to achieve the same result, except the
