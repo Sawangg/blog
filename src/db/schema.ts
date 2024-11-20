@@ -3,22 +3,22 @@ import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
-  id: text("id").primaryKey(),
-  admin: boolean("admin").default(false).notNull(),
-  username: text("username").notNull(),
-  email: text("email").unique(),
-  image: text("image").notNull(),
-  githubId: text("github_id"),
+  id: text().primaryKey(),
+  admin: boolean().default(false).notNull(),
+  username: text().notNull(),
+  email: text().unique(),
+  image: text().notNull(),
+  githubId: text(),
 });
 
 export type User = typeof users.$inferSelect;
 
 export const sessions = pgTable("sessions", {
-  id: text("id").primaryKey(),
-  userId: text("user_id")
+  id: text().primaryKey(),
+  userId: text()
     .notNull()
     .references(() => users.id),
-  expiresAt: timestamp("expires_at", {
+  expiresAt: timestamp({
     withTimezone: true,
     mode: "date",
   }).notNull(),
