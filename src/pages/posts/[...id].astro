@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { getEntry } from "astro:content";
+import { getEntry, render } from "astro:content";
 import clap from "@assets/clap.svg?raw";
 import BaseLayout from "@components/BaseLayout.astro";
 import { MDDivider } from "@components/MD/MDDivider";
@@ -14,15 +14,15 @@ import { Button } from "@ui/Button";
 import { Heading } from "@ui/Heading";
 import { Code, Strong, Text, TextLink } from "@ui/Text";
 
-if (!Astro.params.slug) throw new Error("No slug found!");
-const post = await getEntry("blog", Astro.params.slug);
+if (!Astro.params.id) return Astro.redirect("/404");
+const post = await getEntry("blog", Astro.params.id);
 if (post === undefined) return Astro.redirect("/404");
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <BaseLayout author={post.data.author} description={post.data.description} title={post.data.title}>
   <main class="px-4 sm:px-6 md:px-8">
-    <article class="mx-auto max-w-4xl">
+    <article class="mx-auto max-w-3xl">
       <section class="flex flex-col gap-y-3 pb-12 pt-16">
         <time class="text-base/7 text-zinc-500" datetime={post.data.publishedAt.toISOString()}>
           {

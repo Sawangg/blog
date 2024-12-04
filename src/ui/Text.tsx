@@ -9,7 +9,7 @@ export type TextProps = React.DetailedHTMLProps<
 
 export const Text: React.FC<TextProps> = ({ as, className, children, ...props }) => (
   <p
-    className={cn("text-base/7 text-zinc-600 data-[disabled]:opacity-50 dark:text-zinc-400", className)}
+    className={cn("text-lg/7 text-zinc-600 data-[disabled]:opacity-50 dark:text-zinc-400", className)}
     data-slot={as === "description" ? "description" : "text"}
     {...props}
   >

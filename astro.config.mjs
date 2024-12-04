@@ -29,8 +29,14 @@ export default defineConfig({
     sitemap(),
     tailwind(),
   ],
-  security: {
-    checkOrigin: true,
+  env: {
+    schema: {
+      // TODO: Change access to secret for DB_URL and GITHUB_CLIENT_SECRET when getSecret is stable with cloudflare
+      DB_URL: envField.string({ context: "server", access: "public" }),
+      GITHUB_CLIENT_ID: envField.string({ context: "server", access: "public" }),
+      GITHUB_CLIENT_SECRET: envField.string({ context: "server", access: "public" }),
+      GITHUB_REDIRECT_URI: envField.string({ context: "server", access: "public" }),
+    },
   },
   image: {
     service: passthroughImageService(),
@@ -49,14 +55,5 @@ export default defineConfig({
   },
   experimental: {
     clientPrerender: true,
-    env: {
-      schema: {
-        // TODO: Change access to secret for DB_URL and GITHUB_CLIENT_SECRET when getSecret is stable with cloudflare
-        DB_URL: envField.string({ context: "server", access: "public" }),
-        GITHUB_CLIENT_ID: envField.string({ context: "server", access: "public" }),
-        GITHUB_CLIENT_SECRET: envField.string({ context: "server", access: "public" }),
-        GITHUB_REDIRECT_URI: envField.string({ context: "server", access: "public" }),
-      },
-    },
   },
 });
