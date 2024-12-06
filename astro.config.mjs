@@ -37,6 +37,7 @@ export default defineConfig({
       GITHUB_CLIENT_SECRET: envField.string({ context: "server", access: "public" }),
       GITHUB_REDIRECT_URI: envField.string({ context: "server", access: "public" }),
     },
+    validateSecrets: true,
   },
   image: {
     service: passthroughImageService(),
