@@ -1,11 +1,12 @@
 {
   "name": "blog",
+  "author": "Sawangg",
   "type": "module",
   "version": "0.0.2",
   "scripts": {
     "dev": "astro dev",
     "build": "bun run check && astro check && astro build",
-    "deploy": "bun run check && astro check && astro build && wrangler pages deploy",
+    "deploy:prod": "bun run check && astro check && astro build && wrangler pages deploy",
     "check": "biome check",
     "check:fix": "biome check --fix --unsafe",
     "db:push": "drizzle-kit push",
@@ -42,6 +43,6 @@
     "astro-robots-txt": "^1.0.0",
     "drizzle-kit": "^0.29.1",
     "typescript": "^5.7.2",
-    "wrangler": "^3.92.0"
+    "wrangler": "^3.93.0"
   }
 }
