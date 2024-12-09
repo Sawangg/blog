@@ -57,4 +57,15 @@ export default defineConfig({
   experimental: {
     clientPrerender: true,
   },
+  // NOTE: Remove this after this is fixed: https://github.com/withastro/adapters/pull/436
+  // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
+  // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
+  vite: {
+    resolve: {
+      // @ts-expect-error: only in prod
+      alias: import.meta.env.PROD && {
+        "react-dom/server": "react-dom/server.edge",
+      },
+    },
+  },
 });
