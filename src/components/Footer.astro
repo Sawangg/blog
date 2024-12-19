@@ -1,6 +1,6 @@
 ---
 import { actions } from "astro:actions";
-import rss from "@assets/rss.svg?raw";
+import Rss from "@assets/rss.svg";
 import { Button } from "@ui/Button";
 import { FieldSet } from "@ui/Fieldset";
 import { Heading } from "@ui/Heading";
@@ -23,7 +23,7 @@ const result = Astro.getActionResult(actions.newsletter.register);
     </form>
     <div class="mt-4 flex items-center justify-center gap-x-2 sm:justify-start">
       <TextLink href="/rss.xml" className="no-underline" aria-label="rss" data-astro-prefetch>
-        <Fragment set:html={rss} />
+        <Rss class="size-5" title="rss" />
       </TextLink>
       <Text className="text-sm">© Léo Mercier — {new Date().toLocaleDateString("en", { year: "numeric" })}</Text>
     </div>

@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getEntry, render } from "astro:content";
-import clap from "@assets/clap.svg?raw";
+import Clap from "@assets/clap.svg";
 import BaseLayout from "@components/BaseLayout.astro";
 import { MDDivider } from "@components/MD/MDDivider";
 import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MD/MDHeading";
@@ -48,7 +48,7 @@ const { Content } = await render(post);
           <div class="flex items-center gap-x-4">
             <Button outline>
               Like
-              <Fragment set:html={clap} />
+              <Clap />
             </Button>
             <Share client:only="react" />
           </div>

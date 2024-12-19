@@ -56,6 +56,7 @@ export default defineConfig({
   },
   experimental: {
     clientPrerender: true,
+    svg: true,
   },
   // NOTE: Remove this after this is fixed: https://github.com/withastro/adapters/pull/436
   // Use react-dom/server.edge instead of react-dom/server.browser for React 19.

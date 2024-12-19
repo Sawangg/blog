@@ -1,6 +1,7 @@
 ---
 import { actions } from "astro:actions";
 import { getCollection } from "astro:content";
+import Circle from "@assets/circle.svg";
 import BaseLayout from "@components/BaseLayout.astro";
 import { Badge, type BadgeColor } from "@ui/Badge";
 import { Button } from "@ui/Button";
@@ -23,7 +24,7 @@ const result = Astro.getActionResult(actions.newsletter.register);
     <section class="mb-12 flex flex-col items-center justify-center gap-y-4">
       <Heading className="align-center text-4xl">Welcome traveler</Heading>
       <Text className="text-center">
-        This is a blog where I post random articles and guides on things that I find interesting.<br />You can stay updated with my latest posts by joining my <TextLink href="/rss.xml">RSS feed</TextLink> or subscribing to receive them directly in your inbox!
+        This is a blog where I post random articles and guides on things that I find interesting.<br />You can stay updated with my latest posts by joining my <TextLink href="/rss.xml">RSS feed</TextLink> or subscribing to receive them in your inbox!
       </Text>
       <form method="POST" action={actions.newsletter.register} class="flex w-full flex-col gap-y-3 sm:w-auto sm:max-w-lg sm:flex-row sm:gap-x-3">
         <FieldSet>
@@ -45,12 +46,7 @@ const result = Astro.getActionResult(actions.newsletter.register);
           sortedPosts.map((post) => (
             <li>
               <article class="relative">
-                <svg
-                  class="absolute right-full top-2 mr-6 hidden h-[calc(0.5rem+1px)] w-[calc(0.5rem+1px)] overflow-visible text-[#464649] sm:block md:mr-12"
-                  viewBox="0 0 9 9"
-                >
-                  <circle class="fill-white dark:fill-zinc-900" cx="4.5" cy="4.5" r="4.5" stroke="currentColor" stroke-width="2" />
-                </svg>
+                <Circle class="absolute right-full top-2 mr-6 hidden h-[calc(0.5rem+1px)] w-[calc(0.5rem+1px)] overflow-visible text-[#464649] fill-zinc-50 dark:fill-zinc-900 sm:block md:mr-12" />
                 <a href={`/posts/${post.id}`} class="relative block h-fit cursor-pointer rounded-md outline-none focus:ring-2 focus:ring-sky-500" data-astro-prefetch>
                   <div class="pt-8 lg:pt-0">
                     <Heading level={2} className="text-lg mb-1">
