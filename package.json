@@ -22,7 +22,7 @@
     "@lucia-auth/adapter-drizzle": "^1.1.0",
     "@neondatabase/serverless": "^0.10.4",
     "arctic": "^2.3.3",
-    "astro": "^5.0.9",
+    "astro": "^5.1.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.38.2",
     "lucia": "^3.2.2",
@@ -43,6 +43,6 @@
     "astro-robots-txt": "^1.0.0",
     "drizzle-kit": "^0.30.1",
     "typescript": "^5.7.2",
-    "wrangler": "^3.96.0"
+    "wrangler": "^3.99.0"
   }
 }
