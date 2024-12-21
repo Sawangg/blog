@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "bun run check && astro check && astro build",
+    "deploy:preview": "bun run check && astro check && astro build && wrangler pages deploy --branch preview",
     "deploy:prod": "bun run check && astro check && astro build && wrangler pages deploy",
     "check": "biome check",
     "check:fix": "biome check --fix --unsafe",
