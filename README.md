@@ -1,10 +1,10 @@
 # Leo Mercier's blog
 
-My personal blog built to host my articles.
+My personal blog built to host my articles
 
 ### Features
 
-- Custom-built authentication system
+- Custom-built auth system, with oauth providers
 - Edge network compatible
 - Lighthouse 100% on all metrics on all pages
 - A+ on security, with headers, strict CSP & security.txt
@@ -39,5 +39,4 @@ and prefetching is already done inside Astro.
 
 ## References
 
-[Lucia Auth](https://lucia-auth.com/)
-[Vite Env](https://vite.dev/guide/env-and-mode.html#env-files)
+The custom authentification was heavely inspired by the great [Lucia Auth](https://lucia-auth.com/) project
