@@ -46,7 +46,7 @@ const { Content } = await render(post);
             </li>
           </ul>
           <div class="flex items-center gap-x-4">
-            <Button client:visible plain>
+            <Button aria-label="like" client:visible plain>
               <Clap class="size-5" aria-hidden />
             </Button>
             <Share client:only="react" />

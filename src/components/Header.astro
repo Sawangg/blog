@@ -1,7 +1,10 @@
 ---
+import Moon from "@assets/moon.svg";
 import Signature from "@assets/signature.svg";
+import Sun from "@assets/sun.svg";
 import { HeaderMenu } from "@components/HeaderMenu";
 import { SignIn } from "@components/SignIn";
+import { ThemeToggle } from "@components/ThemeToggle";
 import { Divider } from "@ui/Divider";
 import { TextLink } from "@ui/Text";
 
@@ -18,12 +21,16 @@ const { user } = Astro.locals;
     <div class="flex items-center gap-x-3 md:gap-x-6">
       <TextLink href="https://leomercier.dev" className="no-underline">About</TextLink>
       <Divider className="h-7" vertical />
+      <ThemeToggle client:visible>
+        <Sun class="size-4 dark:hidden" aria-hidden />
+        <Moon class="size-4 hidden dark:block" aria-hidden />
+      </ThemeToggle>
       {!user ?
         <SignIn client:visible />
         :
-        <section class="flex items-center gap-x-2 md:gap-x-4">
+        <div class="flex items-center gap-x-2 md:gap-x-4">
           <HeaderMenu userImage={user.image} client:visible />
-        </section>
+        </div>
       }
     </div>
   </nav>

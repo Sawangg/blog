@@ -5,9 +5,13 @@ import Header from "@components/Header.astro";
 const { author, description, title } = Astro.props;
 ---
 
-<html lang="en" class="bg-zinc-50 dark:bg-zinc-900 dark:[color-scheme:dark]">
+<html lang="en">
   <head>
     <style>
+      :root {
+        color-scheme: light dark;
+      }
+
       @font-face {
         font-family: "Source Serif Pro";
         font-style: normal;
@@ -45,7 +49,6 @@ const { author, description, title } = Astro.props;
     </style>
 
     <meta charset="UTF-8" />
-    <meta content="light dark" name="color-scheme" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta
@@ -66,6 +69,10 @@ const { author, description, title } = Astro.props;
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Léo Mercier's blog" />
 
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
 
@@ -75,9 +82,14 @@ const { author, description, title } = Astro.props;
 
     <link rel="alternate" type="application/rss+xml" title="Léo Mercier's blog" href={`${Astro.site}rss.xml`} />
 
+    <script is:inline>
+      // This script blocks content to prevent FOUC
+      document.documentElement.classList.toggle("dark", localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches))
+    </script>
+
     <title>{title ?? "Léo Mercier's blog"}</title>
   </head>
-  <body class="antialiased min-h-screen overflow-x-hidden font-serif selection:bg-sky-500 selection:text-white">
+  <body class="antialiased min-h-screen overflow-x-hidden font-serif bg-zinc-50 transition-colors ease-in-out duration-300 selection:bg-sky-500 selection:text-white dark:bg-zinc-900">
     <Header />
     <slot />
     <Footer />
