@@ -4,13 +4,13 @@ My personal blog built to host my articles.
 
 ### Features
 
-- OAuth authentification
+- Custom-built authentication system
 - Edge network compatible
-- Lighthouse 100% on all metrics
-- A+ on security with headers, strict CSP & security.txt
+- Lighthouse 100% on all metrics on all pages
+- A+ on security, with headers, strict CSP & security.txt
 - SEO optimization with robots.txt & sitemap
 - Perfect accessibility with light and dark modes
-- No vendor lock-in, self-hostable by changing the the deploy commands and to another adapter (e.g. `@astro/node`)
+- No vendor lock-in, self-hostable with 100% of the features by changing the deploy commands and the adapter (e.g. `@astro/node`)
 
 ### Tech stack
 
@@ -19,16 +19,13 @@ My personal blog built to host my articles.
 <a href="https://reactjs.org/" title="ReactJS" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="react" width="35" height="35" /></a>
 <a href="https://tailwindcss.com/" title="TailwindCSS" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg" alt="tailwindcss" width="35" height="35" /></a>
 <a href="https://orm.drizzle.team/" title="DrizzleORM" target="_blank"> <img src="https://images.opencollective.com/drizzle-orm/9405e48/logo/256.png?height=256" alt="DrizzleORM" width="35" height="35" /></a>
-<a href="https://lucia-auth.com/" title="Lucia" target="_blank"> <img src="https://avatars.githubusercontent.com/u/124423533?s=200&v=4" alt="lucia" width="35" height="35" /></a>
 <a href="https://www.postgresql.org/" title="PostgreSQL" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" alt="postgresql" width="35" height="35" /></a>
 
 ### TODO
 
-- Move from deprecated Lucia to rolling own auth
 - Move from mdx to md
 - Better codeblocks (filenames and theme support)
-- CI/CD Actions (test, deployment to preview)
-- Fix db:studio
+- CI/CD Actions (test, deployment to staging)
 - Add headers linker and summary on the left of the page
 - Move from tailwind v3 to v4
 - Remove React to use web components
@@ -40,3 +37,7 @@ and prefetching is already done inside Astro.
 - CSP nonce is currently generated in the middleware which defeats the purpose of a strong CSP. There is no alternatives currently in Astro.
 - Some environment variables should have their access restricted to secret instead of public in `astro.config.ts`. Currently, I can't make secrets work using Cloudflare. This is not critical (if you share the build output with someone, they could potentially extract your secrets).
 
+## References
+
+[Lucia Auth](https://lucia-auth.com/)
+[Vite Env](https://vite.dev/guide/env-and-mode.html#env-files)

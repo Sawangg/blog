@@ -1,21 +1,20 @@
+import { SESSION_COOKIE } from "astro:env/server";
 import { defineMiddleware, sequence } from "astro:middleware";
-import { lucia } from "@lib/auth";
+import { deleteSessionTokenCookie, setSessionTokenCookie, validateSessionToken } from "@lib/session";
 
 const authMiddleware = defineMiddleware(async (ctx, next) => {
-  const sessionId = ctx.cookies.get(lucia.sessionCookieName)?.value ?? null;
-  if (!sessionId) {
+  const token = ctx.cookies.get(SESSION_COOKIE)?.value ?? null;
+  if (!token) {
     ctx.locals.user = null;
     ctx.locals.session = null;
     return next();
   }
 
-  const { session, user } = await lucia.validateSession(sessionId);
-  if (!session) {
-    const sessionCookie = lucia.createBlankSessionCookie();
-    ctx.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-  } else if (session.fresh) {
-    const sessionCookie = lucia.createSessionCookie(session.id);
-    ctx.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+  const { session, user } = await validateSessionToken(token);
+  if (session) {
+    setSessionTokenCookie(ctx, token, session.expiresAt);
+  } else {
+    deleteSessionTokenCookie(ctx);
   }
 
   ctx.locals.session = session;

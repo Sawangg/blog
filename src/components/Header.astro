@@ -29,7 +29,7 @@ const { user } = Astro.locals;
         <SignIn client:visible />
         :
         <div class="flex items-center gap-x-2 md:gap-x-4">
-          <HeaderMenu userImage={user.image} client:visible />
+          <HeaderMenu userImage={user.avatar} client:visible />
         </div>
       }
     </div>

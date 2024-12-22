@@ -1,21 +1,19 @@
-import { db } from "@db/index";
-import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
-  id: text().primaryKey(),
+  id: serial().primaryKey(),
+  email: text().unique().notNull(),
+  username: text().unique().notNull(),
+  avatar: text().notNull(),
   admin: boolean().default(false).notNull(),
-  username: text().notNull(),
-  email: text().unique(),
-  image: text().notNull(),
-  githubId: text(),
+  githubId: integer().unique(),
 });
 
 export type User = typeof users.$inferSelect;
 
 export const sessions = pgTable("sessions", {
   id: text().primaryKey(),
-  userId: text()
+  userId: integer()
     .notNull()
     .references(() => users.id),
   expiresAt: timestamp({
@@ -24,8 +22,6 @@ export const sessions = pgTable("sessions", {
   }).notNull(),
 });
 
-export const posts = pgTable("posts", {});
+export type Session = typeof sessions.$inferSelect;
 
 export const likes = pgTable("likes", {});
-
-export const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);

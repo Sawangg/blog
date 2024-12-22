@@ -1,6 +1,7 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import { github, lucia } from "@lib/auth";
+import { github } from "@lib/oauth";
+import { deleteSessionTokenCookie, invalidateSession } from "@lib/session";
 import { generateCodeVerifier, generateState } from "arctic";
 
 export const auth = {
@@ -42,10 +43,8 @@ export const auth = {
     async handler(_, ctx): Promise<void> {
       if (!ctx.locals.session) throw new ActionError({ code: "UNAUTHORIZED" });
 
-      await lucia.invalidateSession(ctx.locals.session.id);
-
-      const sessionCookie = lucia.createBlankSessionCookie();
-      ctx.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+      await invalidateSession(ctx.locals.session.id);
+      deleteSessionTokenCookie(ctx);
     },
   }),
 };
