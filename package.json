@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "bun run check && astro check && astro build",
-    "deploy:staging": "bun run check && astro check && astro build && wrangler pages deploy --branch staging",
-    "deploy:prod": "bun run check && astro check && astro build --mode staging && wrangler pages deploy",
+    "deploy:staging": "bun run check && astro check && astro build --mode staging && wrangler pages deploy --branch staging",
+    "deploy:prod": "bun run check && astro check && astro build && wrangler pages deploy",
     "check": "biome check",
     "check:fix": "biome check --fix --unsafe",
     "db:push": "NODE_ENV=development drizzle-kit push",
