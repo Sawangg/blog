@@ -2,6 +2,7 @@
 
 My personal blog built to host my articles. Here is a list of the features:
 
+- Minimal dependencies
 - Custom-built auth system, with oauth providers
 - Edge network compatible
 - Lighthouse 100% on all metrics on all pages
@@ -32,6 +33,7 @@ My personal blog built to host my articles. Here is a list of the features:
 - Add headers linker and summary on the left of the page
 - Move from tailwind v3 to v4
 - Remove React to use web components
+- Add SRI
 
 #### Known Issues
 
