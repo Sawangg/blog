@@ -25,7 +25,10 @@ const result = Astro.getActionResult(actions.newsletter.register);
       <TextLink href="/rss.xml" className="no-underline" aria-label="rss" data-astro-prefetch>
         <Rss class="size-5" title="rss" />
       </TextLink>
-      <Text className="text-sm">© Léo Mercier — {new Date().toLocaleDateString("en", { year: "numeric" })}</Text>
+      <TextLink href="https://creativecommons.org/licenses/by-nc-sa/4.0/" className="no-underline hover:underline text-sm text-zinc-600 dark:text-zinc-400">
+        CC BY-NC-SA 4.0
+      </TextLink>
+      <Text className="text-sm">2024 — PRESENT © Léo Mercier </Text>
     </div>
   </section>
 </footer>
