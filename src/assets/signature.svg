@@ -6,8 +6,50 @@
        id="signature"
        transform="matrix(1.1626395,0,0,1.124131,40.266771,-36.967869)">
       <path
-         d="m 91.649107,248.99948 c -0.624311,0.55208 -6.837836,15.30258 -6.320626,15.30258 0.231857,0 4.953127,-4.19515 5.322634,-3.82565 0.846317,0.84632 -0.831663,4.68985 -0.831663,3.49298 0,-5.54232 3.908185,-4.60728 9.148279,-5.6553" />
-      <path d="m 80.9134,250.2113 c -24.159485,23.28828 16.556109,8.17389 26.21933,1.40964" />
+         d="m 91.649107,248.99948 c -0.624311,0.55208 -6.837836,15.30258 -6.320626,15.30258 0.231857,0 4.953127,-4.19515 5.322634,-3.82565 0.846317,0.84632 -0.831663,4.68985 -0.831663,3.49298 0,-5.54232 3.908185,-4.60728 9.148279,-5.6553" 
+         id="line1"
+      />
+      <path
+         d="m 80.9134,250.2113 c -24.159485,23.28828 16.556109,8.17389 26.21933,1.40964"
+         id="line2"
+      />
     </g>
   </g>
+  <style>
+    @media (prefers-reduced-motion) {
+      path {
+        animation: none !important;
+        stroke-dasharray: unset !important;
+      }
+    }
+    @keyframes grow {
+      0% {
+        stroke-dashoffset: 1px;
+        stroke-dasharray: 0 350px;
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      40% {
+        stroke-dasharray: 350px 0;
+      }
+      85% {
+        stroke-dasharray: 350px 0;
+      }
+      95%,
+      to {
+        stroke-dasharray: 0 350px;
+      }
+    }
+    #line1, #line2 {
+      stroke-dashoffset: 1px;
+      stroke-dasharray: 350px 0;
+      animation: grow 10s ease forwards infinite;
+      transform-origin: center;
+    }
+    #line2 {
+      animation-delay: 0.3s;
+    }
+  </style>
 </svg>
