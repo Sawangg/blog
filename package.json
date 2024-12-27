@@ -5,11 +5,11 @@
   "version": "0.0.2",
   "scripts": {
     "dev": "astro dev",
-    "build": "bun run check && astro check && astro build",
-    "deploy:staging": "bun run check && astro check && astro build --mode staging && wrangler pages deploy --branch staging",
-    "deploy:prod": "bun run check && astro check && astro build && wrangler pages deploy",
-    "check": "biome check",
-    "check:fix": "biome check --fix --unsafe",
+    "build": "biome check && astro check && astro build",
+    "deploy:staging": "biome check && astro check && astro build --mode staging && wrangler pages deploy --branch staging",
+    "deploy:prod": "biome check && astro check && astro build && wrangler pages deploy",
+    "check": "biome check && astro check",
+    "check:fix": "biome check --fix --unsafe && astro check",
     "db:push": "NODE_ENV=development drizzle-kit push",
     "db:studio": "NODE_ENV=development drizzle-kit studio --host localhost --port 3001"
   },
