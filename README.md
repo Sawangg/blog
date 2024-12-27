@@ -4,7 +4,7 @@ My personal blog built to host my articles. Here is a list of the features:
 
 - Minimal dependencies
 - Custom-built auth system, with oauth providers
-- Edge network compatible
+- Edge network compatible, working with all popular runtimes
 - Lighthouse 100% on all metrics on all pages
 - A+ on security, with headers, strict CSP & security.txt
 - SEO optimization with robots.txt & sitemap
@@ -27,8 +27,6 @@ My personal blog built to host my articles. Here is a list of the features:
 
 ### TODO
 
-- Move from mdx to md
-- Better codeblocks (filenames and theme support)
 - CI/CD Actions (test, deployment to staging)
 - Add headers linker and summary on the left of the page
 - Move from tailwind v3 to v4

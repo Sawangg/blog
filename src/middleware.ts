@@ -11,11 +11,7 @@ const authMiddleware = defineMiddleware(async (ctx, next) => {
   }
 
   const { session, user } = await validateSessionToken(token);
-  if (session) {
-    setSessionTokenCookie(ctx, token, session.expiresAt);
-  } else {
-    deleteSessionTokenCookie(ctx);
-  }
+  session ? setSessionTokenCookie(ctx, token, session.expiresAt) : deleteSessionTokenCookie(ctx);
 
   ctx.locals.session = session;
   ctx.locals.user = user;

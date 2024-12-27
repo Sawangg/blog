@@ -13,65 +13,67 @@ tags:
   color: red
 ---
 
-Hi there! If you managed to follow this guide up until now, you're one of a kind! For now, you're system is blind and deaf, and at the end of this post, you'll only be deaf because we're tackling having a graphical interface today!
+Hi there! If you managed to follow this guide up until now, you're one of a kind! For now, you're system is blind and deaf, and at the end of this post, you'll only be deaf because we're tackling having a graphical interface today!  
 <br />
-Wayland is a communication protocol that replaces our old friend Xorg and [Hyprland](https://wiki.hyprland.org/) is an awesome tiling Wayland compositor I've been using for the past 6 months and I've felt in love with it. It's highly customisable and doesn't compromise on its looks. It's still a relatively new project so expect a few bugs here and there but I only have high praise for it. If you've followed my two previous posts, you can go right ahead. If not, I invite you to go back and come here once you're ready.
 
+Wayland is a communication protocol that replaces our old friend Xorg and [Hyprland](https://wiki.hyprland.org/) is an awesome tiling Wayland compositor I've been using for the past 6 months and I've felt in love with it. It's highly customisable and doesn't compromise on its looks. It's still a relatively new project so expect a few bugs here and there but I only have high praise for it. If you've followed my two previous posts, you can go right ahead. If not, I invite you to go back and come here once you're ready.  
 <br />
+
 ## Install Hyprland
 
 Because we've already setup `yay`, you can simply run
+
 ```sh
 yay -S hyprcursor-git
 yay -S hyprland-nosystemd-git
 doas pacman -Rdd elogind
 ```
-
-If you want to automatically run Hyprland once you're connected, add the `Hyprland` command to your `.bash_profile`.
-
+If you want to automatically run Hyprland once you're connected, add the `Hyprland` command to your `.bash_profile`.  
 <br />
+
 ### Terminal emulator
 
 Hyprland is configured with `kitty` as the default terminal emulator. I switched to `alacritty`. Install it by running
+
 ```sh
 yay -S alacritty-git
 ```
-You also need to update the Hyprland config located in `~/.config/hypr/hyprland.conf` and replace kitty with alacritty in the terminal configuration.
-
+You also need to update the Hyprland config located in `~/.config/hypr/hyprland.conf` and replace kitty with alacritty in the terminal configuration.  
 <br />
+
 ### Clipboard support
 
 To be able to handle copy and paste access for certain applications, we're going to add the package `wl-clipboard`
+
 ```sh
 doas pacman -S wl-clipboard
 ```
-
 ### Portal support
 
 Portal are kind of magical and handle stuff like screen sharing and more. To install the Hyprland implementation run
+
 ```sh
 doas pacman -S xdg-desktop-portal-hyprland
 ```
-
 ### Screenshot
 
 Screenshoting can be achieved using two packages called `grim` and `slurp`.
+
 ```sh
 doas pacman -S grim slurp
 ```
-
 Now we can create a bind in our Hyprland config. Don't forget the `wl-clipboard` support we added previously
+
 ```
 bind = , Print, exec, grim -g "$(slurp -d)" - | wl-copy
 ```
-
 ***
 
 Exit your current session and login. You should have the Hyprland desktop on your screen. You can then press `WIN+Q` to open up a terminal.
 Run this command to check your hyprland version. Because we installed the git version of the repository, we should be on the latest version.
+
 ```sh
 hyprctl version
 ```
-
 Congrats, you now have a good looking Wayland desktop environment, you're in the future! Feel free to go through the Hyprland Wiki and configure it as you please. In the next post and probably the last of this guide, I'll show you how to configure your sound properly in Artix. See you soon!
 

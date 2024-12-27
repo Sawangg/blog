@@ -22,7 +22,9 @@ article, I'll guide you to run your own Kubernetes cluster by simply executing a
 ***
 
 ## Prerequisites
+
 To be able to follow along, you'll need a few things
+
 - The server or servers with any Linux Distro. This can be a Raspberry Pi with an ARM processor or any other x86 machine
 - An internet connection
 
@@ -36,137 +38,155 @@ or SD card.
 > I'm using `Artix Linux` and `opendoas` locally for the next few commands. You can change them to your own
 > package manager and `sudo`.
 <br/>
+
 I created a [Github repository](https://github.com/Sawangg/dotfiles-server/) with all you'll need already configured.
 This Kubernetes cluster uses internally `MetalLB`, `kubevip` and `flannel`. Clone it locally by running
+
 ```sh
 git clone https://github.com/Sawangg/dotfiles-server.git
 ```
-
 ### Ansible
+
 First, we'll install `ansible` locally using our package manager
+
 ```sh
 doas pacman -S ansible-core sshpass
 ansible --version
 ```
 Next, we're going to install `netaddr` on our machine. You can install via pip or your package manager
+
 ```sh
 doas pacman -S python-netaddr
 ```
+
 Finally, we'll need to install the required collections by running
+
 ```sh
 ansible-galaxy collection install -r ./dotfiles-server/requirements.yml
 ```
-
 ### Kubectl
+
 We're also going to install `kubectl` locally to interact with our cluster. You can build it from source, use your package manager or use the `AUR` like so if you're on an Arch based distro
+
 ```sh
 yay -S kubectl kubecolor
 ```
 
 ### Optional: Flash your ISO/IMG
+
 If you need to install a Linux from scratch on your server, it's time to pull out your USB stick / SD card. We're going
 to install `Void Linux` because of the lightweight nature of this distro. For this example I'm using an ARM processor,
 so I download the [Void ARM image](https://voidlinux.org/download/#arm%20platforms) and extracted it using 
+
 ```sh
 xz -d <filename>
 ```
-
 Next, you want to use and run this command to flash it onto the SD card or any other storage
+
 ```sh
 doas dd if=<image>.img of=/dev/sdX bs=4M status=progress
 ```
-
 > Replace `sdX` with the correct disk name. You can get it by running `lsblk`
 <br />
 
 Once it's done, you should resize the root partition using `fdisk` to use the available space.
+
 ```sh
 doas fdisk /dev/sdX # Press E then select the root partition then ENTER then W
 doas resize2fs /dev/sdXproot # Make sure to select the root partition
 ```
-
 You can then plug everything and start your machine.
 
 ***
 
 ## Prepare your servers
-If you already have a Linux up and running, you can skip to the last step named "Install Ansible dependencies". If you
-installed Void Linux, continue to the next step.
 
+If you already have a Linux up and running, you can skip to the last step named "Install Ansible dependencies". If you
+installed Void Linux, continue to the next step.  
 <br />
+
 ### Login to Void Linux
+
 Connect to the machine using SSH. The default username and password for the root account of Void Linux is `root:voidlinux`.  
 First, we'll configure the timezone
+
 ```sh
 ln -sf /usr/share/zoneinfo/<timezone> /etc/localtime
 ```
 Then, we'll start chrony to get the correct date
+
 ```sh
 ln -s /etc/sv/chronyd /var/service/
 sv start chronyd
 date
 ```
-
 #### Optional: Update your DNS
+
 Edit `/etc/resolv.conf` with your desired DNS and prevent the DNS from being edited by running
+
 ```sh
 chattr -i /etc/resolv.conf
 ```
-
 ### Update the system
+
 The system packages are probably outdated, run the following to update everything on your system
+
 ```sh
 xbps-install -Su
 ```
-
 ### Create a new user account
+
 You'll need to create a non root user account. Keep in mind that this username is going to be used by the Ansible playbooks.
+
 ```sh
 useradd -m -G wheel -s /bin/bash <new_user>
 passwd <new_user>
 ```
-
 #### Optional: Replace `sudo` with `doas`
+
 Because I'm not a fan of `sudo`, you can replace it with `opendoas`
+
 ```sh
 xbps-install opendoas
 echo "permit keepenv :wheel" > /etc/doas.conf
 echo "ignorepkg=sudo" > /etc/xbps.d/10-ignore.conf
 xbps-remove sudo
 ```
-
 ### Restart SSH
+
 For some reasons, you'll have to restart the SSH service to prevent a key exchange error
+
 ```sh
 sv restart sshd
 ```
-
 ### Install Ansible dependencies
+
 To run our our Ansible playbooks, we need to install the managed node requirements. Connect to the server in SSH and
 install `python3` and `pip` on your server. For example, here is the command for Void Linux
+
 ```sh
 doas xbps-install python3 python3-pip
 ```
-
 ***
 
 ## Deploy your Kubernetes cluster
-Now that both your servers and local machine are ready, you just have to configure 3 files to match your local network.
-First, edit the `hosts.ini` file in the root of my Github repository with your local servers IPs.
 
+Now that both your servers and local machine are ready, you just have to configure 3 files to match your local network.
+First, edit the `hosts.ini` file in the root of my Github repository with your local servers IPs.  
 <br/>
-> Tip: You can use a tool like `nmap` to scan your local network for IPs
+
+> Tip: You can use a tool like `nmap` to scan your local network for IPs  
 <br />
 
 Finally, edit both the `global_vars.yml` and `K3s/vars.yml`. I provided documentation in each of them for easier
 understanding of each configuration options.
 
 Once you're set, run the following command to execute your Ansible playbook
+
 ```sh
 ansible-playbook -k -K -e @global_vars.yml -e @K3s/vars.yml -i hosts.ini K3s/playbook-site.yml
 ```
-
-> Tip: You can remove `-k -K` if you don't have any SSH password
+> Tip: You can remove `-k -K` if you don't have any SSH password  
 <br />
 
 If all went well, you should now have a Kubernetes cluster with everything setup correctly!
@@ -174,14 +194,15 @@ If all went well, you should now have a Kubernetes cluster with everything setup
 ***
 
 ## Connect to your cluster
+
 On your local machine, run the following
+
 ```sh
 mkdir -p ~/.kube
 scp user@your-server-ip:~/.kube/config ~/.kube/config
 kubectl get nodes
 ```
-
-If you get an output with all the nodes running, congratulations! You're now ready to deploy any services in Kubernetes!
-
+If you get an output with all the nodes running, congratulations! You're now ready to deploy any services in Kubernetes!  
 <br />
+
 I hope you enjoyed this more DevOps oriented article and see you soon!

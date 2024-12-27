@@ -73,27 +73,29 @@ This service will now start when another service like `pipewire` requires a dbus
 ***
 
 ## AUR
-Artix is capable of using Arch Linux's AUR. We're going to setup yay to use it. Keep in mind that we're using Artix linux and NOT Arch Linux. It means that some packages that have systemd dependencies will not work on our system.
 
+Artix is capable of using Arch Linux's AUR. We're going to setup yay to use it. Keep in mind that we're using Artix linux and NOT Arch Linux. It means that some packages that have systemd dependencies will not work on our system.  
 <br />
+
 ### Doas & Sudo
 
 First, we need to configure `makepkg` to use `doas`. Open `/etc/makepkg.conf`, uncomment and add at the end of the file
+
 ```sh
 PACMAN_AUTH=(doas)
 ```
-
 We also need to create an alias in our `~/.bashrc` to run `doas` instead of `sudo` for `yay`
+
 ```sh
 alias yay='yay --sudo doas --sudoflags -- --save'
 ```
-
-Now we are ready to install `yay`.
-
+Now we are ready to install `yay`.  
 <br />
+
 ### Yay it works
 
 Yay is an AUR Helper that will install packages from the Arch AUR. Clone the repository and build it.
+
 ```sh
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -105,47 +107,48 @@ doas rm -r yay
 ### Add additional repositories
 
 This is an example for adding the universe repository from Artix Linux. Go to `/etc/pacman.conf` and add at the bottom
+
 ```
 [universe]
 Server = https://universe.artixlinux.org/$arch
 ```
-
 Run this to update your pacman
+
 ```sh
 doas pacman -Sy
 ```
-
 ### Arch repositories
 
 Artix Linux supports the use of the Arch Linux repositories.
+
 ```sh
 doas pacman -S artix-archlinux-support
 doas pacman-key --populate archlinux
 ```
-
 Append your `/etc/pacman.conf` and add whatever Arch Linux repository you want, for example the `extra` repository. 
+
 ```
 [extra]
 Include = /etc/pacman.d/mirrorlist-arch
 ```
 _If you want the community repository, all you have to do is change the extra to community._
- 
+
 ```sh
 doas pacman -Sy
 ```
-
 You can now install packages from the `extra` Arch repository.
 
 ***
 
 ## Fonts
 
-Fonts are an integral part of your system. They are located in `/usr/share/fonts`. We're going to add a few fonts that we'll be using in our system using `yay` and the extra repository we just installed.
-
+Fonts are an integral part of your system. They are located in `/usr/share/fonts`. We're going to add a few fonts that we'll be using in our system using `yay` and the extra repository we just installed.  
 <br />
+
 ### Nerd fonts
 
 Nerd fonts are fonts patched with icons and all kind of crazy. Here is an incomplete [list](https://archlinux.org/groups/x86_64/nerd-fonts/) of fonts we can install. For example `ttf-dejavu-nerd`
+
 ```sh
 doas pacman -S ttf-dejavu-nerd
 ```
@@ -153,10 +156,10 @@ doas pacman -S ttf-dejavu-nerd
 ### Emojis
 
 We also need to add atleast one emoji font on our system. I'm using the AUR package called `openmoji` but you can install any emoji pack you want
+
 ```sh
 yay -S otf-openmoji
 fc-cache
 ```
-
 You now have correctly setup your user environment like a champ! You're ready for the next step which is to setup a graphical interface. Stay tuned for the next post of this guide by following me!
 

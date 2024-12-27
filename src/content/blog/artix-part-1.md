@@ -15,7 +15,10 @@ tags:
 
 Tired of Microsoft shenanigans and Windows eating all of your RAM? In this multiple articles guide you’ll see how to
 setup a full disk encryption with Artix Linux and the init system called `dinit` on your machine as well as rice the
-distro to be **secure** and **usefull**. Because we are using Artix Linux, `systemd` and other common packages found in
+distro to be **secure** and **usefull**.  
+<br />
+
+Because we are using Artix Linux, `systemd` and other common packages found in
 most Linux distros won't be included, so you have total control of your own computer. This article will contain detailed informations to guide you through the install process and the next few posts will help you install a graphical interface and more!
 
 ***
@@ -23,6 +26,7 @@ most Linux distros won't be included, so you have total control of your own comp
 ## Material needed
 
 For this guilde you will need the following
+
 * A USB stick with atleast 1GB in storage
 * The machine you want to install Artix Linux. This guide was created with a 1TB M2 SSD, AMD CPU and last generation Nvidia GPU in mind but it can be used with any machine, for example I also installed this on a raspberry pi!
 * An internet connection
@@ -34,16 +38,16 @@ Additionally, this guide was done using a french layout keyboard (AZERTY), thus 
 
 ## First step
 
-Download the ISO image on the official [Artix Linux website](https://artixlinux.org/download.php). We will choose the `artix-base-dinit-x86_64.iso` version to get Artix Linux with dinit. The partitions for our machine will be the following
-
+Download the ISO image on the official [Artix Linux website](https://artixlinux.org/download.php). We will choose the `artix-base-dinit-x86_64.iso` version to get Artix Linux with dinit. The partitions for our machine will be the following  
 <br />
 ![schema](../../assets/article1-1.avif)
 <br />
 
-_Use this schema as reference if you're lost with what disk or partitions I use in the commands_
+_Use this schema as reference if you're lost with what disk or partitions I use in the commands_  
 <br />
 
-This approch is using LVM on LUKS to encrypt our entire system. We will also later on protect our `boot/efi` partition using the secure bios and an additional tool. This will provide maximum security for our data.
+This approch is using LVM on LUKS to encrypt our entire system. We will also later on protect our `boot/efi` partition using the secure bios and an additional tool. This will provide maximum security for our data.  
+<br />
 
 During this guide, I will reference the disk as either `/dev/your-disk` or a variant of this to indicate a specific partition. You will be able to see if your disk is `/dev/sda` for a hard drive or `/dev/nvme0n1` for an M.2 SSD or any other in the section about wiping your disk.
 
@@ -54,30 +58,32 @@ During this guide, I will reference the disk as either `/dev/your-disk` or a var
 Locate the ISO you downloaded on your machine and use a tool like `dd` on Linux or Rufus on Windows to flash the usb.
 
 Here is the command to flash the USB on Linux
+
 ```sh
 dd bs=4M if=path/to/artixlinux-version-x86_64.iso of=/dev/my-usb oflag=direct status=progress
 ```
-
 Once the USB is flashed, plug the USB in your PC when it's shutdown, press the boot menu choice key or change the bootable order in your BIOS and boot onto the USB.
 
 You might need to edit the GRUB boot options depending on your hardware or else you'll get a black screen once you load the live OS. Press e on the Stick/HDD option of the menu and add ‘nomodeset’ at the end of the line that starts with linux. 
+
 ```
 linux ... nomodeset
 ```
-Press F10 to boot. You should now have access to the root terminal of your live Artix Linux.
-
+Press F10 to boot. You should now have access to the root terminal of your live Artix Linux.  
 <br />
+
 ### Login
 
 You can now login using the default credentials
+
 ```sh
 username: root
 password: artix
 ```
-
 ### Change your keyboard
 
 Change your keyboard mapping if you didn't change the keytable in the GRUB options. Here is an example for the AZERTY layout
+
 ```sh
 loadkeys fr
 ```
@@ -85,6 +91,7 @@ loadkeys fr
 ### Login to the network
 
 We're going to need an Internet connection to download packages further in this guide. To do that without an Ethernet cable, we're going to use `wpa_supplicant` provided in the live install of Artix. Run all these commands to connect to your WIFI
+
 ```sh
 rfkill unblock wlan
 ip link set wlan0 up
@@ -94,21 +101,23 @@ set_network 0 ssid "my wifi ssid"
 set_network 0 psk "my password"
 enable_network 0
 ```
-
 ***
 
 ## Wipe your disk
 
 This step ensure that you start with a fresh disk. You can use whatever disk manager tool you’re comfortable with. Be careful if you have data on this drive it **will be deleted**! You can list your partitions and disks by running:
+
 ```sh
 lsblk
 ```
 
 Wipe the data **⚠️ THIS WILL DELETE ALL THE DATA ON THE SELECTED DISK ⚠️**. This can take a long time depending on the size of your disk and your CPU.
+
 ```sh
 dd bs=4096 if=/dev/urandom iflag=nocache of=/dev/your-disk oflag=direct status=progress || true
 ```
 **WAIT** for the process to finish and run
+
 ```sh
 sync
 ```
@@ -118,12 +127,14 @@ sync
 ## Create the Partitions
 
 Now that our disk has been reset to its original state, we're going to use a tool called parted to create our partitions. Let's install it
+
 ```sh
 pacman -Syu
 pacman -S parted
 ```
 
 Create a GPT partition table
+
 ```sh
 parted -s /dev/your-disk mklabel gpt
 ```

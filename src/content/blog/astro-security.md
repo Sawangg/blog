@@ -17,13 +17,15 @@ tags:
 
 Astro being my new frontend framework of choice to avoid the triangle company, I went on a quest to achieve maximum
 security for my users without sacrificing on developer experience. I achieved 99% of what I set out to do and in this
-article, I'll present you the solutions I found along the way.
-
+article, I'll present you the solutions I found along the way.  
 <br />
+
 ## Security Headers
+
 The first test I wanted to pass was the [Mozilla observatory](https://observatory.mozilla.org/). The solution will depend on
 two factors. First, if your site is static or dynamic and second on your hosting. My website is fully dynamic and hosted
 on the edge network of Cloudflare. So, I created a middleware that added all the necessary headers.
+
 ```ts
 const securityHeadersMiddleware = defineMiddleware(async (_, next) => {
   const response = await next();
@@ -68,37 +70,46 @@ As you can see, there is a workaround to make the `Content-Security-Policy` head
 the middleware and simply replace the `script` tags with the `nonce`. This is not secure but there is currently
 no better way. An integration called `@kindspells/astro-shield` could work but I haven't tested it myself.
 <br />
+
 The values of the different headers will depend on what you want to achieve, my middleware is really strict. You can
 find more informations on the [security headers website](https://securityheaders.com/) as well as the [Mozilla web security
 page](https://infosec.mozilla.org/guidelines/web_security).
-<br />
-> If you're on a static website, you could add `<meta>` tags in your `<head>` to achieve the same result, except the
-`Content-Security-Policy` header that would require a bit more work. You could also use your hosting provider to set the
-headers either with rules of with custom files such as `_headers` for Netlify and Cloudflare.
 
 <br />
+
+> If you're on a static website, you could add `<meta>` tags in your `<head>` to achieve the same result, except the
+`Content-Security-Policy` header that would require a bit more work. You could also use your hosting provider to set the
+headers either with rules of with custom files such as `_headers` for Netlify and Cloudflare.  
+<br />
+
 ### Cloudflare
+
 If you're using Cloudflare workers like myself, the first thing you'll need to do is disable the feature called `Speed
 Brain` inside your Cloudflare dashboard. This features injects scripts in your `head` tag for prefetching, resulting in
 a CSP error. Prefetching is done inside Astro if you configured it, so you don't need this feature.
 <br />
+
 You might have noticed I'm using the `Crypto API` in the middleware. This means that if you plan on using it,
 you'll need to enable the `nodejs_compat` feature of your worker and use a minimum compatibility date of
 `2024-09-23`. Here is an example `wrangler.toml` in the root of my project.
+
 ```toml
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 ```
 
 ## Security.txt
+
 A new standard as emerged to disclose security vulnerabilities to website owners. The
 [security.txt](https://securitytxt.org/) file, located in the `.well-known/` folder aims to create a simple way for
 security researchers to contact you. You can simply create this file in Astro by adding `.well-known/security.txt` to
-your `public` folder.
+your `public` folder.  
+<br />
 
-<br />
 ## Next steps
+
 The Subresource Integrity will be the next subject I'll tackle inside Astro. I'd also like to remove the `unsafe-inline`
-for the `style-src` directive of my Content Security Policy.
+for the `style-src` directive of my Content Security Policy.  
 <br />
+
 Thank you for reading and see you soon!

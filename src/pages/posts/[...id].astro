@@ -1,18 +1,12 @@
 ---
-import { Image } from "astro:assets";
 import { getEntry, render } from "astro:content";
 import Clap from "@assets/clap.svg";
 import BaseLayout from "@components/BaseLayout.astro";
-import { MDDivider } from "@components/MD/MDDivider";
-import { MDHeading2, MDHeading3, MDHeading4 } from "@components/MD/MDHeading";
-import { MDli, MDul } from "@components/MD/MDList";
-import { MDblockquote } from "@components/MD/MDblockquote";
-import { MDpre } from "@components/MD/MDpre";
 import { Share } from "@components/Share";
 import { Avatar } from "@ui/Avatar";
 import { Button } from "@ui/Button";
 import { Heading } from "@ui/Heading";
-import { Code, Strong, Text, TextLink } from "@ui/Text";
+import { Strong, TextLink } from "@ui/Text";
 
 if (!Astro.params.id) return Astro.redirect("/404");
 const post = await getEntry("blog", Astro.params.id);
@@ -24,7 +18,7 @@ const { Content } = await render(post);
   <main class="px-4 sm:px-6 md:px-8">
     <article class="mx-auto max-w-3xl">
       <section class="flex flex-col gap-y-3 pb-12 pt-16">
-        <time class="text-base/7 text-zinc-500" datetime={post.data.publishedAt.toISOString()}>
+        <time class="text-base/7 text-zinc-500 dark:text-zinc-400" datetime={post.data.publishedAt.toISOString()}>
           {
             post.data.publishedAt.toLocaleDateString("en-US", {
               weekday: "long",
@@ -53,23 +47,47 @@ const { Content } = await render(post);
           </div>
         </div>
       </section>
-      <Content
-        components={{
-          img: Image,
-          h2: MDHeading2,
-          h3: MDHeading3,
-          h4: MDHeading4,
-          p: Text,
-          a: TextLink,
-          strong: Strong,
-          ul: MDul,
-          li: MDli,
-          hr: MDDivider,
-          pre: MDpre,
-          code: Code,
-          blockquote: MDblockquote,
-        }}
-      />
+      <section id="content">
+        <Content />
+      </section>
     </article>
   </main>
 </BaseLayout>
+
+<style>
+  #content {
+    h2, h3, h4, h5, h6 {
+      @apply mb-2 font-semibold text-zinc-900 dark:text-white whitespace-pre-wrap leading-loose
+    }
+    h2 {
+      @apply text-2xl
+    }
+    h3 {
+      @apply text-xl
+    }
+    a {
+      @apply text-zinc-950 underline decoration-zinc-950/50 outline-none hover:decoration-zinc-950 focus:ring-2 focus:ring-sky-500 dark:text-white dark:decoration-white/50 dark:hover:decoration-white
+    }
+    p {
+      @apply text-base/7 text-zinc-600 dark:text-zinc-400
+    }
+    strong {
+      @apply font-medium text-zinc-950 dark:text-white
+    }
+    ul {
+      @apply list-inside list-disc p-5
+    }
+    li {
+      @apply text-base/7 text-zinc-500 marker:text-black dark:text-zinc-400 dark:marker:text-white
+    }
+    blockquote p {
+      @apply border-zinc-300 border-l-[3px] p-4
+    }
+    hr {
+      @apply mt-12 mb-10 border border-zinc-950/10 dark:border-white/[0.2]
+    }
+    pre {
+      @apply my-8 border p-4 text-base/6 rounded-md outline-none focus:ring-2 focus:ring-sky-500 dark:border-white/[0.2]
+    }
+  }
+</style>

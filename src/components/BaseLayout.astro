@@ -13,30 +13,12 @@ const { author, description, title } = Astro.props;
       }
 
       @font-face {
-        font-family: "Source Serif Pro";
+        font-family: "Inter";
         font-style: normal;
-        font-weight: 400;
+        font-weight: 100 900;
         font-display: swap;
-        src: url("/fonts/source-serif-pro/source-serif-pro.regular.woff2") format("woff2");
-        unicode-range: U+000-5FF;
-      }
-
-      @font-face {
-        font-family: "Source Serif Pro";
-        font-style: normal;
-        font-weight: 900;
-        font-display: swap;
-        src: url("/fonts/source-serif-pro/source-serif-pro.bold.woff2") format("woff2");
-        unicode-range: U+000-5FF;
-      }
-
-      @font-face {
-        font-family: "Source Serif Pro";
-        font-style: normal;
-        font-weight: 500;
-        font-display: swap;
-        src: url("/fonts/source-serif-pro/source-serif-pro.semibold.woff2") format("woff2");
-        unicode-range: U+000-5FF;
+        font-optical-sizing: auto;
+        src: url("/fonts/Inter.woff2") format("woff2-variations");
       }
 
       @font-face {
@@ -44,7 +26,7 @@ const { author, description, title } = Astro.props;
         font-style: normal;
         font-weight: 300 700;
         font-display: swap;
-        src: url("/fonts/fira-code/FiraCode.woff2") format("woff2-variations");
+        src: url("/fonts/FiraCode.woff2") format("woff2-variations");
       }
     </style>
 
@@ -71,7 +53,7 @@ const { author, description, title } = Astro.props;
 
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#18181b" />
 
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
@@ -83,24 +65,15 @@ const { author, description, title } = Astro.props;
     <link rel="alternate" type="application/rss+xml" title="Léo Mercier's blog" href={`${Astro.site}rss.xml`} />
 
     <script is:inline>
-      // This script blocks content to prevent FOUC
+      // This script blocks content to prevent FOUC if the user prefers dark mode
       document.documentElement.classList.toggle("dark", localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches))
     </script>
 
     <title>{title ?? "Léo Mercier's blog"}</title>
   </head>
-  <body class="antialiased min-h-screen overflow-x-hidden font-serif bg-zinc-50 transition-colors ease-in-out duration-300 selection:bg-sky-500 selection:text-white dark:bg-zinc-900">
+  <body class="antialiased min-h-screen overflow-x-hidden font-sans bg-zinc-50 transition-colors ease-in-out duration-300 selection:bg-sky-500 selection:text-white dark:bg-zinc-900">
     <Header />
     <slot />
     <Footer />
   </body>
 </html>
-
-<style is:global>
-/* Remove the codeblock override in mdx */
-pre code {
-  border: none !important;
-  background-color: transparent !important;
-  padding: 0 !important;
-}
-</style>
