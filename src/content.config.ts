@@ -1,8 +1,9 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
+import { MARKDOWN_PATH } from "astro:env/server";
 
 const blog = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/blog" }),
+  loader: glob({ pattern: "**/[^_]*.md", base: MARKDOWN_PATH }),
   schema: z.object({
     title: z.string(),
     description: z.string(),

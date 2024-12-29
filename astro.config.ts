@@ -45,6 +45,7 @@ export default defineConfig({
   env: {
     schema: {
       // TODO: Change access to secret for DB_URL and GITHUB_CLIENT_SECRET when getSecret is stable with cloudflare
+      MARKDOWN_PATH: envField.string({ context: "server", access: "public" }),
       DB_URL: envField.string({ context: "server", access: "public" }),
       SESSION_COOKIE: envField.string({ context: "server", access: "public" }),
       SESSION_EXPIRY: envField.number({ context: "server", access: "public" }),
