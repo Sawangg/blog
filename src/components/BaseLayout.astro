@@ -1,4 +1,5 @@
 ---
+import "src/index.css";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 
@@ -7,29 +8,6 @@ const { author, description, title } = Astro.props;
 
 <html lang="en">
   <head>
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
-
-      @font-face {
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 100 900;
-        font-display: swap;
-        font-optical-sizing: auto;
-        src: url("/fonts/Inter.woff2") format("woff2-variations");
-      }
-
-      @font-face {
-        font-family: "Fira Code";
-        font-style: normal;
-        font-weight: 300 700;
-        font-display: swap;
-        src: url("/fonts/FiraCode.woff2") format("woff2-variations");
-      }
-    </style>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -42,8 +20,32 @@ const { author, description, title } = Astro.props;
     <meta name="copyright" content="CC BY-NC-SA" />
 
     <link rel="canonical" href={Astro.url} />
-    <link rel="preconnect" href="/" />
     <meta content="origin" name="referrer" />
+
+    <link rel="preconnect" href="/" />
+    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/firacode.woff2" as="font" type="font/woff2" crossorigin />
+
+    <style is:inline>
+      /* This prevents FOUT by preloading and importing fonts as soon as possible */
+      @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        font-optical-sizing: auto;
+        src: url("/fonts/inter.woff2") format("woff2-variations");
+      }
+
+      @font-face {
+        font-family: "Fira Code";
+        font-style: normal;
+        font-weight: 300 700;
+        font-display: swap;
+        font-optical-sizing: auto;
+        src: url("/fonts/firacode.woff2") format("woff2-variations");
+      }
+    </style>
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -65,13 +67,13 @@ const { author, description, title } = Astro.props;
     <link rel="alternate" type="application/rss+xml" title="Léo Mercier's blog" href={`${Astro.site}rss.xml`} />
 
     <script is:inline>
-      // This script blocks content to prevent FOUC if the user prefers dark mode
+      // This inline script prevents FOUC if the user prefers dark mode
       document.documentElement.classList.toggle("dark", localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches))
     </script>
 
     <title>{title ?? "Léo Mercier's blog"}</title>
   </head>
-  <body class="antialiased min-h-screen overflow-x-hidden font-sans bg-zinc-50 transition-colors ease-in-out duration-300 selection:bg-sky-500 selection:text-white dark:bg-zinc-900">
+  <body class="scheme-light antialiased min-h-screen overflow-x-hidden font-sans bg-zinc-50 transition-colors ease-in-out duration-300 selection:bg-sky-500 selection:text-white dark:bg-zinc-900 dark:scheme-dark">
     <Header />
     <slot />
     <Footer />

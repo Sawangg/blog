@@ -9,7 +9,7 @@ export type TextProps = React.DetailedHTMLProps<
 
 export const Text: React.FC<TextProps> = ({ as, className, children, ...props }) => (
   <p
-    className={cn("text-base/7 text-zinc-600 data-[disabled]:opacity-50 dark:text-zinc-400", className)}
+    className={cn("text-base/7 text-zinc-600 data-disabled:opacity-50 dark:text-zinc-400", className)}
     data-slot={as === "description" ? "description" : "text"}
     {...props}
   >
@@ -38,7 +38,7 @@ export type TextLinkProps = Omit<
 export const TextLink: React.FC<TextLinkProps> = ({ href, newTab = true, className, children, ...props }) => (
   <a
     className={cn(
-      "text-zinc-950 underline decoration-zinc-950/50 outline-none hover:decoration-zinc-950 focus:ring-2 focus:ring-sky-500 dark:text-white dark:decoration-white/50 dark:hover:decoration-white",
+      "text-zinc-950 underline decoration-zinc-950/50 outline-hidden hover:decoration-zinc-950 focus:ring-2 focus:ring-sky-500 dark:text-white dark:decoration-white/50 dark:hover:decoration-white",
       className,
     )}
     href={href}
@@ -57,7 +57,7 @@ export const Code: React.FC<React.DetailedHTMLProps<React.HTMLAttributes<HTMLEle
 }) => (
   <code
     className={cn(
-      "rounded bg-zinc-950/[2.5%] px-0.5 font-medium text-sm text-zinc-950 sm:text-[0.8125rem]",
+      "rounded-sm bg-zinc-950/[2.5%] px-0.5 font-medium text-sm text-zinc-950 sm:text-[0.8125rem]",
       "dark:bg-white/5 dark:text-white",
       "border border-zinc-950/10 dark:border-white/20",
       className,

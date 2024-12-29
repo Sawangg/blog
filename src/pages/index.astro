@@ -29,7 +29,7 @@ const result = Astro.getActionResult(actions.newsletter.register);
       <form method="POST" action={actions.newsletter.register} class="flex w-full flex-col gap-y-3 sm:w-auto sm:max-w-lg sm:flex-row sm:gap-x-3">
         <FieldSet>
           <Input name="email" type="email" placeholder="Subscribe by email" autoComplete="email" data-invalid={result?.error && true} aria-invalid={result?.error && true} client:idle required />
-          {result && result.error && <span class="block mt-2 text-base/6 text-red-600 data-[disabled]:opacity-50 sm:text-sm/6 sm:mt-0 dark:text-red-500">{result.error.message}</span>}
+          {result && result.error && <span class="block mt-2 text-base/6 text-red-600 data-disabled:opacity-50 sm:text-sm/6 sm:mt-0 dark:text-red-500">{result.error.message}</span>}
           {result && !result.error && <Text className="text-green-500">Successfully registered!</Text>}
         </FieldSet>
         <Button className="h-fit" type="submit" client:visible>Subscribe</Button>
@@ -39,7 +39,7 @@ const result = Astro.getActionResult(actions.newsletter.register);
       class="relative sm:ml-[calc(2rem+1px)] sm:pb-8 md:ml-[calc(3.5rem+1px)] lg:ml-[max(calc(14.5rem+1px),calc(100%-48rem))]"
     >
       <hr
-        class="absolute bottom-0 right-full top-3 mr-7 hidden h-auto border dark:border-white/[0.2] sm:block md:mr-[3.25rem]"
+        class="absolute bottom-0 right-full top-3 mr-7 hidden h-auto border border-gray-200 dark:border-white/[0.2] sm:block md:mr-[3.25rem]"
       />
       <ul class="space-y-12 sm:space-y-16">
         {
@@ -47,7 +47,7 @@ const result = Astro.getActionResult(actions.newsletter.register);
             <li>
               <article class="relative">
                 <Circle class="absolute right-full top-2 mr-6 hidden h-[calc(0.5rem+1px)] w-[calc(0.5rem+1px)] overflow-visible text-[#464649] fill-zinc-50 dark:fill-zinc-900 sm:block md:mr-12" />
-                <a href={`/posts/${post.id}`} class="relative block h-fit cursor-pointer rounded-md outline-none focus:ring-2 focus:ring-sky-500" data-astro-prefetch>
+                <a href={`/posts/${post.id}`} class="relative block h-fit cursor-pointer rounded-md outline-hidden focus:ring-2 focus:ring-sky-500" data-astro-prefetch>
                   <div class="pt-8 lg:pt-0">
                     <Heading level={2} className="text-lg mb-1">
                       {post.data.title}

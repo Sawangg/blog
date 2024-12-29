@@ -55,6 +55,8 @@ const { Content } = await render(post);
 </BaseLayout>
 
 <style>
+  @import "../../index.css" reference;
+
   #content {
     h2, h3, h4, h5, h6 {
       @apply mb-2 font-semibold text-zinc-900 dark:text-white whitespace-pre-wrap leading-loose
@@ -66,7 +68,7 @@ const { Content } = await render(post);
       @apply text-xl
     }
     a {
-      @apply text-zinc-950 underline decoration-zinc-950/50 outline-none hover:decoration-zinc-950 focus:ring-2 focus:ring-sky-500 dark:text-white dark:decoration-white/50 dark:hover:decoration-white
+      @apply text-zinc-950 underline decoration-zinc-950/50 outline-hidden hover:decoration-zinc-950 focus:ring-2 focus:ring-sky-500 dark:text-white dark:decoration-white/50 dark:hover:decoration-white
     }
     p {
       @apply text-base/7 text-zinc-600 dark:text-zinc-400
@@ -87,7 +89,7 @@ const { Content } = await render(post);
       @apply mt-12 mb-10 border border-zinc-950/10 dark:border-white/[0.2]
     }
     pre {
-      @apply my-8 border p-4 text-base/6 rounded-md outline-none focus:ring-2 focus:ring-sky-500 dark:border-white/[0.2]
+      @apply my-8 border p-4 text-base/6 rounded-md outline-hidden focus:ring-2 focus:ring-sky-500 dark:border-white/[0.2]
     }
   }
 </style>

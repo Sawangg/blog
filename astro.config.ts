@@ -1,8 +1,8 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
 import playformCompress from "@playform/compress";
+import tailwindcss from "@tailwindcss/vite";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig, envField, passthroughImageService } from "astro/config";
 
@@ -10,11 +10,13 @@ export default defineConfig({
   site: "https://leomercier.blog",
   output: "server",
   adapter: cloudflare(),
-  integrations: [playformCompress({ CSS: false }), react(), robotsTxt(), sitemap(), tailwind()],
-  // NOTE: Remove this after this is fixed: https://github.com/withastro/adapters/pull/436
-  // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
-  // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
+  integrations: [playformCompress({ CSS: false }), react(), robotsTxt(), sitemap()],
   vite: {
+    // @ts-expect-error: beta type error, will be fixed by using official integration
+    plugins: [tailwindcss()],
+    // NOTE: Remove this after this is fixed: https://github.com/withastro/adapters/pull/436
+    // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
+    // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
     resolve: {
       // @ts-expect-error: only in prod
       alias: import.meta.env.PROD && {
@@ -44,7 +46,7 @@ export default defineConfig({
   },
   env: {
     schema: {
-      // TODO: Change access to secret for DB_URL and GITHUB_CLIENT_SECRET when getSecret is stable with cloudflare
+      // NOTE: Change access to secret for DB_URL and GITHUB_CLIENT_SECRET if you're not using the cloudflare adapter
       MARKDOWN_PATH: envField.string({ context: "server", access: "public" }),
       DB_URL: envField.string({ context: "server", access: "public" }),
       SESSION_COOKIE: envField.string({ context: "server", access: "public" }),

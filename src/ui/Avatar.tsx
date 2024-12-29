@@ -14,8 +14,8 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, square, className, ...
     className={cn(
       className,
       "[--avatar-radius:20%] [--ring-opacity:20%]",
-      "-outline-offset-1 inline-grid shrink-0 select-none align-middle outline outline-1 outline-black/[--ring-opacity] *:col-start-1 *:row-start-1 dark:outline-white/[--ring-opacity]",
-      !square ? "rounded-full *:rounded-full" : "rounded-[--avatar-radius] *:rounded-[--avatar-radius]",
+      "-outline-offset-1 inline-grid shrink-0 select-none align-middle outline outline-1 outline-black/(--ring-opacity) *:col-start-1 *:row-start-1 dark:outline-white/(--ring-opacity)",
+      !square ? "rounded-full *:rounded-full" : "rounded-(--avatar-radius) *:rounded-(--avatar-radius)",
       !props.src && "bg-zinc-900 text-white dark:bg-white dark:text-black",
     )}
     data-slot={props.slot ?? "avatar"}
@@ -29,7 +29,7 @@ export const Avatar: React.FC<AvatarProps> = ({ initials, square, className, ...
           alt={props.alt ?? "avatar"}
           className={cn(
             "-z-10 relative size-full",
-            !square ? "rounded-full *:rounded-full" : "rounded-[--avatar-radius] *:rounded-[--avatar-radius]",
+            !square ? "rounded-full *:rounded-full" : "rounded-(--avatar-radius) *:rounded-(--avatar-radius)",
           )}
           loading="lazy"
           decoding="async"

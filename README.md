@@ -2,7 +2,7 @@
 
 My personal blog built to host my articles. Here is a list of the features:
 
-- Minimal dependencies
+- Minimal dependencies, build output is less than 1MB
 - Custom-built auth system, with oauth providers
 - Edge network compatible, working with all popular runtimes
 - Lighthouse 100% on all metrics on all pages
@@ -29,7 +29,6 @@ My personal blog built to host my articles. Here is a list of the features:
 
 - CI/CD Actions (test, deployment to staging)
 - Add headers linker and summary on the left of the page
-- Move from tailwind v3 to v4
 - Remove React to use web components
 - Add SRI
 
