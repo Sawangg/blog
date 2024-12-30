@@ -10,7 +10,7 @@ export default defineConfig({
   site: "https://leomercier.blog",
   output: "server",
   adapter: cloudflare(),
-  integrations: [playformCompress({ CSS: false }), react(), robotsTxt(), sitemap()],
+  integrations: [playformCompress(), react(), robotsTxt(), sitemap()],
   vite: {
     // @ts-expect-error: beta type error, will be fixed by using official integration
     plugins: [tailwindcss()],

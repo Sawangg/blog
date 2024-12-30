@@ -29,9 +29,10 @@ const securityHeadersMiddleware = defineMiddleware(async (_, next) => {
     script-src 'strict-dynamic' 'nonce-${nonce}';
     style-src 'self' 'unsafe-inline';
     img-src 'self' https: blob: data:;
+    frame-src 'self';
     font-src 'self';
     form-action 'self';
-    frame-ancestors 'none';
+    frame-ancestors 'self';
     base-uri 'none';
     connect-src 'self';
     upgrade-insecure-requests;

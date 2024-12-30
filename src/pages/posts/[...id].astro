@@ -55,41 +55,125 @@ const { Content } = await render(post);
 </BaseLayout>
 
 <style>
-  @import "../../index.css" reference;
-
   #content {
     h2, h3, h4, h5, h6 {
-      @apply mb-2 font-semibold text-zinc-900 dark:text-white whitespace-pre-wrap leading-loose
+      margin-bottom: calc(var(--spacing) * 2);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-zinc-900);
+      white-space: pre-wrap;
+      line-height: var(--leading-loose);
+      &:is(.dark *) {
+        color: var(--color-white);
+      }
     }
     h2 {
-      @apply text-2xl
+      font-size: var(--text-2xl);
+      line-height: var(--tw-leading, var(--text-2xl--line-height));
     }
     h3 {
-      @apply text-xl
+      font-size: var(--text-xl);
+      line-height: var(--tw-leading, var(--text-xl--line-height));
     }
     a {
-      @apply text-zinc-950 underline decoration-zinc-950/50 outline-hidden hover:decoration-zinc-950 focus:ring-2 focus:ring-sky-500 dark:text-white dark:decoration-white/50 dark:hover:decoration-white
+      color: var(--color-zinc-950);
+      text-decoration-line: underline;
+      text-decoration-color: color-mix(in oklab, var(--color-zinc-950) 50%, transparent);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      &:hover {
+        @media (hover: hover) {
+          text-decoration-color: var(--color-zinc-950);
+        }
+      }
+      &:focus {
+        --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentColor);
+        --tw-ring-color: var(--color-sky-500);
+        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      }
+      &:is(.dark *) {
+        color: var(--color-white);
+        text-decoration-color: color-mix(in oklab, var(--color-white) 50%, transparent);
+        &:hover {
+          @media (hover: hover) {
+            text-decoration-color: var(--color-white);
+          }
+        }
+      }
     }
     p {
-      @apply text-base/7 text-zinc-600 dark:text-zinc-400
+      font-size: var(--text-base);
+      line-height: calc(var(--spacing) * 7);
+      color: var(--color-zinc-600);
+      &:is(.dark *) {
+        color: var(--color-zinc-400);
+      }
     }
     strong {
-      @apply font-medium text-zinc-950 dark:text-white
+      font-weight: var(--font-weight-medium);
+      color: var(--color-zinc-950);
+      &:is(.dark *) {
+        color: var(--color-white);
+      }
     }
     ul {
-      @apply list-inside list-disc p-5
+      padding: calc(var(--spacing) * 5);
+      list-style-type: disc;
+      list-style-position: inside;
     }
     li {
-      @apply text-base/7 text-zinc-500 marker:text-black dark:text-zinc-400 dark:marker:text-white
+      font-size: var(--text-base);
+      line-height: calc(var(--spacing) * 7);
+      color: var(--color-zinc-500);
+      & *::marker {
+        color: var(--color-black);
+      }
+      &::marker {
+        color: var(--color-black);
+      }
+      &:is(.dark *) {
+        color: var(--color-zinc-400);
+        & *::marker {
+          color: var(--color-white);
+        }
+        &::marker {
+          color: var(--color-white);
+        }
+      }
     }
     blockquote p {
-      @apply border-zinc-300 border-l-[3px] p-4
+      padding: calc(var(--spacing) * 4);
+      border-color: var(--color-zinc-300);
+      border-left-style: var(--tw-border-style);
+      border-left-width: 3px;
     }
     hr {
-      @apply mt-12 mb-10 border border-zinc-950/10 dark:border-white/[0.2]
+      margin-top: calc(var(--spacing) * 12);
+      margin-bottom: calc(var(--spacing) * 10);
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      border-color: color-mix(in oklab, var(--color-zinc-950) 10%, transparent);
+      &:is(.dark *) {
+        border-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+      }
     }
     pre {
-      @apply my-8 border p-4 text-base/6 rounded-md outline-hidden focus:ring-2 focus:ring-sky-500 dark:border-white/[0.2]
+      margin-block: calc(var(--spacing) * 8);
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+      padding: calc(var(--spacing) * 4);
+      font-size: var(--text-base);
+      line-height: calc(var(--spacing) * 6);
+      border-radius: var(--radius-md);
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      &:focus {
+        --tw-ring-color: var(--color-sky-500);
+        --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentColor);
+        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+      }
+      &:is(.dark *) {
+        border-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+      }
     }
   }
 </style>

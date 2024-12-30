@@ -8,7 +8,7 @@ My personal blog built to host my articles. Here is a list of the features:
 - Lighthouse 100% on all metrics on all pages
 - A+ on security, with headers, strict CSP & security.txt
 - SEO optimization with robots.txt & sitemap
-- Perfect accessibility with light and dark modes
+- Perfect accessibility with light and dark modes, with page transitions
 - No vendor lock-in, self-hostable with 100% of the features by changing the deploy commands and the adapter (e.g. `@astro/node`)
 
 ### Tech stack
@@ -29,6 +29,7 @@ My personal blog built to host my articles. Here is a list of the features:
 
 - CI/CD Actions (test, deployment to staging)
 - Add headers linker and summary on the left of the page
+- Add analytics
 - Remove React to use web components
 - Add SRI
 
