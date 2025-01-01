@@ -41,7 +41,7 @@ const securityHeadersMiddleware = defineMiddleware(async (_, next) => {
 
   response.headers.set("Access-Control-Allow-Origin", import.meta.env.PROD ? import.meta.env.SITE : "*");
   response.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Frame-Options", "SAMEORIGIN");
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin");
   response.headers.set(
