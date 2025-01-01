@@ -27,6 +27,6 @@
     "lineWidth": 120
   },
   "files": {
-    "ignore": ["dist/**", ".astro"]
+    "ignore": ["dist/**", ".astro/**"]
   }
 }
