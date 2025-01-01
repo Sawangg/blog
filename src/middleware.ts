@@ -31,10 +31,11 @@ const securityHeadersMiddleware = defineMiddleware(async (_, next) => {
     img-src 'self' https: blob: data:;
     frame-src 'self';
     font-src 'self';
+    connect-src 'self';
+    prefetch-src 'self';
+    base-uri 'none';
     form-action 'self';
     frame-ancestors 'self';
-    base-uri 'none';
-    connect-src 'self';
     upgrade-insecure-requests;
   `;
   const body = (await response.text()).replaceAll("<script", `<script nonce="${nonce}"`);
