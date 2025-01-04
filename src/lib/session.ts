@@ -19,7 +19,7 @@ export const createSession = async (token: string, userId: number): Promise<Sess
   const session: Session = {
     id: sessionId,
     userId,
-    expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * SESSION_EXPIRY),
+    expiresAt: new Date(Date.now() + SESSION_EXPIRY),
   };
   await db.insert(sessions).values(session);
   return session;
@@ -42,8 +42,8 @@ export const validateSessionToken = async (token: string): Promise<SessionValida
     return { session: null, user: null };
   }
 
-  if (Date.now() >= session.expiresAt.getTime() - 1000 * 60 * 60 * 24 * (SESSION_EXPIRY / 2)) {
-    session.expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * SESSION_EXPIRY);
+  if (Date.now() >= session.expiresAt.getTime() - SESSION_EXPIRY / 2) {
+    session.expiresAt = new Date(Date.now() + SESSION_EXPIRY);
     await db
       .update(sessions)
       .set({
