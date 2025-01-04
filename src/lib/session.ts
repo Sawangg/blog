@@ -70,13 +70,7 @@ export const setSessionTokenCookie = (context: APIContext, token: string, expire
 };
 
 export const deleteSessionTokenCookie = (context: APIContext | ActionAPIContext): void => {
-  context.cookies.set(SESSION_COOKIE, "", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: import.meta.env.PROD,
-    maxAge: 0,
-    path: "/",
-  });
+  context.cookies.delete(SESSION_COOKIE, { path: "/" });
 };
 
 export type SessionValidationResult = { session: Session; user: User } | { session: null; user: null };
