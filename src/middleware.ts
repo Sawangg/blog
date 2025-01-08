@@ -32,7 +32,6 @@ const securityHeadersMiddleware = defineMiddleware(async (_, next) => {
     frame-src 'self';
     font-src 'self';
     connect-src 'self';
-    prefetch-src 'self';
     base-uri 'none';
     form-action 'self';
     frame-ancestors 'self';
