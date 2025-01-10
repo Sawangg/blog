@@ -3,7 +3,7 @@ import { MARKDOWN_PATH } from "astro:env/server";
 import { glob } from "astro/loaders";
 
 const blog = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: MARKDOWN_PATH }),
+  loader: glob({ pattern: "**/*.md", base: MARKDOWN_PATH }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
