@@ -4,6 +4,7 @@
   "type": "module",
   "version": "0.0.2",
   "scripts": {
+    "astro": "astro",
     "dev": "astro dev",
     "build": "biome check && astro check && astro build",
     "deploy:staging": "biome check && astro check && astro build --mode staging && wrangler pages deploy --branch staging",
@@ -15,33 +16,33 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.1.0",
-    "@astrojs/react": "^4.1.2",
+    "@astrojs/react": "^4.1.3",
     "@astrojs/rss": "^4.0.11",
     "@neondatabase/serverless": "^0.10.4",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
-    "@tailwindcss/vite": "^4.0.0-beta.8",
-    "arctic": "^3.1.0",
-    "astro": "^5.1.3",
+    "@tailwindcss/vite": "^4.0.0-beta.9",
+    "arctic": "^3.1.1",
+    "astro": "5.1.2",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.38.3",
     "react": "^19.0.0",
     "react-aria-components": "^1.5.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss": "^4.0.0-beta.8"
+    "tailwindcss": "^4.0.0-beta.9"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.2.1",
     "@biomejs/biome": "^1.9.4",
     "@playform/compress": "^0.1.7",
-    "@types/bun": "^1.1.15",
-    "@types/react": "^19.0.3",
+    "@types/bun": "^1.1.16",
+    "@types/react": "^19.0.4",
     "@types/react-dom": "^19.0.2",
     "astro-robots-txt": "^1.0.0",
     "drizzle-kit": "^0.30.1",
-    "typescript": "^5.7.2",
-    "wrangler": "^3.100.0"
+    "typescript": "^5.7.3",
+    "wrangler": "^3.101.0"
   }
 }
