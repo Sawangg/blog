@@ -43,6 +43,6 @@
     "astro-robots-txt": "^1.0.0",
     "drizzle-kit": "^0.30.2",
     "typescript": "^5.7.3",
-    "wrangler": "^3.103.1"
+    "wrangler": "^3.103.2"
   }
 }
