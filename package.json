@@ -15,14 +15,14 @@
     "db:studio": "NODE_ENV=development drizzle-kit studio --host localhost --port 3001"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.2.0",
+    "@astrojs/cloudflare": "^12.2.1",
     "@astrojs/react": "^4.1.6",
     "@astrojs/rss": "^4.0.11",
     "@neondatabase/serverless": "^0.10.4",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
-    "@tailwindcss/vite": "^4.0.0-beta.10",
-    "arctic": "^3.2.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "arctic": "^3.2.1",
     "astro": "^5.1.8",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.38.4",
@@ -30,14 +30,13 @@
     "react-aria-components": "^1.6.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss": "^4.0.0-beta.10"
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.2.1",
     "@biomejs/biome": "^1.9.4",
     "@playform/compress": "^0.1.7",
-    "@types/bun": "^1.1.18",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "astro-robots-txt": "^1.0.0",

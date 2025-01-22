@@ -12,7 +12,7 @@ export default defineConfig({
   adapter: cloudflare(),
   integrations: [playformCompress(), react(), robotsTxt(), sitemap()],
   vite: {
-    // @ts-expect-error: Type error, will be fixed when not in beta
+    // @ts-expect-error: Type error, will be fixed when using integration
     plugins: [tailwindcss()],
     // NOTE: Remove this after this is fixed: https://github.com/withastro/adapters/pull/436
     // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
