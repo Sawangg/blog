@@ -28,7 +28,7 @@ My personal blog built to host my articles. Here is a list of the features:
 ### TODO
 
 - CI/CD Actions (test, deployment to staging)
-- Add headers links and summary on the left of the page
+- Add headers links
 - Add analytics
 - Remove React to use web components
 - Add SRI

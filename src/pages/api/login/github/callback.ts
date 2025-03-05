@@ -19,7 +19,7 @@ export async function GET(ctx: APIContext): Promise<Response> {
     const userRes = await fetch("https://api.github.com/user", {
       headers: {
         Authorization: `Bearer ${tokens.accessToken()}`,
-        "User-Agent": "auth", // Needed for Cloudflare
+        "User-Agent": "auth",
       },
     });
     const githubUser: { id: number; login: string; avatar_url: string } = await userRes.json();
@@ -35,7 +35,7 @@ export async function GET(ctx: APIContext): Promise<Response> {
     const emailRes = await fetch("https://api.github.com/user/emails", {
       headers: {
         Authorization: `Bearer ${tokens.accessToken()}`,
-        "User-Agent": "auth", // Needed for Cloudflare
+        "User-Agent": "auth",
       },
     });
     const emails: { email: string; verified: boolean; primary: boolean }[] = await emailRes.json();
