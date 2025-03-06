@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [playformCompress(), react(), robotsTxt(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
-    // NOTE: Remove this after this is fixed: https://github.com/withastro/adapters/pull/436
+    // NOTE: Remove this after this is fixed: https://github.com/withastro/astro/issues/12824
     // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
     // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
     resolve: {

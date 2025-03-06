@@ -21,16 +21,16 @@
     "@neondatabase/serverless": "^0.10.4",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
-    "@tailwindcss/vite": "^4.0.9",
+    "@tailwindcss/vite": "^4.0.11",
     "arctic": "^3.5.0",
     "astro": "^5.4.2",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.40.0",
     "react": "^19.0.0",
-    "react-aria-components": "^1.6.0",
+    "react-aria-components": "^1.7.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.2",
-    "tailwindcss": "^4.0.9"
+    "tailwindcss": "^4.0.11"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
@@ -42,6 +42,6 @@
     "astro-robots-txt": "^1.0.0",
     "drizzle-kit": "^0.30.5",
     "typescript": "^5.8.2",
-    "wrangler": "^3.112.0"
+    "wrangler": "^3.114.0"
   }
 }
