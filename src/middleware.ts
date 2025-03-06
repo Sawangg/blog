@@ -1,6 +1,6 @@
 import { SESSION_COOKIE } from "astro:env/server";
 import { defineMiddleware, sequence } from "astro:middleware";
-import { deleteSessionTokenCookie, setSessionTokenCookie, validateSessionToken } from "@lib/session";
+import { deleteSessionTokenCookie, validateSessionToken } from "@lib/session";
 
 const authMiddleware = defineMiddleware(async (ctx, next) => {
   const token = ctx.cookies.get(SESSION_COOKIE)?.value ?? null;
@@ -11,7 +11,7 @@ const authMiddleware = defineMiddleware(async (ctx, next) => {
   }
 
   const { session, user } = await validateSessionToken(token);
-  session ? setSessionTokenCookie(ctx, token, session.expiresAt) : deleteSessionTokenCookie(ctx);
+  if (!session) deleteSessionTokenCookie(ctx);
 
   ctx.locals.session = session;
   ctx.locals.user = user;
