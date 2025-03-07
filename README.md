@@ -19,6 +19,9 @@ My personal blog built to host my articles. Here is a list of the features:
 <a href="https://orm.drizzle.team/" title="DrizzleORM" target="_blank"> <img src="https://images.opencollective.com/drizzle-orm/9405e48/logo/256.png?height=256" alt="DrizzleORM" width="35" height="35" /></a>
 <a href="https://www.postgresql.org/" title="PostgreSQL" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" alt="postgresql" width="35" height="35" /></a>
 
+> [!NOTE]
+> The runtime needs to have access to the Web Crypto API
+
 #### Development
 
 <a href="https://bun.sh/" title="Bun" target="_blank" align="left"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bun/bun-original.svg" alt="bun" width="35" height="35" /></a>
@@ -38,7 +41,9 @@ My personal blog built to host my articles. Here is a list of the features:
 - If you're hosting on Cloudflare, you need to disable `Speed Brain`. This features isn't compatible with a strict CSP
 and prefetching is already done inside Astro.
 - CSP nonce is currently generated in the middleware which defeats the purpose of a strong CSP. There is no alternatives currently in Astro.
-- Some environment variables should have their access restricted to secret instead of public in `astro.config.ts`. Currently, I can't make secrets work using Cloudflare. This is not critical (if you share the build output with someone, they could potentially extract your secrets).
+- Some environment variables should have their access restricted to secret instead of public in `astro.config.ts`.
+Currently, I can't make secrets work using Cloudflare. This is not critical (if you share the build output with someone,
+they could potentially extract your secrets).
 - Currently BiomeJS partialy supports Astro files. The component script is linted/formatted but not the template part. See the [documentation](https://biomejs.dev/internals/language-support/#html-super-languages-support)
 
 ## References
