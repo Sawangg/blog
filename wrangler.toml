@@ -2,7 +2,8 @@
 name = "blog"
 compatibility_date = "2024-11-11"
 pages_build_output_dir = "./dist"
-compatibility_flags = ["nodejs_compat"]
+# TODO: remove the second flag and change compatibility_date to 2025-04-01 when date is passed
+compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env"]
 send_metrics = false
 
 [placement]

@@ -9,7 +9,7 @@ My personal blog built to host my articles. Here is a list of the features:
 - A+ on security, with headers, strict CSP & security.txt
 - SEO optimization with robots.txt & sitemap
 - Perfect accessibility with light and dark modes, with client page transitions
-- No vendor lock-in, self-hostable with 100% of the features by changing the deploy commands and the adapter (e.g. `@astro/node`)
+- No vendor lock-in, self-hostable with 100% of the features by changing the deploy commands and Astro adapter (e.g. `@astro/node`)
 
 ### Tech stack
 
@@ -30,7 +30,7 @@ My personal blog built to host my articles. Here is a list of the features:
 
 ### TODO
 
-- CI/CD Actions (test, deployment to staging)
+- CI/CD Actions (test, deployment)
 - Add headers links
 - Add analytics
 - Remove React to use web components
@@ -41,11 +41,8 @@ My personal blog built to host my articles. Here is a list of the features:
 - If you're hosting on Cloudflare, you need to disable `Speed Brain`. This features isn't compatible with a strict CSP
 and prefetching is already done inside Astro.
 - CSP nonce is currently generated in the middleware which defeats the purpose of a strong CSP. There is no alternatives currently in Astro.
-- Some environment variables should have their access restricted to secret instead of public in `astro.config.ts`.
-Currently, I can't make secrets work using Cloudflare. This is not critical (if you share the build output with someone,
-they could potentially extract your secrets).
 - Currently BiomeJS partialy supports Astro files. The component script is linted/formatted but not the template part. See the [documentation](https://biomejs.dev/internals/language-support/#html-super-languages-support)
 
 ## References
 
-The custom authentification was heavely inspired by the great [Lucia Auth](https://lucia-auth.com/) project
+The custom authentification was inspired by the [Lucia Auth](https://lucia-auth.com/) project.

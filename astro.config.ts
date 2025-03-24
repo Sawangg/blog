@@ -45,13 +45,12 @@ export default defineConfig({
   },
   env: {
     schema: {
-      // NOTE: Change access to secret for DB_URL and GITHUB_CLIENT_SECRET if you're not using the cloudflare adapter
       MARKDOWN_PATH: envField.string({ context: "server", access: "public" }),
-      DB_URL: envField.string({ context: "server", access: "public" }),
+      DB_URL: envField.string({ context: "server", access: "secret" }),
       SESSION_COOKIE: envField.string({ context: "server", access: "public" }),
       SESSION_EXPIRY: envField.number({ context: "server", access: "public" }),
       GITHUB_CLIENT_ID: envField.string({ context: "server", access: "public" }),
-      GITHUB_CLIENT_SECRET: envField.string({ context: "server", access: "public" }),
+      GITHUB_CLIENT_SECRET: envField.string({ context: "server", access: "secret" }),
       GITHUB_REDIRECT_URI: envField.string({ context: "server", access: "public" }),
     },
     validateSecrets: true,
