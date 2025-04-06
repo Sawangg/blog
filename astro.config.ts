@@ -7,7 +7,7 @@ import robotsTxt from "astro-robots-txt";
 import { defineConfig, envField, passthroughImageService } from "astro/config";
 
 export default defineConfig({
-  site: "https://leomercier.blog",
+  site: "https://blog.leomercier.dev",
   output: "server",
   adapter: cloudflare(),
   integrations: [playformCompress(), react(), robotsTxt(), sitemap()],
