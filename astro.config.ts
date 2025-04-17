@@ -57,7 +57,5 @@ export default defineConfig({
   },
   experimental: {
     clientPrerender: true,
-    svg: true,
-    preserveScriptOrder: true,
   },
 });
