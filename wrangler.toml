@@ -1,9 +1,8 @@
 # Cloudflare config (remove this file if you're not using the Cloudflare adapter)
 name = "blog"
-compatibility_date = "2024-11-11"
+compatibility_date = "2025-04-01"
 pages_build_output_dir = "./dist"
-# TODO: remove the second flag and change compatibility_date to 2025-04-01 when date is passed
-compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env"]
+compatibility_flags = ["nodejs_compat"]
 send_metrics = false
 
 [placement]
