@@ -6,7 +6,7 @@ My personal blog built to host my articles. Here is a list of the features:
 - Custom-built auth system, with oauth providers
 - Edge network compatible, working with all popular runtimes
 - Lighthouse 100% on all metrics on all pages
-- A+ on security, with headers, strict CSP & security.txt
+- A+ on security, with HTTP headers, strict CSP & security.txt
 - SEO optimization with robots.txt & sitemap
 - Perfect accessibility with light and dark modes, with client page transitions
 - No vendor lock-in, self-hostable with 100% of the features by changing the deploy commands and Astro adapter (e.g. `@astro/node`)
