@@ -7,7 +7,6 @@ import { generateCodeVerifier, generateState } from "arctic";
 export const auth = {
   login: defineAction({
     accept: "json",
-    input: z.object({ provider: z.enum(["github"]) }),
     handler(input, ctx): { url: URL } {
       const state = generateState();
       const codeVerifier = generateCodeVerifier();
@@ -20,23 +19,24 @@ export const auth = {
       }
 
       ctx.cookies.set("state", state, {
-        path: "/",
-        secure: import.meta.env.PROD,
         httpOnly: true,
         maxAge: 60 * 10, // 10 min
+        path: "/",
         sameSite: "lax",
+        secure: import.meta.env.PROD,
       });
 
       ctx.cookies.set("code_verifier", codeVerifier, {
-        path: "/",
-        secure: import.meta.env.PROD,
         httpOnly: true,
         maxAge: 60 * 10, // 10 min
+        path: "/",
         sameSite: "lax",
+        secure: import.meta.env.PROD,
       });
 
       return { url };
     },
+    input: z.object({ provider: z.enum(["github"]) }),
   }),
 
   logout: defineAction({

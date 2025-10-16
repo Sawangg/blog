@@ -1,12 +1,16 @@
 {
   // https://www.typescriptlang.org/tsconfig/
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
-    // Type Checking
-    "useUnknownInCatchVariables": true,
     // Modules
     "baseUrl": ".",
+    // JavaScript Support
+    "checkJs": true,
+    // Projects
+    "incremental": true,
+    // Language and Environment
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "paths": {
       "@actions/*": ["src/actions/*"],
       "@assets/*": ["src/assets/*"],
@@ -16,14 +20,10 @@
       "@pages/*": ["src/pages/*"],
       "@ui/*": ["src/ui/*"]
     },
-    // JavaScript Support
-    "checkJs": true,
-    // Language and Environment
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    // Projects
-    "incremental": true
+    // Type Checking
+    "useUnknownInCatchVariables": true
   },
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "node_modules"],
+  "extends": "astro/tsconfigs/strictest",
+  "include": [".astro/types.d.ts", "**/*"]
 }

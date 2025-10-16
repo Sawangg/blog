@@ -4,31 +4,31 @@ import { cn } from "@lib/utils";
 import { Button as RAButton, type ButtonProps as RAButtonProps } from "react-aria-components";
 
 const colorClasses = {
-  dark: "text-white [--btn-bg:var(--color-zinc-900)] [--btn-border:var(--color-zinc-950)]/90 [--btn-hover-overlay:var(--color-white)]/10 [--btn-icon:var(--color-zinc-400)] data-active:[--btn-icon:var(--color-zinc-300)] data-hovered:[--btn-icon:var(--color-zinc-300)] dark:[--btn-bg:var(--color-zinc-600)] dark:[--btn-hover-overlay:var(--color-white)]/5",
-  zinc: "text-white",
-  white: "text-zinc-950",
-  red: "text-white [--btn-bg:var(--color-red-600)] [--btn-border:var(--color-red-700)]/90 [--btn-hover-overlay:var(--color-white)]/10 [--btn-icon:var(--color-red-300)] data-active:[--btn-icon:var(--color-red-200)] data-hovered:[--btn-icon:var(--color-red-200)]",
-  orange: "",
   amber: "",
-  yellow: "",
-  lime: "",
-  green: "",
-  emerald: "",
-  teal: "",
-  cyan: "",
-  sky: "",
   blue: "text-white [--btn-bg:var(--color-blue-600)] [--btn-border:var(--color-blue-700)]/90 [--btn-hover-overlay:var(--color-white)]/10 [--btn-icon:var(--color-blue-400)] data-active:[--btn-icon:var(--color-blue-300)] data-hovered:[--btn-icon:var(--color-blue-300)]",
-  indigo: "",
-  violet: "",
-  purple: "",
+  cyan: "",
+  dark: "text-white [--btn-bg:var(--color-zinc-900)] [--btn-border:var(--color-zinc-950)]/90 [--btn-hover-overlay:var(--color-white)]/10 [--btn-icon:var(--color-zinc-400)] data-active:[--btn-icon:var(--color-zinc-300)] data-hovered:[--btn-icon:var(--color-zinc-300)] dark:[--btn-bg:var(--color-zinc-600)] dark:[--btn-hover-overlay:var(--color-white)]/5",
+  emerald: "",
   fuchsia: "",
-  pink: "",
-  rose: "",
+  green: "",
+  indigo: "",
+  lime: "",
+  orange: "",
 
   outline:
     "border-zinc-950/10 text-zinc-950 [--btn-icon:var(--color-zinc-500)] data-active:bg-zinc-950/[2.5%] data-hovered:bg-zinc-950/[2.5%] data-active:[--btn-icon:var(--color-zinc-700)] data-hovered:[--btn-icon:var(--color-zinc-700)] dark:border-white/15 dark:text-white dark:[--btn-bg:transparent] dark:data-active:bg-white/5 dark:data-hovered:bg-white/5 dark:data-active:[--btn-icon:var(--color-zinc-400)] dark:data-hovered:[--btn-icon:var(--color-zinc-400)]",
+  pink: "",
   plain:
     "text-zinc-950 data-active:bg-zinc-950/5 data-active:bg-zinc-950/5 data-hovered:bg-zinc-950/5 dark:text-white dark:data-active:bg-white/10 dark:data-active:bg-white/10 dark:data-hovered:bg-white/10 [--btn-icon:var(--color-zinc-500)] data-active:[--btn-icon:var(--color-zinc-700)] data-active:[--btn-icon:var(--color-zinc-700)] data-hovered:[--btn-icon:var(--color-zinc-700)] dark:[--btn-icon:var(--color-zinc-500)] dark:data-active:[--btn-icon:var(--color-zinc-400)] dark:data-active:[--btn-icon:var(--color-zinc-400)] dark:data-hovered:[--btn-icon:var(--color-zinc-400)]",
+  purple: "",
+  red: "text-white [--btn-bg:var(--color-red-600)] [--btn-border:var(--color-red-700)]/90 [--btn-hover-overlay:var(--color-white)]/10 [--btn-icon:var(--color-red-300)] data-active:[--btn-icon:var(--color-red-200)] data-hovered:[--btn-icon:var(--color-red-200)]",
+  rose: "",
+  sky: "",
+  teal: "",
+  violet: "",
+  white: "text-zinc-950",
+  yellow: "",
+  zinc: "text-white",
 };
 
 export type ButtonProps = RAButtonProps & {

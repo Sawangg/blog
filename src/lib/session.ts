@@ -1,7 +1,7 @@
 import type { ActionAPIContext } from "astro:actions";
 import { SESSION_COOKIE, SESSION_EXPIRY } from "astro:env/server";
 import { db } from "@db/index";
-import { type Session, type User, sessions, users } from "@db/schema";
+import { type Session, sessions, type User, users } from "@db/schema";
 import { sha256 } from "@oslojs/crypto/sha2";
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import type { APIContext } from "astro";
@@ -17,9 +17,9 @@ export const generateSessionToken = (): string => {
 export const createSession = async (token: string, userId: number): Promise<Session> => {
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
   const session: Session = {
+    expiresAt: new Date(Date.now() + SESSION_EXPIRY),
     id: sessionId,
     userId,
-    expiresAt: new Date(Date.now() + SESSION_EXPIRY),
   };
   await db.insert(sessions).values(session);
   return session;
@@ -28,7 +28,7 @@ export const createSession = async (token: string, userId: number): Promise<Sess
 export const validateSessionToken = async (token: string): Promise<SessionValidationResult> => {
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
   const result = await db
-    .select({ user: users, session: sessions })
+    .select({ session: sessions, user: users })
     .from(sessions)
     .innerJoin(users, eq(sessions.userId, users.id))
     .where(eq(sessions.id, sessionId));
@@ -61,11 +61,11 @@ export const invalidateSession = async (sessionId: string): Promise<void> => {
 
 export const setSessionTokenCookie = (context: APIContext, token: string, expiresAt: Date): void => {
   context.cookies.set(SESSION_COOKIE, token, {
+    expires: expiresAt,
     httpOnly: true,
+    path: "/",
     sameSite: "lax",
     secure: import.meta.env.PROD,
-    expires: expiresAt,
-    path: "/",
   });
 };
 

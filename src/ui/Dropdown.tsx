@@ -44,7 +44,7 @@ export const DropdownItem: React.FC<MenuItemProps> = ({ className, children, ...
 
 export const DropdownDivider: React.FC<SeparatorProps> = ({ ...props }) => (
   <Separator
-    className="col-span-full mx-3.5 my-1 h-px border-zinc-950/10 border-t sm:mx-3 dark:border-white/[0.2] "
+    className="col-span-full mx-3.5 my-1 h-px border-zinc-950/10 border-t sm:mx-3 dark:border-white/[0.2]"
     {...props}
   />
 );

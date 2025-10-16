@@ -2,15 +2,15 @@ import { cn } from "@lib/utils";
 import { Modal, ModalOverlay, Dialog as RADialog, type DialogProps as RADialogProps } from "react-aria-components";
 
 export const sizes = {
-  xs: "sm:max-w-xs",
-  sm: "sm:max-w-sm",
-  md: "sm:max-w-md",
-  lg: "sm:max-w-lg",
-  xl: "sm:max-w-xl",
   "2xl": "sm:max-w-2xl",
   "3xl": "sm:max-w-3xl",
   "4xl": "sm:max-w-4xl",
   "5xl": "sm:max-w-5xl",
+  lg: "sm:max-w-lg",
+  md: "sm:max-w-md",
+  sm: "sm:max-w-sm",
+  xl: "sm:max-w-xl",
+  xs: "sm:max-w-xs",
 };
 
 export type DialogProps = RADialogProps & {

@@ -1,5 +1,5 @@
 ---
-import { ClientRouter } from "astro:transitions";
+import { Font } from "astro:assets";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import ThemeManager from "@components/ThemeManager.astro";
@@ -24,31 +24,9 @@ const { author, description, title } = Astro.props;
     <meta content="origin" name="referrer" />
 
     <link rel="preconnect" href="/" />
-    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/firacode.woff2" as="font" type="font/woff2" crossorigin />
 
-    <style is:inline>
-      /* This prevents FOUT by preloading and importing fonts as soon as possible */
-      @font-face {
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 100 900;
-        font-display: swap;
-        font-optical-sizing: auto;
-        src: url("/fonts/inter.woff2") format("woff2-variations");
-        src: url("/fonts/inter.woff2") format("woff2") tech("variations");
-      }
-
-      @font-face {
-        font-family: "Fira Code";
-        font-style: normal;
-        font-weight: 300 700;
-        font-display: swap;
-        font-optical-sizing: auto;
-        src: url("/fonts/firacode.woff2") format("woff2-variations");
-        src: url("/fonts/firacode.woff2") format("woff2") tech("variations");
-      }
-    </style>
+    <Font cssVariable="--font-aktiv-grotesk" preload />
+    <Font cssVariable="--font-jetbrains-mono" preload />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -72,7 +50,6 @@ const { author, description, title } = Astro.props;
     <title>{title ?? "Léo Mercier's blog"}</title>
 
     <ThemeManager />
-    <ClientRouter />
   </head>
   <body class="scheme-light antialiased min-h-screen overflow-x-hidden font-sans bg-zinc-50 transition-colors ease-in-out duration-300 selection:bg-sky-500 selection:text-white dark:bg-zinc-900 dark:scheme-dark">
     <Header />
@@ -86,10 +63,8 @@ const { author, description, title } = Astro.props;
 
   @variant dark (&:is([data-theme="dark"] *));
 
-  @theme {
-    --font-sans: Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji";
-    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-      monospace;
+  @theme inline {
+    --font-sans: var(--font-aktiv-grotesk);
+    --font-mono: var(--font-jetbrains-mono);
   }
 </style>

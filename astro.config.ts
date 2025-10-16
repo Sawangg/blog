@@ -3,59 +3,90 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import playformCompress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
+import { defineConfig, envField, fontProviders, passthroughImageService } from "astro/config";
 import robotsTxt from "astro-robots-txt";
-import { defineConfig, envField, passthroughImageService } from "astro/config";
 
 export default defineConfig({
-  site: "https://blog.leomercier.dev",
-  output: "server",
   adapter: cloudflare(),
-  integrations: [playformCompress(), react(), robotsTxt(), sitemap()],
-  vite: {
-    plugins: [tailwindcss()],
-    // NOTE: Remove this after this is fixed: https://github.com/withastro/astro/issues/12824
-    // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
-    // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
-    resolve: {
-      // @ts-expect-error: only in prod
-      alias: import.meta.env.PROD && {
-        "react-dom/server": "react-dom/server.edge",
-      },
-    },
-  },
   devToolbar: {
     enabled: false,
   },
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: "viewport",
-  },
-  image: {
-    service: passthroughImageService(),
-    remotePatterns: [
-      {
-        protocol: "https",
-      },
-    ],
-  },
-  markdown: {
-    shikiConfig: {
-      theme: "catppuccin-mocha",
-    },
-  },
   env: {
     schema: {
-      MARKDOWN_PATH: envField.string({ context: "server", access: "public" }),
-      DB_URL: envField.string({ context: "server", access: "secret" }),
-      SESSION_COOKIE: envField.string({ context: "server", access: "public" }),
-      SESSION_EXPIRY: envField.number({ context: "server", access: "public" }),
-      GITHUB_CLIENT_ID: envField.string({ context: "server", access: "public" }),
-      GITHUB_CLIENT_SECRET: envField.string({ context: "server", access: "secret" }),
-      GITHUB_REDIRECT_URI: envField.string({ context: "server", access: "public" }),
+      DB_URL: envField.string({ access: "secret", context: "server" }),
+      GITHUB_CLIENT_ID: envField.string({ access: "public", context: "server" }),
+      GITHUB_CLIENT_SECRET: envField.string({ access: "secret", context: "server" }),
+      GITHUB_REDIRECT_URI: envField.string({ access: "public", context: "server" }),
+      MARKDOWN_PATH: envField.string({ access: "public", context: "server" }),
+      SESSION_COOKIE: envField.string({ access: "public", context: "server" }),
+      SESSION_EXPIRY: envField.number({ access: "public", context: "server" }),
     },
     validateSecrets: true,
   },
   experimental: {
     clientPrerender: true,
+    fonts: [
+      {
+        cssVariable: "--font-aktiv-grotesk",
+        fallbacks: [
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
+        ],
+        name: "Aktiv Grotesk",
+        provider: "local",
+        variants: [
+          {
+            src: ["./src/assets/fonts/aktivgrotesk.woff2"],
+            style: "normal",
+            weight: "100 800",
+          },
+        ],
+      },
+      {
+        cssVariable: "--font-jetbrains-mono",
+        fallbacks: [
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "Liberation Mono",
+          "Courier New",
+          "monospace",
+        ],
+        name: "JetBrains Mono",
+        provider: fontProviders.fontsource(),
+      },
+    ],
+    preserveScriptOrder: true,
+    staticImportMetaEnv: true,
+  },
+  image: {
+    remotePatterns: [
+      {
+        protocol: "https",
+      },
+    ],
+    service: passthroughImageService(),
+  },
+  integrations: [playformCompress(), react(), robotsTxt(), sitemap()],
+  markdown: {
+    shikiConfig: {
+      theme: "catppuccin-mocha",
+    },
+  },
+  output: "server",
+  prefetch: {
+    defaultStrategy: "viewport",
+    prefetchAll: true,
+  },
+  site: "https://blog.leomercier.dev",
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

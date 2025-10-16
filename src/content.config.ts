@@ -3,18 +3,18 @@ import { MARKDOWN_PATH } from "astro:env/server";
 import { glob } from "astro/loaders";
 
 const blog = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: MARKDOWN_PATH }),
+  loader: glob({ base: MARKDOWN_PATH, pattern: "**/*.md" }),
   schema: z.object({
-    title: z.string(),
-    description: z.string(),
     author: z.string(),
-    authorLink: z.string(),
-    authorAvatar: z.string().url(),
     authorAt: z.string(),
-    publishedAt: z.date(),
-    updatedAt: z.date().optional(),
-    tags: z.array(z.object({ title: z.string(), color: z.string() })),
+    authorAvatar: z.string().url(),
+    authorLink: z.string(),
+    description: z.string(),
     draft: z.boolean().optional(),
+    publishedAt: z.date(),
+    tags: z.array(z.object({ color: z.string(), title: z.string() })),
+    title: z.string(),
+    updatedAt: z.date().optional(),
   }),
 });
 

@@ -3,9 +3,9 @@ import { type User, users } from "@db/schema";
 
 export const createUser = async (email: string, username: string, avatar: string, githubId?: number): Promise<User> => {
   const user: typeof users.$inferInsert = {
+    avatar,
     email,
     username,
-    avatar,
   };
 
   if (githubId) user.githubId = githubId;

@@ -4,14 +4,14 @@ import rss from "@astrojs/rss";
 export async function GET(context: { site: string }) {
   const blog = await getCollection("blog");
   return rss({
-    title: "Leo Mercier's blog",
     description: "My blog for all tech related news",
-    site: context.site,
     items: blog.map((post) => ({
-      title: post.data.title,
-      pubDate: post.data.publishedAt,
       description: post.data.description,
       link: `/posts/${post.id}/`,
+      pubDate: post.data.publishedAt,
+      title: post.data.title,
     })),
+    site: context.site,
+    title: "Leo Mercier's blog",
   });
 }
