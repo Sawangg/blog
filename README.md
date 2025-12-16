@@ -42,7 +42,6 @@ My personal blog built to host my articles. Here is a list of the features:
 - If you're hosting on Cloudflare, you need to disable `Speed Brain`. This features isn't compatible with a strict CSP
 and prefetching is already done inside Astro.
 - CSP nonce is currently generated in the middleware which defeats the purpose of a strong CSP. There is no alternatives currently in Astro.
-- Currently BiomeJS partialy supports Astro files. The component script is linted/formatted but not the template part. See the [documentation](https://biomejs.dev/internals/language-support/#html-super-languages-support)
 
 ## References
 

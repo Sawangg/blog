@@ -56,7 +56,7 @@ export const Button: React.FC<ButtonProps> = ({
         "dark:border-white/5",
         !outline &&
           !plain &&
-          "dark:after:-inset-px before:-z-10 after:-z-10 before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-sm after:absolute after:inset-0 after:rounded-[calc(var(--radius-lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(--color-white/15%)] data-active:after:bg-(--btn-hover-overlay) data-hovered:after:bg-(--btn-hover-overlay) data-disabled:after:shadow-none data-disabled:before:shadow-none dark:after:rounded-lg dark:before:hidden",
+          "before:absolute before:inset-0 before:-z-10 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-sm after:absolute after:inset-0 after:-z-10 after:rounded-[calc(var(--radius-lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(--color-white/15%)] data-active:after:bg-(--btn-hover-overlay) data-hovered:after:bg-(--btn-hover-overlay) data-disabled:after:shadow-none data-disabled:before:shadow-none dark:after:-inset-px dark:after:rounded-lg dark:before:hidden",
         // Color
         !outline && !plain && "bg-(--btn-border) before:bg-(--btn-bg) dark:bg-(--btn-bg)",
         colorClasses[outline ? "outline" : plain ? "plain" : color],
